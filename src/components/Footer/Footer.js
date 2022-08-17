@@ -61,7 +61,7 @@ const Footer = () => {
             <a href="https://github.com/HelioCash/heliocash-frontend" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <IconGithub style={{fill: '#dddfee', height: '20px'}} />
             </a>
-            <a href="https://t.me/HELIO_Community" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://t.me/HELIOCommunityPortal/3" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <IconTelegram style={{fill: '#dddfee', height: '20px'}} />
             </a>
           </Grid>

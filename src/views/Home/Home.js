@@ -220,7 +220,7 @@ const Home = () => {
               <p>
                 <IconTelegram alt="telegram" style={{ fill: '#dddfee', height: '15px' }} /> Join our{' '}
                 <a
-                  href="https://t.me/HELIO_Community"
+                  href="https://t.me/HELIOCommunityPortal/3"
                   rel="noopener noreferrer"
                   target="_blank"
                   style={{ color: '#dddfee' }}

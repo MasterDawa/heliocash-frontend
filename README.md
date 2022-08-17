@@ -33,5 +33,5 @@ npx prettier --write .
 ## Useful Resources
 
 - [Our project documentation](https://docs.helio.cash) will help you understand before start contributing
-- Or if you are more of a [Telegram Zombie](https://t.me/HELIO_Community) we have that too
+- Or if you are more of a [Telegram Zombie](https://t.me/HELIOCommunityPortal/3) we have that too
 - Bugs? Use the [Issues](https://github.com/HelioCash/heliocash-frontend) section of our github to report them

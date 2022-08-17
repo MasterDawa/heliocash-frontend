@@ -34,7 +34,7 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 individual is representing the project or its community.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by
-contacting the team in our [Telegram Sever](https://t.me/HELIO_Community) . All complaints will
+contacting the team in our [Telegram Sever](https://t.me/HELIOCommunityPortal/3) . All complaints will
 be reviewed and investigated and will result in a response that is deemed necessary and
 appropriate to the circumstances. Maintainers are obligated to maintain confidentiality
 with regard to the reporter of an incident.
