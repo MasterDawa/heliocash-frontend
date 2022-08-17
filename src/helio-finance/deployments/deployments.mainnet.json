@@ -9430,7 +9430,7 @@
   },
 
   "Treasury": {
-    "address": "0xcd42d2478610584e786A98D2D6D94bc80A066218",
+    "address": "0xADf6E9EB886e4bbF0f0eB7a0F5ef01d3AB13ABB4",
     "abi": [
       {
         "anonymous": false,
