@@ -1,0 +1,232 @@
+body,
+html,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: "Poppins",sans-serif!important;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* .makeStyles-paper-11, */
+/* .makeStyles-paper-11 h2, */
+/* .MuiTypography-body1,
+.MuiPaper-root, */
+h2 {
+  color: #7e48aa !important;
+}
+
+body {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-position: center center !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins",sans-serif!important;
+  text-transform: uppercase;
+  color: #7e48aa;
+}
+
+.MuiToolbar-regular {
+  color: #d6efff;
+}
+
+.MuiButton-containedPrimary,
+.MuiButton-containedPrimary:hover,
+.MuiListItem-button:hover,
+.MuiButtonBase-root:hover {
+  color: #fff !important;
+}
+
+code {
+  font-family: "Poppins",sans-serif!important;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+}
+
+.account > img,
+.account > div {
+  margin-right: 8px;
+}
+
+.wallet-button {
+  color: white;
+  font-family: "Poppins",sans-serif!important;
+  font-size: 1rem !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  text-transform: none !important;
+}
+.wallet-button:hover {
+  color: #7e48aa !important;
+}
+
+.navLink {
+  color: white !important;
+}
+
+.navLink:hover {
+  color: #7e48aa !important;
+}
+
+.shinyButton {
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border-radius: 15px;
+  font-size: 1rem !important;
+  padding-left: 5px;
+  color: #7e48aa !important;
+  box-shadow: 0px 0px 5px 0px rgba(162, 120, 196);
+}
+
+.shinyButtonTertiary {
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border-radius: 15px;
+  font-size: 1rem !important;
+  padding-left: 5px;
+  color: #dddfee !important;
+  box-shadow: 0px 0px 5px 0px white;
+}
+
+.zrx {
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border-radius: 35px;
+  /* padding-left: 5px; */
+  box-shadow: 0px 0px 13px 0px rgb(255, 68, 4, 0.75);
+}
+
+.tutorial {
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border-radius: 15px;
+  font-size: 1rem !important;
+  padding-left: 5px;
+  background-color: #7e48aa !important;
+  color: #08090d !important;
+  box-shadow: 0px 0px 5px 0px rgba(162, 120, 196);
+}
+
+.shinyButtonDisabled {
+  border-radius: 15px;
+
+  color: grey !important;
+  box-shadow: 0px 0px 5px 0px grey;
+}
+
+.shinyButton:hover {
+  background-color: #7e48aa !important;
+  color: #08090d !important;
+}
+
+.shinyButtonTertiary:hover {
+  background-color: #dddfee !important;
+  color: #08090d !important;
+}
+
+.tutorial:hover {
+  background-color: #7e48aa !important;
+  color: #08090d !important;
+  box-shadow: 0px 0px 10px 0px rgba(162, 120, 196);
+}
+
+.shinyButtonSecondary {
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border-radius: 15px;
+  font-size: 1rem !important;
+  padding-left: 5px;
+  background-color: #7e48aa !important;
+  color: #08090d !important;
+  /* box-shadow: 0px 0px 5px 0px rgba(162, 120, 196); */
+}
+
+.shinyButtonDisabledSecondary {
+  border-radius: 15px;
+
+  color: grey !important;
+  box-shadow: 0px 0px 5px 0px grey;
+}
+
+.shinyButtonSecondary:hover {
+  background-color: #7e48aa !important;
+  color: #08090d !important;
+  box-shadow: 0px 0px 5px 0px rgba(162, 120, 196);
+}
+
+.navTokenPrice {
+  padding-top: 6px;
+  padding-right: 12px;
+  color: #fff;
+}
+
+.navTokenIcon {
+  height: 30px !important;
+  width: 30px !important;
+  padding-top: 3px;
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  overflow: hidden;
+}
+
+.helio {
+  background-image: url('/helio-logo.png');
+  background-size: 38px 38px;
+}
+
+.bshare {
+  background-image: url('/hshares.png');
+  background-size: 38px 38px;
+}
+
+.btc {
+  background-image: url('/eth.png');
+  background-size: 38px 38px;
+}
+
+.matic {
+  background-image: url('/wmatic-logo.png');
+  background-size: 38px 38px;
+}
+
+.strategy {
+  background-image: url('/background2.png');
+}
