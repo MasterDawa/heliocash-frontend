@@ -198,7 +198,7 @@ const Nav = () => {
               </a>
               <a href="https://dexscreener.com/polygon/" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
                 <div className="navTokenIcon bshare"></div>{' '}
-                <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 0)}</div>
+                <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
               </a>
               <a href="https://dexscreener.com/polygon/0x45dda9cb7c25131df268515131f647d726f50608" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
                 <div className="navTokenIcon btc"></div>{' '}
@@ -206,7 +206,7 @@ const Nav = () => {
               </a>
               <a href="https://dexscreener.com/polygon/0xa374094527e1673a86de625aa59517c5de346d32" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
                 <div className="navTokenIcon matic"></div>{' '}
-                <div className="navTokenPrice">${roundAndFormatNumber(Number(maticPriceInDollars), 0)}</div>
+                <div className="navTokenPrice">${roundAndFormatNumber(Number(maticPriceInDollars), 2)}</div>
               </a>
             </Box>
             <AccountButton text="Connect" />

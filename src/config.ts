@@ -34,6 +34,7 @@ const configurations: {[env: string]: Configuration} = {
       SVL: ['0x37F14E7c2FadC2A01dBD93b8a1F69D41c6c3d554', 18], //todo
       QUICK: ['0xB5C064F955D8e7F38fE0460C556a72987494eE17', 18],
       HELIO: ['0x0ebe0412776Ce5eF1C1d854b8a21C35224eF81cB', 18],
+      USDT: ['0xc2132d05d31c914a87c6611c10748aeb04b58e8f', 6],
       'USDT-MATIC-LP': ['0x604229c960e5cacf2aaeac8be68ac07ba9df81c3', 18], 
       'USDT-ETH-LP': ['0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046', 18], 
       'HELIO-ETH-LP': ['0xFE467301DA1A259165EEc1e7b8EA9a02dA612664', 18],
@@ -61,6 +62,7 @@ const configurations: {[env: string]: Configuration} = {
       SVL: ['0x37F14E7c2FadC2A01dBD93b8a1F69D41c6c3d554', 18],
       QUICK: ['0xB5C064F955D8e7F38fE0460C556a72987494eE17', 18],
       HELIO: ['0x0ebe0412776Ce5eF1C1d854b8a21C35224eF81cB', 18],
+      USDT: ['0xc2132d05d31c914a87c6611c10748aeb04b58e8f', 6],
       'USDT-MATIC-LP': ['0x604229c960e5cacf2aaeac8be68ac07ba9df81c3', 18],
       'USDT-ETH-LP': ['0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046', 18],
       'HELIO-ETH-LP': ['0xFE467301DA1A259165EEc1e7b8EA9a02dA612664', 18],

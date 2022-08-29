@@ -52,7 +52,7 @@ const Boardroom = () => {
   const { account } = useWallet();
   const { onRedeem } = useRedeemOnBoardroom(version);
   const stakedBalance = useStakedBalanceOnBoardroom(version);
-  const currentEpoch = useCurrentEpoch(version).add(8);
+  const currentEpoch = useCurrentEpoch(version).add(0);
   const cashStat = useCashPriceInEstimatedTWAP(version);
   const totalStaked = useTotalStakedOnBoardroom(version);
   const boardroomAPR = useFetchBoardroomAPR(version);

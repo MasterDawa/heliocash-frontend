@@ -37,6 +37,7 @@
     "material-ui-image": "^3.3.2",
     "moment": "^2.29.1",
     "numeral": "^2.0.6",
+    "quickswap-sdk": "^3.0.9",
     "react": "^16.13.1",
     "react-circular-progressbar": "^2.0.3",
     "react-countdown": "^2.2.1",

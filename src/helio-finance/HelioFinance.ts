@@ -1,7 +1,7 @@
 import { HSHARE_TICKER, ETH_TICKER } from './../utils/constants';
 // import { Fetcher, Route, Token } from '@uniswap/sdk';
 //import { Fetcher as FetcherSpirit, Token as TokenSpirit } from '@spiritswap/sdk';
-import { Fetcher, Route, Token } from '@pancakeswap/sdk';
+import { Fetcher, Route, Token } from 'quickswap-sdk';
 import { Contract as MultiContract, Provider } from 'ethers-multicall';
 import { Configuration } from './config';
 import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, HShareSwapperStat, Call } from './types';
@@ -432,7 +432,11 @@ export class HelioFinance {
         tokenPrice = await this.getApeLPTokenPrice(token, this.HSHARE, false);
       } else if (tokenName === 'HELIO-ETH-APELP') {
         tokenPrice = await this.getApeLPTokenPrice(token, this.HELIO, true);
-      } else {
+      } else if (tokenName === 'HELIO') {
+        const helioStat = this.getHelioStat();
+        tokenPrice = (await helioStat).priceInDollars;
+      }
+      else {
         const [priceToken, priceMATIC] = await Promise.all([
           this.getTokenPriceFromQuickswap(token),
           this.getWMATICPriceFromQuickswap()
@@ -481,6 +485,9 @@ export class HelioFinance {
   async getTotalValueLocked(): Promise<Number> {
     let totalValue = 0;
     for (const bankInfo of Object.values(bankDefinitions)) {
+      if (bankInfo.depositTokenName === 'HELIO-HSHARE-LP') {
+        continue;
+      }
       const pool = this.contracts[bankInfo.contract];
       const token = this.externalTokens[bankInfo.depositTokenName];
       const [tokenPrice, tokenAmountInPool] = await Promise.all([
@@ -489,19 +496,22 @@ export class HelioFinance {
       ]);
       const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal)) * Number(tokenPrice);
       const poolValue = Number.isNaN(value) ? 0 : value;
+
       totalValue += poolValue;
     }
-
-    const [shareStat, boardroomtShareBalance, lpStat, detonatorBalance] = await Promise.all([
+    
+    // const [shareStat, boardroomtShareBalance, lpStat, detonatorBalance] = await Promise.all([
+    //   this.getShareStat(),
+    //   this.HSHARE.balanceOf(this.currentBoardroom(1).address),
+    //   this.getLPStat('HELIO-ETH-LP'),
+    //   this.HELIOETH_LP.balanceOf(this.contracts.Detonator.address)
+    // ]);
+    const [shareStat, boardroomtShareBalance] = await Promise.all([
       this.getShareStat(),
       this.HSHARE.balanceOf(this.currentBoardroom(1).address),
-      this.getLPStat('HELIO-ETH-LP'),
-      this.HELIOETH_LP.balanceOf(this.contracts.Detonator.address)
     ]);
     const HSHAREPrice = shareStat.priceInDollars;
-    const LpPrice = lpStat.priceOfOne;
     const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalance, this.HSHARE.decimal)) * Number(HSHAREPrice);
-    const detonatorTVL = Number(getDisplayBalance(detonatorBalance, 18)) * Number(LpPrice);
 
     return totalValue + boardroomTVL;
   }
@@ -725,13 +735,13 @@ export class HelioFinance {
   async getWMATICPriceFromQuickswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { WMATIC, DAI } = this.externalTokens;
+    const { WMATIC, USDT } = this.externalTokens;
     try {
       const dai_wftm_lp_pair = this.externalTokens['USDT-MATIC-LP'];
       let ftm_amount_BN = await WMATIC.balanceOf(dai_wftm_lp_pair.address);
       let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WMATIC.decimal));
-      let dai_amount_BN = await DAI.balanceOf(dai_wftm_lp_pair.address);
-      let dai_amount = Number(getFullDisplayBalance(dai_amount_BN, DAI.decimal));
+      let dai_amount_BN = await USDT.balanceOf(dai_wftm_lp_pair.address);
+      let dai_amount = Number(getFullDisplayBalance(dai_amount_BN, USDT.decimal));
       return (dai_amount / ftm_amount).toString();
     } catch (err) {
       console.error(`Failed to fetch token price of WMATIC: ${err}`);
@@ -744,9 +754,9 @@ export class HelioFinance {
     const { ETH } = this.externalTokens;
     try {
       const btcPriceInMATIC = await this.getTokenPriceFromQuickswap(ETH);
-
+      
       const wmaticPrice = await this.getWMATICPriceFromQuickswap();
-
+      
       const btcprice = (Number(btcPriceInMATIC) * Number(wmaticPrice)).toFixed(2).toString();
       //console.log('btcprice', btcprice);
       return btcprice;

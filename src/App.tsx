@@ -93,7 +93,7 @@ const Providers: React.FC = ({children}) => {
             walletlink: {
               url: config.defaultProvider,
               appName: 'helio.cash',
-              appLogoUrl: 'https://i.imgur.com/daY5tUl.png',
+              appLogoUrl: 'https://i.imgur.com/TizDHIp.png', 
             },
           }}
         >
