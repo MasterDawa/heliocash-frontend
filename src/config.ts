@@ -125,11 +125,11 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
  
 
    HelioGenesisRewardPool: {
-     name: 'Earn HELIO by WMATIC',
-     poolId: 0,
+     name: 'Earn HELIO by QUICK',
+     poolId: 1,
      sectionInUI: 0,
      contract: 'HelioGenesisRewardPool',
-     depositTokenName: 'WMATIC',
+     depositTokenName: 'QUICK',
      earnTokenName: 'HELIO',
      finished: false,
      sort: 1,
@@ -168,7 +168,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     earnTokenName: 'HSHARE',
     finished: false,
     sort: 8,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   HelioEthHShareRewardPool: {
     name: 'Earn HSHARE by HELIO-ETH LP',
@@ -179,7 +179,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     earnTokenName: 'HSHARE',
     finished: false,
     sort: 7,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   HelioETHLPHelioRewardPool: {
     name: 'Earn HSHARE by HELIO-ETH LP',
@@ -190,7 +190,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     earnTokenName: 'HELIO',
     finished: false,
     sort: 9,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   HelioHShareRewardPool: {
     name: 'Earn HSHARE by HELIO',
