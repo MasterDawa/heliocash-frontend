@@ -192,7 +192,7 @@ const Nav = () => {
                 display: 'flex',
               }}
             >
-              <a href="https://dexscreener.com/polygon/" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
+              <a href="https://dexscreener.com/polygon/0x0b4dd5A7A7377397aa1dFa12582f270fe0351770" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
                 <div className="navTokenIcon helio"></div>{' '}
                 <div className="navTokenPrice">${roundAndFormatNumber(Number(helioPriceInDollars), 2)}</div>
               </a>
