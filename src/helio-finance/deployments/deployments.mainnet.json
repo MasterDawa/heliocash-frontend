@@ -5530,7 +5530,7 @@
   },
 
   "HelioDAIRewardPool": {
-    "address": "0xAeAF5CAeaAA000e8BBAf66679E403292D7D62bB2",
+    "address": "0xb24314d0866812476db6906E425Aff557702cD42",
     "abi": [
       {
         "inputs": [
@@ -7045,7 +7045,7 @@
   },
 
   "HelioQUICKRewardPool": {
-    "address": "0xAeAF5CAeaAA000e8BBAf66679E403292D7D62bB2",
+    "address": "0xb24314d0866812476db6906E425Aff557702cD42",
     "abi": [
       {
         "inputs": [
@@ -7549,7 +7549,7 @@
     ]
   },
   "HelioMaticLPRewardPool": {
-    "address": "0xAeAF5CAeaAA000e8BBAf66679E403292D7D62bB2",
+    "address": "0xb24314d0866812476db6906E425Aff557702cD42",
     "abi": [
       {
         "inputs": [
@@ -8041,7 +8041,7 @@
   },
 
   "HelioRewardPool": {
-    "address": "0xAeAF5CAeaAA000e8BBAf66679E403292D7D62bB2",
+    "address": "0xb24314d0866812476db6906E425Aff557702cD42",
     "abi": [
       {
         "inputs": [
@@ -8533,7 +8533,7 @@
   },
  
   "HelioETHLPHelioRewardPool": {
-    "address": "0xAeAF5CAeaAA000e8BBAf66679E403292D7D62bB2",
+    "address": "0xb24314d0866812476db6906E425Aff557702cD42",
     "abi": [
       {
         "inputs": [
