@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import useHelioFinance from '../useHelioFinance';
 import {AllocationTime} from '../../helio-finance/types';
 
-const useClaimRewardTimerBoardroom = (version: number) => {
+const useClaimRewardTimerBoardroom = () => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
@@ -11,9 +11,9 @@ const useClaimRewardTimerBoardroom = (version: number) => {
 
   useEffect(() => {
     if (helioFinance) {
-      helioFinance.getUserClaimRewardTime(version).then(setTime);
+      helioFinance.getUserClaimRewardTime().then(setTime);
     }
-  }, [helioFinance, version]);
+  }, [helioFinance]);
   return time;
 };
 

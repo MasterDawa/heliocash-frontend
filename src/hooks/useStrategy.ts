@@ -11,8 +11,8 @@ const useStrategy = () => {
     if (!helioFinance.myAccount) return;
     const harvestTxs = [];
 
-    if ((await helioFinance.canUserClaimRewardFromBoardroom(1)) && (await helioFinance.getEarningsOnBoardroom(1)).gt(ZERO))
-      harvestTxs.push(await helioFinance.harvestCashFromBoardroom(1));
+    if ((await helioFinance.canUserClaimRewardFromBoardroom()) && (await helioFinance.getEarningsOnBoardroom()).gt(ZERO))
+      harvestTxs.push(await helioFinance.harvestCashFromBoardroom());
     if ((await helioFinance.earnedFromBank('HShareMaticHShareRewardPool', HSHARE_TICKER, 0, helioFinance.myAccount)).gt(ZERO))
       harvestTxs.push(await helioFinance.harvest('HShareMaticHShareRewardPool', 0, 2));
     if ((await helioFinance.earnedFromBank('HelioEthHShareRewardPool', HSHARE_TICKER, 1, helioFinance.myAccount)).gt(ZERO))
@@ -64,7 +64,7 @@ const useStrategy = () => {
     if (balanceSHARELP.gt(ZERO))
       stakeTxs.push(await helioFinance.stake('HShareMaticHShareRewardPool', 0, 2, balanceSHARELP));
     if (stakeBoardroom > 0 && shareBoardroomAmount.gt(ZERO))
-      stakeTxs.push(await helioFinance.currentBoardroom(1).stake(shareBoardroomAmount));
+      stakeTxs.push(await helioFinance.currentBoardroom().stake(shareBoardroomAmount));
 
     await Promise.all(stakeTxs.map((tx) => tx.wait()));
 

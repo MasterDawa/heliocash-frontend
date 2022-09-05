@@ -3,7 +3,7 @@ import {BigNumber} from 'ethers';
 import useHelioFinance from './useHelioFinance';
 import useRefresh from './useRefresh';
 
-const useTotalStakedOnBoardroom = (version: number) => {
+const useTotalStakedOnBoardroom = () => {
   const [totalStaked, setTotalStaked] = useState(BigNumber.from(0));
   const helioFinance = useHelioFinance();
   const {slowRefresh} = useRefresh();
@@ -12,7 +12,7 @@ const useTotalStakedOnBoardroom = (version: number) => {
   useEffect(() => {
     async function fetchTotalStaked() {
       try {
-        setTotalStaked(await helioFinance.getTotalStakedInBoardroom(version));
+        setTotalStaked(await helioFinance.getTotalStakedInBoardroom());
       } catch (err) {
         console.error(err);
       }
@@ -20,7 +20,7 @@ const useTotalStakedOnBoardroom = (version: number) => {
     if (isUnlocked) {
       fetchTotalStaked();
     }
-  }, [isUnlocked, slowRefresh, helioFinance, version]);
+  }, [isUnlocked, slowRefresh, helioFinance]);
 
   return totalStaked;
 };

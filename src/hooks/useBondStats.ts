@@ -3,7 +3,7 @@ import useHelioFinance from './useHelioFinance';
 import {TokenStat} from '../helio-finance/types';
 import useRefresh from './useRefresh';
 
-const useBondStats = (version: number) => {
+const useBondStats = () => {
   const [stat, setStat] = useState<TokenStat>();
   const {slowRefresh} = useRefresh();
   const helioFinance = useHelioFinance();
@@ -11,13 +11,13 @@ const useBondStats = (version: number) => {
   useEffect(() => {
     async function fetchBondPrice() {
       try {
-        setStat(await helioFinance.getBondStat(version));
+        setStat(await helioFinance.getBondStat());
       } catch (err) {
         console.error(err);
       }
     }
     fetchBondPrice();
-  }, [setStat, helioFinance, slowRefresh, version]);
+  }, [setStat, helioFinance, slowRefresh]);
 
   return stat;
 };

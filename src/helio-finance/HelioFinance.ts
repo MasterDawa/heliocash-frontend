@@ -193,7 +193,7 @@ export class HelioFinance {
    * TotalSupply
    * CirculatingSupply (always equal to total supply for bonds)
    */
-  async getBondStat(version: number): Promise<TokenStat> {
+  async getBondStat(): Promise<TokenStat> {
     const { Treasury } = this.contracts;
     const helioStat = await this.getHelioStat();
     const bondHelioRatioBN = await Treasury.getBondPremiumRate();
@@ -235,9 +235,9 @@ export class HelioFinance {
     };
   }
 
-  async getHelioStatInEstimatedTWAP(version: number): Promise<TokenStat> {
+  async getHelioStatInEstimatedTWAP(): Promise<TokenStat> {
     const { Oracle, HelioRewardPool } = this.contracts;
-    const expectedPrice = version === 0 ? await Oracle.twap(this.HELIO.address, ethers.utils.parseEther('4000')) : await Oracle.twap(this.HELIO.address, ethers.utils.parseEther('4000'));
+    const expectedPrice = await Oracle.twap(this.HELIO.address, ethers.utils.parseEther('4000'));
 
     const supply = await this.HELIO.totalSupply();
     const helioRewardPoolSupply = await this.HELIO.balanceOf(HelioRewardPool.address);
@@ -250,7 +250,7 @@ export class HelioFinance {
     };
   }
 
-  async getHelioPriceInLastTWAP(version: number): Promise<BigNumber> {
+  async getHelioPriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getHelioUpdatedPrice();
   }
@@ -262,7 +262,7 @@ export class HelioFinance {
   //   return updatedPrice2;
   // }
 
-  async getBondsPurchasable(version: number): Promise<BigNumber> {
+  async getBondsPurchasable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     // const burnableHelio = (Number(Treasury.getBurnableHelioLeft()) * 1000).toFixed(2).toString();
     return Treasury.getBurnableHelioLeft();
@@ -452,12 +452,12 @@ export class HelioFinance {
   //=========================== END ===================================
   //===================================================================
 
-  async getCurrentEpoch(version: number): Promise<BigNumber> {
+  async getCurrentEpoch(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.epoch();
   }
 
-  async getBondOraclePriceInLastTWAP(version: number): Promise<BigNumber> {
+  async getBondOraclePriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getBondPremiumRate();
   }
@@ -466,7 +466,7 @@ export class HelioFinance {
    * Buy bonds with cash.
    * @param amount amount of cash to purchase bonds with.
    */
-  async buyBonds(version: number, amount: string | number): Promise<TransactionResponse> {
+  async buyBonds(amount: string | number): Promise<TransactionResponse> {
     const { Treasury } = this.contracts;
     const treasuryHelioPrice = await Treasury.getHelioPrice();
     return Treasury.buyBonds(decimalToBalance(amount), treasuryHelioPrice);
@@ -476,7 +476,7 @@ export class HelioFinance {
    * Redeem bonds for cash.
    * @param amount amount of bonds to redeem.
    */
-  async redeemBonds(version: number, amount: string): Promise<TransactionResponse> {
+  async redeemBonds(amount: string): Promise<TransactionResponse> {
     const { Treasury } = this.contracts;
     const priceForHelio = await Treasury.getHelioPrice();
     return await Treasury.redeemBonds(decimalToBalance(amount), priceForHelio);
@@ -508,7 +508,7 @@ export class HelioFinance {
     // ]);
     const [shareStat, boardroomtShareBalance] = await Promise.all([
       this.getShareStat(),
-      this.HSHARE.balanceOf(this.currentBoardroom(1).address),
+      this.HSHARE.balanceOf(this.currentBoardroom().address),
     ]);
     const HSHAREPrice = shareStat.priceInDollars;
     const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalance, this.HSHARE.decimal)) * Number(HSHAREPrice);
@@ -661,7 +661,7 @@ export class HelioFinance {
     return 'latest';
   }
 
-  currentBoardroom(version: number): Contract {
+  currentBoardroom(): Contract {
     if (!this.boardroomVersionOfUser) {
       //throw new Error('you must unlock the wallet to continue.');
     }
@@ -789,8 +789,8 @@ export class HelioFinance {
   //===================================================================
   //===================================================================
 
-  async getBoardroomAPR(version: number) {
-    const Boardroom = this.currentBoardroom(version);
+  async getBoardroomAPR() {
+    const Boardroom = this.currentBoardroom();
     const [latestSnapshotIndex, shareStat, helioStat, boardroomtShareBalanceOf] = await Promise.all([
       Boardroom.latestSnapshotIndex(),
       this.getShareStat(),
@@ -813,8 +813,8 @@ export class HelioFinance {
    * Checks if the user is allowed to retrieve their reward from the Boardroom
    * @returns true if user can withdraw reward, false if they can't
    */
-  async canUserClaimRewardFromBoardroom(version: number): Promise<boolean> {
-    const Boardroom = this.currentBoardroom(version);
+  async canUserClaimRewardFromBoardroom(): Promise<boolean> {
+    const Boardroom = this.currentBoardroom();
     return await Boardroom.canClaimReward(this.myAccount);
   }
 
@@ -822,10 +822,10 @@ export class HelioFinance {
    * Checks if the user is allowed to retrieve their reward from the Boardroom
    * @returns true if user can withdraw reward, false if they can't
    */
-  async canUserUnstakeFromBoardroom(version: number): Promise<boolean> {
-    const Boardroom = this.currentBoardroom(version);
+  async canUserUnstakeFromBoardroom(): Promise<boolean> {
+    const Boardroom = this.currentBoardroom();
     const canWithdraw = await Boardroom.canWithdraw(this.myAccount);
-    const stakedAmount = await this.getStakedSharesOnBoardroom(version);
+    const stakedAmount = await this.getStakedSharesOnBoardroom();
     const notStaked = Number(getDisplayBalance(stakedAmount, this.HSHARE.decimal)) === 0;
     const result = notStaked ? true : canWithdraw;
     return result;
@@ -837,54 +837,54 @@ export class HelioFinance {
     return BigNumber.from(0);
   }
 
-  async getTotalStakedInBoardroom(version: number): Promise<BigNumber> {
-    const Boardroom = this.currentBoardroom(version);
+  async getTotalStakedInBoardroom(): Promise<BigNumber> {
+    const Boardroom = this.currentBoardroom();
     return await Boardroom.totalSupply();
   }
 
-  async stakeShareToBoardroom(version: number, amount: string): Promise<TransactionResponse> {
+  async stakeShareToBoardroom(amount: string): Promise<TransactionResponse> {
     if (this.isOldBoardroomMember()) {
       throw new Error("you're using old boardroom. please withdraw and deposit the HSHARE again.");
     }
-    const Boardroom = this.currentBoardroom(version);
+    const Boardroom = this.currentBoardroom();
     return await Boardroom.stake(decimalToBalance(amount));
   }
 
-  async getStakedSharesOnBoardroom(version: number): Promise<BigNumber> {
-    const Boardroom = this.currentBoardroom(version);
+  async getStakedSharesOnBoardroom(): Promise<BigNumber> {
+    const Boardroom = this.currentBoardroom();
     if (this.boardroomVersionOfUser === 'v1') {
       return await Boardroom.getShareOf(this.myAccount);
     }
     return await Boardroom.balanceOf(this.myAccount);
   }
 
-  async getEarningsOnBoardroom(version: number): Promise<BigNumber> {
-    const Boardroom = this.currentBoardroom(version);
+  async getEarningsOnBoardroom(): Promise<BigNumber> {
+    const Boardroom = this.currentBoardroom();
     if (this.boardroomVersionOfUser === 'v1') {
       return await Boardroom.getCashEarningsOf(this.myAccount);
     }
     return await Boardroom.earned(this.myAccount);
   }
 
-  async withdrawShareFromBoardroom(version: number, amount: string): Promise<TransactionResponse> {
-    const Boardroom = this.currentBoardroom(version);
+  async withdrawShareFromBoardroom(amount: string): Promise<TransactionResponse> {
+    const Boardroom = this.currentBoardroom();
     return await Boardroom.withdraw(decimalToBalance(amount));
   }
 
-  async harvestCashFromBoardroom(version: number): Promise<TransactionResponse> {
-    const Boardroom = this.currentBoardroom(version);
+  async harvestCashFromBoardroom(): Promise<TransactionResponse> {
+    const Boardroom = this.currentBoardroom();
     if (this.boardroomVersionOfUser === 'v1') {
       return await Boardroom.claimDividends();
     }
     return await Boardroom.claimReward();
   }
 
-  async exitFromBoardroom(version: number): Promise<TransactionResponse> {
-    const Boardroom = this.currentBoardroom(version);
+  async exitFromBoardroom(): Promise<TransactionResponse> {
+    const Boardroom = this.currentBoardroom();
     return await Boardroom.exit();
   }
 
-  async getTreasuryNextAllocationTime(version: number): Promise<AllocationTime> {
+  async getTreasuryNextAllocationTime(): Promise<AllocationTime> {
     const { Treasury } = this.contracts;
     const nextEpochTimestamp: BigNumber = await Treasury.nextEpochPoint();
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
@@ -898,7 +898,7 @@ export class HelioFinance {
    * their reward from the boardroom
    * @returns Promise<AllocationTime>
    */
-  async getUserClaimRewardTime(version: number): Promise<AllocationTime> {
+  async getUserClaimRewardTime(): Promise<AllocationTime> {
     const { Boardroom, Treasury } = this.contracts;
     const selectedBoardroom = Boardroom;
     const nextEpochTimestamp = await selectedBoardroom.nextEpochPoint(); //in unix timestamp
@@ -932,7 +932,7 @@ export class HelioFinance {
    * from the boardroom
    * @returns Promise<AllocationTime>
    */
-  async getUserUnstakeTime(version: number): Promise<AllocationTime> {
+  async getUserUnstakeTime(): Promise<AllocationTime> {
     const { Boardroom, Treasury } = this.contracts;
     const selectedBoardroom = Boardroom;
     const nextEpochTimestamp = await selectedBoardroom.nextEpochPoint();
@@ -944,7 +944,7 @@ export class HelioFinance {
     const withdrawLockupEpochs = await selectedBoardroom.withdrawLockupEpochs();
     const fromDate = new Date(Date.now());
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
-    const stakedAmount = await this.getStakedSharesOnBoardroom(version);
+    const stakedAmount = await this.getStakedSharesOnBoardroom();
     if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
       return { from: fromDate, to: fromDate };
     } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
@@ -1021,7 +1021,7 @@ export class HelioFinance {
   /**
    * @returns an array of the regulation events till the most up to date epoch
    */
-  async listenForRegulationsEvents(version: number): Promise<any> {
+  async listenForRegulationsEvents(): Promise<any> {
     const { Treasury } = this.contracts;
 
     const treasuryDaoFundedFilter = Treasury.filters.DaoFundFunded();
@@ -1057,13 +1057,11 @@ export class HelioFinance {
 
     epochBlocksRanges.forEach(async (value, index) => {
       events[index].bondsBought = await this.getBondsWithFilterForPeriod(
-        version,
         boughtBondsFilter,
         value.startBlock,
         value.endBlock,
       );
       events[index].bondsRedeemed = await this.getBondsWithFilterForPeriod(
-        version,
         redeemBondsFilter,
         value.startBlock,
         value.endBlock,
@@ -1087,7 +1085,7 @@ export class HelioFinance {
    * @param to block number
    * @returns the amount of bonds events emitted based on the filter provided during a specific period
    */
-  async getBondsWithFilterForPeriod(version: number, filter: EventFilter, from: number, to: number): Promise<number> {
+  async getBondsWithFilterForPeriod(filter: EventFilter, from: number, to: number): Promise<number> {
     const { Treasury } = this.contracts;
     const bondsAmount = await Treasury.queryFilter(filter, from, to);
     return bondsAmount.length;

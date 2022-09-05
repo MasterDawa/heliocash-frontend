@@ -3,7 +3,7 @@ import useHelioFinance from './useHelioFinance';
 import {AllocationTime} from '../helio-finance/types';
 import useRefresh from './useRefresh';
 
-const useTreasuryAllocationTimes = (version: number) => {
+const useTreasuryAllocationTimes = () => {
   const {slowRefresh} = useRefresh();
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
@@ -12,9 +12,9 @@ const useTreasuryAllocationTimes = (version: number) => {
   const helioFinance = useHelioFinance();
   useEffect(() => {
     if (helioFinance) {
-      helioFinance.getTreasuryNextAllocationTime(version).then(setTime);
+      helioFinance.getTreasuryNextAllocationTime().then(setTime);
     }
-  }, [helioFinance, slowRefresh, version]);
+  }, [helioFinance, slowRefresh]);
   return time;
 };
 

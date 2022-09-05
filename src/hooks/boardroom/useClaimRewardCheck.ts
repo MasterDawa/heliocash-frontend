@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import useRefresh from '../useRefresh';
 import useHelioFinance from '../useHelioFinance';
 
-const useClaimRewardCheck = (version: number) => {
+const useClaimRewardCheck = () => {
   const {slowRefresh} = useRefresh();
   const [canClaimReward, setCanClaimReward] = useState(false);
   const helioFinance = useHelioFinance();
@@ -11,7 +11,7 @@ const useClaimRewardCheck = (version: number) => {
   useEffect(() => {
     async function canUserClaimReward() {
       try {
-        setCanClaimReward(await helioFinance.canUserClaimRewardFromBoardroom(version));
+        setCanClaimReward(await helioFinance.canUserClaimRewardFromBoardroom());
       } catch (err) {
         console.error(err);
       }
@@ -19,7 +19,7 @@ const useClaimRewardCheck = (version: number) => {
     if (isUnlocked) {
       canUserClaimReward();
     }
-  }, [isUnlocked, slowRefresh, helioFinance, version]);
+  }, [isUnlocked, slowRefresh, helioFinance]);
 
   return canClaimReward;
 };

@@ -47,19 +47,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Boardroom = () => {
-  const version = 1;
   const classes = useStyles();
   const { account } = useWallet();
-  const { onRedeem } = useRedeemOnBoardroom(version);
-  const stakedBalance = useStakedBalanceOnBoardroom(version);
-  const currentEpoch = useCurrentEpoch(version).add(0);
-  const cashStat = useCashPriceInEstimatedTWAP(version);
-  const totalStaked = useTotalStakedOnBoardroom(version);
-  const boardroomAPR = useFetchBoardroomAPR(version);
-  const canClaimReward = useClaimRewardCheck(version);
-  const canWithdraw = useWithdrawCheck(version);
+  const { onRedeem } = useRedeemOnBoardroom();
+  const stakedBalance = useStakedBalanceOnBoardroom();
+  const currentEpoch = useCurrentEpoch();
+  const cashStat = useCashPriceInEstimatedTWAP();
+  const totalStaked = useTotalStakedOnBoardroom();
+  const boardroomAPR = useFetchBoardroomAPR();
+  const canClaimReward = useClaimRewardCheck();
+  const canWithdraw = useWithdrawCheck();
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
-  const { to } = useTreasuryAllocationTimes(version);
+  const { to } = useTreasuryAllocationTimes();
   const hsharesActive = Date.now() >= config.boardroomLaunchesAt.getTime();
 
   return (

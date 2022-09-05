@@ -32,12 +32,11 @@ import useWithdrawFromBoardroom from '../../../hooks/useWithdrawFromBoardroom';
 
 const Stake: React.FC = () => {
   const helioFinance = useHelioFinance();
-  const version = 1;
   const [approveStatus, approve] = useApprove(helioFinance.HSHARE, helioFinance.contracts.Boardroom.address);
 
   const tokenBalance = useTokenBalance(helioFinance.HSHARE);
-  const stakedBalance = useStakedBalanceOnBoardroom(version);
-  const {from, to} = useUnstakeTimerBoardroom(version);
+  const stakedBalance = useStakedBalanceOnBoardroom();
+  const {from, to} = useUnstakeTimerBoardroom();
 
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('HSHARE', helioFinance.HSHARE);
   const tokenPriceInDollars = useMemo(
@@ -49,9 +48,9 @@ const Stake: React.FC = () => {
   );
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const {onStake} = useStakeToBoardroom(version);
-  const {onWithdraw} = useWithdrawFromBoardroom(version);
-  const canWithdrawFromBoardroom = useWithdrawCheck(version);
+  const {onStake} = useStakeToBoardroom();
+  const {onWithdraw} = useWithdrawFromBoardroom();
+  const canWithdrawFromBoardroom = useWithdrawCheck();
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal

@@ -3,7 +3,7 @@ import useHelioFinance from './useHelioFinance';
 import {TokenStat} from '../helio-finance/types';
 import useRefresh from './useRefresh';
 
-const useCashPriceInEstimatedTWAP = (version: number) => {
+const useCashPriceInEstimatedTWAP = () => {
   const [stat, setStat] = useState<TokenStat>();
   const helioFinance = useHelioFinance();
   const {slowRefresh} = useRefresh();
@@ -11,13 +11,13 @@ const useCashPriceInEstimatedTWAP = (version: number) => {
   useEffect(() => {
     async function fetchCashPrice() {
       try {
-        setStat(await helioFinance.getHelioStatInEstimatedTWAP(version));
+        setStat(await helioFinance.getHelioStatInEstimatedTWAP());
       } catch (err) {
         console.error(err);
       }
     }
     fetchCashPrice();
-  }, [setStat, helioFinance, slowRefresh, version]);
+  }, [setStat, helioFinance, slowRefresh]);
 
   return stat;
 };

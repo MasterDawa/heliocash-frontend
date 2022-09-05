@@ -49,13 +49,13 @@ const Farm = () => {
                   <Typography color="textPrimary" align="center" variant="h4" gutterBottom>
                     Earn HSHARE by staking QuickSwap LP
                   </Typography>
-                  {/* <Alert variant="filled" severity="info">
+                  { <Alert variant="filled" severity="info">
                     <h4>
-                      Farms started November 25th 2021 and will continue running for 1 full year.</h4>
+                      Farms started September 6th 2022 and will continue running for 1 full year.</h4>
 
 
 
-                  </Alert> */}
+                  </Alert> }
                   <Grid container spacing={3} style={{marginTop: '20px'}}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
@@ -90,8 +90,7 @@ const Farm = () => {
                   Genesis Pools
                   </Typography>
                   <Alert variant="filled" severity="info">
-                  Genesis pools run for the first 24 hours and will end at the same time the reward pool above
-                  begins. August 8 23:00 UTC
+                  Genesis pools run for the first 24 hours starting on September 5 4:00 PM GMT or Unix Epoch Time 1662393600
                   </Alert>
                   <Grid container spacing={3} style={{marginTop: '20px'}}>
                     {activeBanks

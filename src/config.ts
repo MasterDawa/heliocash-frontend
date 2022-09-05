@@ -33,13 +33,13 @@ const configurations: {[env: string]: Configuration} = {
       ETH: ['0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18], 
       SVL: ['0x37F14E7c2FadC2A01dBD93b8a1F69D41c6c3d554', 18], //todo
       QUICK: ['0xB5C064F955D8e7F38fE0460C556a72987494eE17', 18],
-      HELIO: ['0x0ebe0412776Ce5eF1C1d854b8a21C35224eF81cB', 18],
+      HELIO: ['0xB38B969f151E8217C917fE0532382172BB6Fb83E', 18],
       USDT: ['0xc2132d05d31c914a87c6611c10748aeb04b58e8f', 6],
       'USDT-MATIC-LP': ['0x604229c960e5cacf2aaeac8be68ac07ba9df81c3', 18], 
       'USDT-ETH-LP': ['0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046', 18], 
-      'HELIO-ETH-LP': ['0xFE467301DA1A259165EEc1e7b8EA9a02dA612664', 18],
-      'HELIO-MATIC-LP': ['0xaf08211beed0266e6ce221f169f729f16cd7fadd', 18], //todo
-      'HSHARE-MATIC-LP': ['0xD69edD067cFa5A06222DD1a699EE16Afe7fa3924', 18],
+      'HELIO-ETH-LP': ['0x6C8bBA1618fF2ca8534b46465d3aE830602Cb511', 18],
+      'HELIO-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18], //todo
+      'HSHARE-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18],
       'HELIO-HSHARE-LP': ['0x2fa50016b979beeac3ef9242fe3031946b8f97e1', 18], //todo
       
     },
@@ -61,20 +61,20 @@ const configurations: {[env: string]: Configuration} = {
       ETH: ['0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18],
       SVL: ['0x37F14E7c2FadC2A01dBD93b8a1F69D41c6c3d554', 18],
       QUICK: ['0xB5C064F955D8e7F38fE0460C556a72987494eE17', 18],
-      HELIO: ['0x0ebe0412776Ce5eF1C1d854b8a21C35224eF81cB', 18],
+      HELIO: ['0xB38B969f151E8217C917fE0532382172BB6Fb83E', 18],
       USDT: ['0xc2132d05d31c914a87c6611c10748aeb04b58e8f', 6],
       'USDT-MATIC-LP': ['0x604229c960e5cacf2aaeac8be68ac07ba9df81c3', 18],
       'USDT-ETH-LP': ['0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046', 18],
-      'HELIO-ETH-LP': ['0xFE467301DA1A259165EEc1e7b8EA9a02dA612664', 18],
-      'HELIO-MATIC-LP': ['0xaf08211beed0266e6ce221f169f729f16cd7fadd', 18], /// TODO
-      'HSHARE-MATIC-LP': ['0xD69edD067cFa5A06222DD1a699EE16Afe7fa3924', 18],
+      'HELIO-ETH-LP': ['0x6C8bBA1618fF2ca8534b46465d3aE830602Cb511', 18],
+      'HELIO-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18], /// TODO
+      'HSHARE-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18],
       'HELIO-HSHARE-LP': ['0x2fa50016b979beeac3ef9242fe3031946b8f97e1', 18], /// TODO
 
     },
-    baseLaunchDate: new Date('2022-01-17T23:00:00Z'),
-    bondLaunchesAt: new Date('2022-01-31T23:00:00Z'),
-    boardroomLaunchesAt: new Date('2022-01-21T01:00:00Z'),
-    hsharesLaunchesAt: new Date('2022-01-20T01:00:00Z'),
+    baseLaunchDate: new Date('2022-09-5T02:17:00Z'),
+    bondLaunchesAt: new Date('2022-09-06T23:00:00Z'),
+    boardroomLaunchesAt: new Date('2022-09-06T01:00:00Z'),
+    hsharesLaunchesAt: new Date('2022-09-06T01:00:00Z'),
     refreshInterval: 10000,
   },
 };
@@ -111,17 +111,17 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
   
 
 
-  // HelioQuickRewardPool: {
-  //   name: 'Earn HELIO by QUICK',
-  //   poolId: 0,
-  //   sectionInUI: 0,
-  //   contract: 'HelioQUICKRewardPool',
-  //   depositTokenName: 'QUICK',
-  //   earnTokenName: 'HELIO',
-  //   finished: true,
-  //   sort: 3,
-  //   closedForStaking: true,
-  // },
+   HelioQuickRewardPool: {
+     name: 'Earn HELIO by QUICK',
+     poolId: 0,
+     sectionInUI: 0,
+     contract: 'HelioQUICKRewardPool',
+     depositTokenName: 'QUICK',
+     earnTokenName: 'HELIO',
+     finished: false,
+     sort: 3,
+     closedForStaking: true,
+   },
  
 
    HelioGenesisRewardPool: {
@@ -135,17 +135,17 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
      sort: 1,
      closedForStaking: false,
    },
-  // HelioWMATICGenesisRewardPool: {
-  //   name: 'Earn HELIO by WMATIC',
-  //   poolId: 4,
-  //   sectionInUI: 0,
-  //   contract: 'HelioWMATICGenesisRewardPool',
-  //   depositTokenName: 'WMATIC',
-  //   earnTokenName: 'HELIO',
-  //   finished: true,
-  //   sort: 1,
-  //   closedForStaking: true,
-  // },
+   HelioWMATICGenesisRewardPool: {
+     name: 'Earn HELIO by WMATIC',
+     poolId: 0,
+     sectionInUI: 0,
+     contract: 'HelioWMATICGenesisRewardPool',
+     depositTokenName: 'WMATIC',
+     earnTokenName: 'HELIO',
+     finished: false,
+     sort: 1,
+     closedForStaking: false,
+   },
   // HelioMaticLPRewardPool: {
   //   name: 'Earn HELIO by HELIO-MATIC LP',
   //   poolId: 1,
@@ -181,13 +181,13 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     sort: 7,
     closedForStaking: false,
   },
-  HelioHShareHShareRewardPool: {
-    name: 'Earn HSHARE by HELIO-HSHARE LP',
-    poolId: 2,
-    sectionInUI: 2,
-    contract: 'HelioHShareHShareRewardPool',
-    depositTokenName: 'HELIO-HSHARE-LP',
-    earnTokenName: 'HSHARE',
+  HelioETHLPHelioRewardPool: {
+    name: 'Earn HSHARE by HELIO-ETH LP',
+    poolId: 0,
+    sectionInUI: 1,
+    contract: 'HelioETHLPHelioRewardPool',
+    depositTokenName: 'HELIO-ETH-LP',
+    earnTokenName: 'HELIO',
     finished: false,
     sort: 9,
     closedForStaking: false,

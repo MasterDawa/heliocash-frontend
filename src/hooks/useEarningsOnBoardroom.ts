@@ -3,7 +3,7 @@ import {BigNumber} from 'ethers';
 import useHelioFinance from './useHelioFinance';
 import useRefresh from './useRefresh';
 
-const useEarningsOnBoardroom = (version: number) => {
+const useEarningsOnBoardroom = () => {
   const {slowRefresh} = useRefresh();
   const [balance, setBalance] = useState(BigNumber.from(0));
   const helioFinance = useHelioFinance();
@@ -12,7 +12,7 @@ const useEarningsOnBoardroom = (version: number) => {
   useEffect(() => {
     async function fetchBalance() {
       try {
-        setBalance(await helioFinance.getEarningsOnBoardroom(version));
+        setBalance(await helioFinance.getEarningsOnBoardroom());
       } catch (e) {
         console.error(e);
       }
@@ -20,7 +20,7 @@ const useEarningsOnBoardroom = (version: number) => {
     if (isUnlocked) {
       fetchBalance();
     }
-  }, [isUnlocked, helioFinance, slowRefresh, version]);
+  }, [isUnlocked, helioFinance, slowRefresh]);
 
   return balance;
 };

@@ -2,10 +2,10 @@ import {useCallback, useEffect, useState} from 'react';
 import useHelioFinance from './useHelioFinance';
 import useStakedBalanceOnBoardroom from './useStakedBalanceOnBoardroom';
 
-const useBoardroomVersion = (version: number) => {
+const useBoardroomVersion = () => {
   const [boardroomVersion, setBoardroomVersion] = useState('latest');
   const helioFinance = useHelioFinance();
-  const stakedBalance = useStakedBalanceOnBoardroom(version);
+  const stakedBalance = useStakedBalanceOnBoardroom();
 
   const updateState = useCallback(async () => {
     setBoardroomVersion(await helioFinance.fetchBoardroomVersionOfUser());

@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import useHelioFinance from './useHelioFinance';
 import useRefresh from './useRefresh';
 
-const useFetchBoardroomAPR = (version: number) => {
+const useFetchBoardroomAPR = () => {
   const [apr, setApr] = useState<number>(0);
   const helioFinance = useHelioFinance();
   const {slowRefresh} = useRefresh();
@@ -10,13 +10,13 @@ const useFetchBoardroomAPR = (version: number) => {
   useEffect(() => {
     async function fetchBoardroomAPR() {
       try {
-        setApr(await helioFinance.getBoardroomAPR(version));
+        setApr(await helioFinance.getBoardroomAPR());
       } catch (err) {
         console.error(err);
       }
     }
     fetchBoardroomAPR();
-  }, [setApr, helioFinance, slowRefresh, version]);
+  }, [setApr, helioFinance, slowRefresh]);
 
   return apr;
 };

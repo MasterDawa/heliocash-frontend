@@ -2,20 +2,20 @@ import {useEffect, useState} from 'react';
 import {BigNumber} from 'ethers';
 import useHelioFinance from './useHelioFinance';
 
-const useBondsPurchasable = (version: number) => {
+const useBondsPurchasable = () => {
   const [balance, setBalance] = useState(BigNumber.from(0));
   const helioFinance = useHelioFinance();
 
   useEffect(() => {
     async function fetchBondsPurchasable() {
       try {
-        setBalance(await helioFinance.getBondsPurchasable(version)); // 
+        setBalance(await helioFinance.getBondsPurchasable()); // 
       } catch (err) {
         console.error(err);
       }
     }
     fetchBondsPurchasable();
-  }, [setBalance, helioFinance, version]);
+  }, [setBalance, helioFinance]);
 
   return balance;
 };

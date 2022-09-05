@@ -16,11 +16,10 @@ import useHelioStats from '../../../hooks/useHelioStats';
 import {getDisplayBalance} from '../../../utils/formatBalance';
 
 const Harvest: React.FC = () => {
-  const version = 1;
   const helioStats = useHelioStats();
-  const {onReward} = useHarvestFromBoardroom(version);
-  const earnings = useEarningsOnBoardroom(version);
-  const canClaimReward = useClaimRewardCheck(version);
+  const {onReward} = useHarvestFromBoardroom();
+  const earnings = useEarningsOnBoardroom();
+  const canClaimReward = useClaimRewardCheck();
 
   const tokenPriceInDollars = useMemo(
     () => (helioStats ? Number(helioStats.priceInDollars).toFixed(2) : null),
@@ -29,7 +28,7 @@ const Harvest: React.FC = () => {
 
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
 
-  const {from, to} = useClaimRewardTimerBoardroom(version);
+  const {from, to} = useClaimRewardTimerBoardroom();
 
   return (
     <Box>

@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import useHelioFinance from '../useHelioFinance';
 import useRefresh from '../useRefresh';
 
-const useWithdrawCheck = (version: number) => {
+const useWithdrawCheck = () => {
   const [canWithdraw, setCanWithdraw] = useState(false);
   const helioFinance = useHelioFinance();
   const {slowRefresh} = useRefresh();
@@ -11,7 +11,7 @@ const useWithdrawCheck = (version: number) => {
   useEffect(() => {
     async function canUserWithdraw() {
       try {
-        setCanWithdraw(await helioFinance.canUserUnstakeFromBoardroom(version));
+        setCanWithdraw(await helioFinance.canUserUnstakeFromBoardroom());
       } catch (err) {
         console.error(err);
       }
@@ -19,7 +19,7 @@ const useWithdrawCheck = (version: number) => {
     if (isUnlocked) {
       canUserWithdraw();
     }
-  }, [isUnlocked, helioFinance, slowRefresh, version]);
+  }, [isUnlocked, helioFinance, slowRefresh]);
 
   return canWithdraw;
 };

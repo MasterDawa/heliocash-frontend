@@ -2,15 +2,15 @@ import {useCallback} from 'react';
 import useHelioFinance from './useHelioFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
-const useStakeToBoardroom = (version: number) => {
+const useStakeToBoardroom = () => {
   const helioFinance = useHelioFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleStake = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(helioFinance.stakeShareToBoardroom(version, amount), `Stake ${amount} HSHARE to the boardroom`);
+      handleTransactionReceipt(helioFinance.stakeShareToBoardroom(amount), `Stake ${amount} HSHARE to the boardroom`);
     },
-    [helioFinance, handleTransactionReceipt, version],
+    [helioFinance, handleTransactionReceipt],
   );
   return {onStake: handleStake};
 };

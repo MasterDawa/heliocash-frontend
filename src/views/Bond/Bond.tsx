@@ -31,36 +31,35 @@ const BackgroundImage = createGlobalStyle`
 `;
 
 const Bond: React.FC = () => {
-  const version = 1;
   const {path} = useRouteMatch();
   const {account} = useWallet();
   const helioFinance = useHelioFinance();
   const addTransaction = useTransactionAdder();
-  const bondStat = useBondStats(version);
+  const bondStat = useBondStats();
   const helioStat = useHelioStats();
-  const cashPrice = useCashPriceInLastTWAP(version);
+  const cashPrice = useCashPriceInLastTWAP();
 
-  const bondsPurchasable = useBondsPurchasable(version);
+  const bondsPurchasable = useBondsPurchasable();
 
   const bondBalance = useTokenBalance(helioFinance?.HBOND);
   // const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice).toFixed(4) : null), [cashPrice]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
-      const tx = await helioFinance.buyBonds(version, amount);
+      const tx = await helioFinance.buyBonds(amount);
       addTransaction(tx, {
         summary: `Buy ${Number(amount).toFixed(2)} HBOND with ${amount} HELIO`,
       });
     },
-    [helioFinance, addTransaction, version],
+    [helioFinance, addTransaction],
   );
 
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
-      const tx = await helioFinance.redeemBonds(version, amount);
+      const tx = await helioFinance.redeemBonds(amount);
       addTransaction(tx, {summary: `Redeem ${amount} HBOND`});
     },
-    [helioFinance, addTransaction, version],
+    [helioFinance, addTransaction],
   );
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
   const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInETH) < 1.01, [bondStat]);
