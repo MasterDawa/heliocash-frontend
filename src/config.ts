@@ -118,7 +118,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
      contract: 'HelioQUICKRewardPool',
      depositTokenName: 'QUICK',
      earnTokenName: 'HELIO',
-     finished: false,
+     finished: true,
      sort: 3,
      closedForStaking: true,
    },
