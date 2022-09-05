@@ -38,8 +38,8 @@ const configurations: {[env: string]: Configuration} = {
       'USDT-MATIC-LP': ['0x604229c960e5cacf2aaeac8be68ac07ba9df81c3', 18], 
       'USDT-ETH-LP': ['0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046', 18], 
       'HELIO-ETH-LP': ['0x0b4dd5A7A7377397aa1dFa12582f270fe0351770', 18],
-      'HELIO-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18], //todo
-      'HSHARE-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18],
+      'HELIO-MATIC-LP': ['0x8d3451Ea8FAF205d087941996F784a0234b59A86', 18], //todo
+      'HSHARE-MATIC-LP': ['0x8d3451Ea8FAF205d087941996F784a0234b59A86', 18],
       'HELIO-HSHARE-LP': ['0x2fa50016b979beeac3ef9242fe3031946b8f97e1', 18], //todo
       
     },
@@ -66,8 +66,8 @@ const configurations: {[env: string]: Configuration} = {
       'USDT-MATIC-LP': ['0x604229c960e5cacf2aaeac8be68ac07ba9df81c3', 18],
       'USDT-ETH-LP': ['0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046', 18],
       'HELIO-ETH-LP': ['0x0b4dd5A7A7377397aa1dFa12582f270fe0351770', 18],
-      'HELIO-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18], /// TODO
-      'HSHARE-MATIC-LP': ['0x9D8365b4d00bF9b2cb570Da2a3f2363bea0bbF0C', 18],
+      'HELIO-MATIC-LP': ['0x8d3451Ea8FAF205d087941996F784a0234b59A86', 18], /// TODO
+      'HSHARE-MATIC-LP': ['0x8d3451Ea8FAF205d087941996F784a0234b59A86', 18],
       'HELIO-HSHARE-LP': ['0x2fa50016b979beeac3ef9242fe3031946b8f97e1', 18], /// TODO
 
     },
@@ -106,7 +106,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     earnTokenName: 'HELIO',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   
 

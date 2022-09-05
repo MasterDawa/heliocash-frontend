@@ -196,7 +196,7 @@ const Nav = () => {
                 <div className="navTokenIcon helio"></div>{' '}
                 <div className="navTokenPrice">${roundAndFormatNumber(Number(helioPriceInDollars), 2)}</div>
               </a>
-              <a href="https://dexscreener.com/polygon/" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
+              <a href="https://dexscreener.com/polygon/0x8521F10339fA59417C90d3808426659b452a73E8" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
                 <div className="navTokenIcon bshare"></div>{' '}
                 <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
               </a>
