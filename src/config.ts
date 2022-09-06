@@ -190,7 +190,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     earnTokenName: 'HELIO',
     finished: false,
     sort: 9,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   HelioHShareRewardPool: {
     name: 'Earn HSHARE by HELIO',
