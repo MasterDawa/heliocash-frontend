@@ -122,7 +122,7 @@ const Home = () => {
   const hShare = hShareProd;
 
   const buyHelioAddress =
-    'https://quickswap.exchange/#/swap?inputCurrency=0x2170Ed0880ac9A755fd29B2688956BD959F933F8&outputCurrency=' +
+    'https://quickswap.exchange/#/swap?inputCurrency=0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619&outputCurrency=' +
     helio.address;
   const buyHShareAddress =
     'https://quickswap.exchange/#/swap?outputCurrency=' +

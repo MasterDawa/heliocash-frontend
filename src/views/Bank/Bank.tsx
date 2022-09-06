@@ -242,7 +242,7 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   let uniswapUrl: string;
   if (bank.depositTokenName === 'HELIO-ETH-LP') {
     pairName = 'HELIO-ETH pair';
-    uniswapUrl = 'https://quickswap.exchange/#/add/0x2170ed0880ac9a755fd29b2688956bd959f933f8/' + helioAddr;
+    uniswapUrl = 'https://quickswap.exchange/#/add/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619/' + helioAddr;
   } else if (bank.depositTokenName === 'HELIO-HSHARE-LP') {
     pairName = 'HELIO-HSHARE pair';
     uniswapUrl = 'https://quickswap.exchange/#/add/' + bshareAddr + '/' + helioAddr;

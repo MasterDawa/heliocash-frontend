@@ -188,7 +188,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     contract: 'HelioETHLPHelioRewardPool',
     depositTokenName: 'HELIO-ETH-LP',
     earnTokenName: 'HELIO',
-    finished: false,
+    finished: true,
     sort: 9,
     closedForStaking: true,
   },

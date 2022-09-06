@@ -122,7 +122,7 @@ const HowItWorks = () => {
       </Row>
       <Row>
         <div>{' '}</div>
-        <Button className="shinyButton" style={{ width: '8rem' }} onClick={() => window.open('https://quickswap.exchange/#/add/0x2170ed0880ac9a755fd29b2688956bd959f933f8/0x3b248CEfA87F836a4e6f6d6c9b42991b88Dc1d58')}>
+        <Button className="shinyButton" style={{ width: '8rem' }} onClick={() => window.open('https://quickswap.exchange/#/add/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619/0xB38B969f151E8217C917fE0532382172BB6Fb83E')}>
           HELIO-ETH LP
         </Button>
         <div>{' '}</div>
