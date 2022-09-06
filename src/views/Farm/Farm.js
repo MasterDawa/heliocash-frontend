@@ -90,7 +90,7 @@ const Farm = () => {
                   Genesis Pools
                   </Typography>
                   <Alert variant="filled" severity="info">
-                  Genesis pools run for the first 24 hours starting on September 5 4:00 PM GMT or Unix Epoch Time 1662393600
+                  Genesis pools have ended. Please claim all rewards and remove funds from the pool.
                   </Alert>
                   <Grid container spacing={3} style={{marginTop: '20px'}}>
                     {activeBanks
