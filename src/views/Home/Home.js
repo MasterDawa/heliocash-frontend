@@ -268,7 +268,7 @@ const Home = () => {
               </Button>
               <Button
                 target="_blank"
-                href={'https://dexscreener.com/polygon/'}
+                href={'https://dexscreener.com/polygon/0x0b4dd5A7A7377397aa1dFa12582f270fe0351770'}
                 style={{ margin: '10px' }}
                 className={'shinyButton ' + classes.button}
               >
@@ -284,7 +284,7 @@ const Home = () => {
               </Button>
               <Button
                 target="_blank"
-                href={'https://dexscreener.com/polygon/'}
+                href={'https://dexscreener.com/polygon/0x8521F10339fA59417C90d3808426659b452a73E8'}
                 className={'shinyButton ' + classes.button}
                 style={{ margin: '10px' }}
               >
