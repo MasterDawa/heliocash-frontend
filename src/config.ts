@@ -106,7 +106,7 @@ export const bankDefinitions: {[contractName: string]: BankInfo} = {
     earnTokenName: 'HELIO',
     finished: false,
     sort: 2,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   
 
