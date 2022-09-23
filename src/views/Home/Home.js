@@ -218,7 +218,7 @@ const Home = () => {
                 /p> <
                 p >
                 <
-                strong > Respect is pegged via algorithm to a 4, 000: 1 ratio to ETH.$4k ETH = $1 HELIO PEG < /strong> <
+                strong > Respect is pegged via algorithm to a 4, 000: 1 ratio to ETH.$4k ETH = $1 Respect PEG < /strong> <
                 /p> <
                 p > Stake your RESPECT - ETH LP in the Farm to earn RSHARE rewards.Then stake your earned RSHARE in the Boardroom to earn more RESPECT!
                 <
