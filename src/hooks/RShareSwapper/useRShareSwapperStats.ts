@@ -12,7 +12,7 @@ const useRShareSwapperStats = (account: string) => {
     async function fetchRSwapperStat() {
       try {
         if (respectFinance.myAccount) {
-          setStat(await respectFinance.getRSwapperStat(account));
+          setStat(await respectFinance.getRShareSwapperStat(account));
         }
       } catch (err) {
         console.error(err);
