@@ -29,7 +29,7 @@ function useApproveStrategy(): [ApprovalState, () => Promise<void>] {
   const [approveStatusRsharePair, approveRsharePair] = useApprove(bankRshareLP.depositToken, RShareRewardPool.address);
 
   const approvalState: ApprovalState = useMemo(() => {
-    return approveStatusStrategy === ApprovalState.APPROVED && approveStatusStrategy2 === ApprovalState.APPROVED && approveStatusBoardroom === ApprovalState.APPROVED && approveStatusRespectPair === ApprovalState.APPROVED && approveStatusHsharePair === ApprovalState.APPROVED
+    return approveStatusStrategy === ApprovalState.APPROVED && approveStatusStrategy2 === ApprovalState.APPROVED && approveStatusBoardroom === ApprovalState.APPROVED && approveStatusRespectPair === ApprovalState.APPROVED && approveStatusRsharePair === ApprovalState.APPROVED
      ? ApprovalState.APPROVED
      : ApprovalState.NOT_APPROVED;
   }, [approveStatusStrategy, approveStatusStrategy2, approveStatusBoardroom, approveStatusRespectPair, approveStatusRsharePair]);
