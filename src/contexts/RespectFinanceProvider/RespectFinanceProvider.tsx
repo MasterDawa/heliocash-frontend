@@ -4,7 +4,7 @@ import RespectFinance from '../../respect-finance';
 import config from '../../config';
 
 export interface RespectFinanceContext {
-  helioFinance?: RespectFinance;
+  respectFinance?: RespectFinance;
 }
 
 export const Context = createContext<RespectFinanceContext>({respectFinance: null});
