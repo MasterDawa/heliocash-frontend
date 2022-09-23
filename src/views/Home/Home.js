@@ -129,7 +129,7 @@ const Home = () => {
     RShare.address;
 
   const respectLPStats = useMemo(() => (respectFtmLpStats ? respectFtmLpStats : null), [respectFtmLpStats]);
-  const bshareLPStats = useMemo(() => (RShareFtmLpStats ? RShareFtmLpStats : null), [RShareFtmLpStats]);
+  const bshareLPStats = useMemo(() => (rShareFtmLpStats ? rShareFtmLpStats : null), [rShareFtmLpStats]);
   const respectPriceInDollars = useMemo(
     () => (respectStats ? Number(respectStats.priceInDollars).toFixed(2) : null),
     [respectStats],
