@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
-import useHelioStats from '../../hooks/useRespectStats';
+import useRespectStats from '../../hooks/useRespectStats';
 import useEthStats from '../../hooks/useEthStats';
 import useShareStats from '../../hooks/usehRhareStats';
 
@@ -28,7 +28,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
 
-import helioLogo from '../../assets/img/helio-logo-final.png';
+import respectLogo from '../../assets/img/respect-logo-final.png';
 import { roundAndFormatNumber } from '../../0x';
 import useMaticStats from '../../hooks/useMaticStats';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
@@ -106,7 +106,7 @@ const Nav = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const helioStats = useHelioStats();
+  const respectStats = userespectStats();
   const btcStats = useEthStats();
   const maticStats = useMaticStats();
   const shareStats = useShareStats();
@@ -121,9 +121,9 @@ const Nav = () => {
 
   const btcPriceInDollars = useMemo(() => (btcStats ? Number(btcStats).toFixed(2) : null), [btcStats]);
   const maticPriceInDollars = useMemo(() => (maticStats ? Number(maticStats).toFixed(2) : null), [maticStats]);
-  const helioPriceInDollars = useMemo(
-    () => (helioStats ? Number(helioStats.priceInDollars).toFixed(2) : null),
-    [helioStats],
+  const respectPriceInDollars = useMemo(
+    () => (respectStats ? Number(respectStats.priceInDollars).toFixed(2) : null),
+    [respectStats],
   );
   const sharePriceInDollars = useMemo(
     () => (shareStats ? Number(shareStats.priceInDollars).toFixed(2) : null),
@@ -136,9 +136,9 @@ const Nav = () => {
         {matches ? (
           <>
             <Typography variant="h6" color="inherit" noWrap style={{ flexGrow: '0', marginBottom: '-10px', marginLeft: '-10px' }} className={classes.toolbarTitle}>
-              {/* <a className={ classes.brandLink } href="/">Helio Cash</a> */}
+              {/* <a className={ classes.brandLink } href="/">respect Cash</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-                <img alt="helio.cash" src={helioLogo} height="80px" />
+                <img alt="respect.finance" src={respectLogo} height="80px" />
               </Link>
             </Typography>
             <Box style={{ paddingLeft: '0', paddingTop: '2px', fontSize: '1rem', flexGrow: '1' }}>
@@ -149,7 +149,7 @@ const Nav = () => {
                 Farm
               </Link>
               
-              <Link to="/farm/HelioMasterNode" className={'navLink ' + classes.link}>
+              <Link to="/farm/respectMasterNode" className={'navLink ' + classes.link}>
                 Nodes
               </Link>
               <Link to="/boardroom" className={'navLink ' + classes.link}>
@@ -168,13 +168,13 @@ const Nav = () => {
               {/* <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-              <a href="https://vaults.helio.cash" className={'navLink ' + classes.link} rel="noopener noreferrer" target="_blank">
+              <a href="https://vaults.respect.finance" className={'navLink ' + classes.link} rel="noopener noreferrer" target="_blank">
                 AutoVaults
               </a>
-              <a href="https://docs.helio.cash/" className={'navLink ' + classes.link} rel="noopener noreferrer" target="_blank">
+              <a href="https://docs.respect.finance/" className={'navLink ' + classes.link} rel="noopener noreferrer" target="_blank">
                 Docs
               </a>
-              {/* <a href="https://docs.helio.cash/" className={'navLink ' + classes.link} rel="noopener" target="_blank">
+              {/* <a href="https://docs.respect.finance/" className={'navLink ' + classes.link} rel="noopener" target="_blank">
                 Docs
               </a> */}
             </Box>
@@ -193,8 +193,8 @@ const Nav = () => {
               }}
             >
               <a href="https://dexscreener.com/polygon/0x0b4dd5A7A7377397aa1dFa12582f270fe0351770" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
-                <div className="navTokenIcon helio"></div>{' '}
-                <div className="navTokenPrice">${roundAndFormatNumber(Number(helioPriceInDollars), 2)}</div>
+                <div className="navTokenIcon respect"></div>{' '}
+                <div className="navTokenPrice">${roundAndFormatNumber(Number(respectPriceInDollars), 2)}</div>
               </a>
               <a href="https://dexscreener.com/polygon/0x8521F10339fA59417C90d3808426659b452a73E8" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
                 <div className="navTokenIcon bshare"></div>{' '}
@@ -224,8 +224,8 @@ const Nav = () => {
             </IconButton>
 
             <img
-              alt="helio.cash"
-              src={helioLogo}
+              alt="respect.finance"
+              src={respectLogo}
               style={{ height: '60px', marginTop: '5px', marginLeft: '10px', marginRight: '15px' }}
             />
             <AccountButton text="Connect" />
@@ -256,13 +256,13 @@ const Nav = () => {
                 </ListItem>
                 <ListItemLink primary="Home" to="/" />
                 <ListItemLink primary="Farm" to="/farm" />
-                <ListItemLink primary="Nodes" to="/farm/HelioMasterNode" />
+                <ListItemLink primary="Nodes" to="/farm/respectMasterNode" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
                 <ListItemLink primary="Bond" to="/bond" />
-                <ListItem button component="a" href="https://helio.cash/#">
+                <ListItem button component="a" href="https://respect.finance/#">
                   <ListItemText>AutoVaults</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://docs.helio.cash/">
+                <ListItem button component="a" href="https://docs.respect.finance/">
                   <ListItemText>Docs</ListItemText>
                 </ListItem>
               </List>
@@ -282,8 +282,8 @@ const Nav = () => {
                       }}
                     >
                       <a href="https://dexscreener.com/bsc/0x84821bb588f049913dc579dc511e5e31eb22d5e4" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
-                        <div className="navTokenIcon helio"></div>{' '}
-                        <div className="navTokenPrice">${roundAndFormatNumber(Number(helioPriceInDollars), 2)}</div>
+                        <div className="navTokenIcon respect"></div>{' '}
+                        <div className="navTokenPrice">${roundAndFormatNumber(Number(respectPriceInDollars), 2)}</div>
                       </a>
                       <a href="https://dexscreener.com/bsc/0x1747af98ebf0b22d500014c7dd52985d736337d2" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', textDecoration: 'none' }}>
                         <div className="navTokenIcon bshare"></div>{' '}
@@ -293,17 +293,17 @@ const Nav = () => {
                     <div style={{ height: '45px' }}>{' '}</div>
                     <div>
                       <a
-                        href="https://twitter.com/Helio_Cash"
+                        href="https://twitter.com/RespectFinance"
                         rel="noopener noreferrer"
                         target="_blank"
                         className={classes.link}
                       >
                         <IconTwitter style={{ fill: '#dddfee' }} />
                       </a>
-                      <a href="https://github.com/HelioCash/heliocash-frontend" rel="noopener noreferrer" target="_blank" className={classes.link}>
+                      <a href="https://github.com/MasterDawa/respectfinance-frontend" rel="noopener noreferrer" target="_blank" className={classes.link}>
                         <IconGithub style={{ fill: '#dddfee', height: '20px' }} />
                       </a>
-                      <a href="https://t.me/HELIOCommunityPortal/3" rel="noopener noreferrer" target="_blank" className={classes.link}>
+                      <a href="https://t.me/respfin" rel="noopener noreferrer" target="_blank" className={classes.link}>
                         <IconTelegram style={{ fill: '#dddfee', height: '20px' }} />
                       </a>
                     </div>
