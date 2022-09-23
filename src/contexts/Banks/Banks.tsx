@@ -6,7 +6,7 @@ import config, {bankDefinitions} from '../../config';
 
 const Banks: React.FC = ({children}) => {
   const [banks, setBanks] = useState<Bank[]>([]);
-  const respectFinance = useRespectFinance();
+  const respectFinance = useRespectfinance();
   const isUnlocked = respectFinance?.isUnlocked;
 
   const fetchPools = useCallback(async () => {
