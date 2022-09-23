@@ -27,156 +27,160 @@ const BackgroundImage = createGlobalStyle `
 `;
 
 const Farm = () => {
-        const [banks] = useBanks();
-        const { path } = useRouteMatch();
-        const { account } = useWallet();
-        const hsharesActive = true // Date.now() >= config.hsharesLaunchesAt.getTime();
-        const activeBanks = banks.filter((bank) => !bank.finished && (hsharesActive || bank.sectionInUI !== 2));
+    const [banks] = useBanks();
+    const { path } = useRouteMatch();
+    const { account } = useWallet();
+    const rsharesActive = true // Date.now() >= config.hsharesLaunchesAt.getTime();
+    const activeBanks = banks.filter((bank) => !bank.finished && (rsharesActive || bank.sectionInUI !== 2));
 
-        return ( <
-                Switch >
+    return ( <
+        Switch >
+        <
+        Page >
+        <
+        Route exact path = { path } >
+        <
+        BackgroundImage / > {!!account ? ( <
+                Container maxWidth = "lg" > {
+                    /* <Typography color="textYellow" align="center" variant="h3" gutterBottom>
+                                    Farm
+                                  </Typography> */
+                }
+
                 <
-                Page >
+                Box mt = { 5 } >
                 <
-                Route exact path = { path } >
+                div hidden = { activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0 } >
                 <
-                BackgroundImage / > {!!account ? ( <
-                        Container maxWidth = "lg" > {
-                            /* <Typography color="textYellow" align="center" variant="h3" gutterBottom>
-                                            Farm
-                                          </Typography> */
-                        }
+                Typography color = "textPrimary"
+                align = "center"
+                variant = "h4"
+                gutterBottom >
+                Earn RSHARE by staking QuickSwap LP <
+                /Typography> { < Alert variant = "filled"
+                severity = "info" >
+                <
+                h4 >
+                Farms started October 6 th 2022 and will
+                continue running
+                for 1 full year. < /h4>
 
+
+
+                <
+                /Alert> } <
+                Grid container spacing = { 3 }
+                style = {
+                    { marginTop: '20px' }
+                } > {
+                    activeBanks
+                    .filter((bank) => bank.sectionInUI === 2)
+                    .map((bank) => ( <
+                        React.Fragment key = { bank.name } >
                         <
-                        Box mt = { 5 } >
+                        FarmCard bank = { bank }
+                        /> < /
+                        React.Fragment >
+                    ))
+                } <
+                /Grid> < /
+                div >
+
+                <
+                div hidden = { activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0 } > {
+                    /* <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{marginTop: '20px'}}>
+                                      Earn RESPECT by staking QuickSwap LP
+                                      </Typography> */
+                } {
+                    /* <Alert variant="standard" severity="info" style={{marginTop: '30px'}}>
+                                        Please remove funds from the inactive farms below.
+                                      </Alert> */
+                } <
+                Grid container spacing = { 3 }
+                style = {
+                    { marginTop: '20px', display: 'flex', alignItems: 'center' }
+                } > {
+                    activeBanks
+                    .filter((bank) => bank.sectionInUI === 1)
+                    .map((bank) => ( <
+                        React.Fragment key = { bank.name } >
                         <
-                        div hidden = { activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0 } >
+                        FarmCard bank = { bank }
+                        /> < /
+                        React.Fragment >
+                    ))
+                } <
+                /Grid> < /
+                div >
+
+                <
+                div hidden = { activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0 } >
+                <
+                Typography color = "textPrimary"
+                align = "center"
+                variant = "h4"
+                gutterBottom style = {
+                    { marginTop: '20px' }
+                } >
+                Genesis Pools <
+                /Typography> <
+                Alert variant = "filled"
+                severity = "info" >
+                Genesis pools have ended.Please claim all rewards and remove funds from the pool. <
+                /Alert> <
+                Grid container spacing = { 3 }
+                style = {
+                    { marginTop: '20px' }
+                } > {
+                    activeBanks
+                    .filter((bank) => bank.sectionInUI === 0)
+                    .map((bank) => ( <
+                        React.Fragment key = { bank.name } >
                         <
-                        Typography color = "textPrimary"
-                        align = "center"
-                        variant = "h4"
-                        gutterBottom >
-                        Earn RSHARE by staking QuickSwap LP <
-                        /Typography> { < Alert variant = "filled"
-                            severity = "info" >
-                                <
-                                h4 >
-                                Farms started October 6 th 2022 and will
-                            continue running
-                            for 1 full year. < /h4>
+                        FarmCard bank = { bank }
+                        /> < /
+                        React.Fragment >
+                    ))
+                } <
+                /Grid> < /
+                div >
 
+                {
+                    /* <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 3).length === 0}>
+                                      <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{marginTop: '20px'}}>
+                                        Generate HELIO with Nodes
+                                      </Typography>
+                                      <Grid container spacing={3} style={{marginTop: '20px'}}>
+                                        {activeBanks
+                                          .filter((bank) => bank.sectionInUI === 3)
+                                          .map((bank) => (
+                                            <React.Fragment key={bank.name}>
+                                              <FarmCard bank={bank} />
+                                            </React.Fragment>
+                                          ))}
+                                      </Grid>
+                                    </div> */
+                } <
+                /Box> < /
+                Container >
+            ) : ( <
+                UnlockWallet / >
+            )
+        } <
+        /Route> <
+        Route path = { `${path}/:bankId` } >
+        <
+        BackgroundImage / >
+        <
+        Bank / >
+        <
+        /Route> {!!account && !rsharesActive && < div style = {
+            { marginTop: '2rem' }
+        } > < LaunchCountdown deadline = { config.rsharesLaunchesAt }
+        description = 'RSHARE Farms' / > < /div>} < /
+        Page > <
+        /Switch>
+    );
+};
 
-
-                            <
-                            /Alert> } <
-                            Grid container spacing = { 3 }
-                            style = {
-                                    { marginTop: '20px' } } > {
-                                    activeBanks
-                                    .filter((bank) => bank.sectionInUI === 2)
-                                    .map((bank) => ( <
-                                        React.Fragment key = { bank.name } >
-                                        <
-                                        FarmCard bank = { bank }
-                                        /> <
-                                        /React.Fragment>
-                                    ))
-                                } <
-                                /Grid> <
-                                /div>
-
-                            <
-                            div hidden = { activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0 } > {
-                                    /* <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{marginTop: '20px'}}>
-                                                      Earn RESPECT by staking QuickSwap LP
-                                                      </Typography> */
-                                } {
-                                    /* <Alert variant="standard" severity="info" style={{marginTop: '30px'}}>
-                                                        Please remove funds from the inactive farms below.
-                                                      </Alert> */
-                                } <
-                                Grid container spacing = { 3 }
-                            style = {
-                                    { marginTop: '20px', display: 'flex', alignItems: 'center' } } > {
-                                    activeBanks
-                                    .filter((bank) => bank.sectionInUI === 1)
-                                    .map((bank) => ( <
-                                        React.Fragment key = { bank.name } >
-                                        <
-                                        FarmCard bank = { bank }
-                                        /> <
-                                        /React.Fragment>
-                                    ))
-                                } <
-                                /Grid> <
-                                /div>
-
-                            <
-                            div hidden = { activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0 } >
-                                <
-                                Typography color = "textPrimary"
-                            align = "center"
-                            variant = "h4"
-                            gutterBottom style = {
-                                    { marginTop: '20px' } } >
-                                Genesis Pools <
-                                /Typography> <
-                                Alert variant = "filled"
-                            severity = "info" >
-                                Genesis pools have ended.Please claim all rewards and remove funds from the pool. <
-                                /Alert> <
-                                Grid container spacing = { 3 }
-                            style = {
-                                    { marginTop: '20px' } } > {
-                                    activeBanks
-                                    .filter((bank) => bank.sectionInUI === 0)
-                                    .map((bank) => ( <
-                                        React.Fragment key = { bank.name } >
-                                        <
-                                        FarmCard bank = { bank }
-                                        /> <
-                                        /React.Fragment>
-                                    ))
-                                } <
-                                /Grid> <
-                                /div>
-
-                            {
-                                /* <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 3).length === 0}>
-                                                  <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{marginTop: '20px'}}>
-                                                    Generate HELIO with Nodes
-                                                  </Typography>
-                                                  <Grid container spacing={3} style={{marginTop: '20px'}}>
-                                                    {activeBanks
-                                                      .filter((bank) => bank.sectionInUI === 3)
-                                                      .map((bank) => (
-                                                        <React.Fragment key={bank.name}>
-                                                          <FarmCard bank={bank} />
-                                                        </React.Fragment>
-                                                      ))}
-                                                  </Grid>
-                                                </div> */
-                            } <
-                            /Box> <
-                            /Container>
-                        ): ( <
-                            UnlockWallet / >
-                        )
-                    } <
-                    /Route> <
-                    Route path = { `${path}/:bankId` } >
-                    <
-                    BackgroundImage / >
-                    <
-                    Bank / >
-                    <
-                    /Route> {
-                        !!account && !rsharesActive && < div style = {
-                            { marginTop: '2rem' } } > < LaunchCountdown deadline = { config.rsharesLaunchesAt }
-                        description = 'RSHARE Farms' / > < /div>} <
-                            /Page> <
-                            /Switch>
-                    );
-                };
-
-                export default Farm;
+export default Farm;
