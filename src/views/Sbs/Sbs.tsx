@@ -65,7 +65,7 @@ const Sbs: React.FC = () => {
   };
 
   const handleRBondSelectMax = async () => {
-    setRbondAmount(String(bondBalance));
+    setBbondAmount(String(bondBalance));
     const updateRShareAmount = await respectFinance.estimateAmountOfRShare(String(bondBalance));
     setRshareAmount(updateRShareAmount);
   };
