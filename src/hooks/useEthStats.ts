@@ -1,22 +1,22 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useRefresh from './useRefresh';
 
 const useEthStats = () => {
   const [stat, setStat] = useState<Number>();
   const {slowRefresh} = useRefresh();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     async function fetchSharePrice() {
       try {
-        setStat(await helioFinance.getETHPriceUSD());
+        setStat(await respectFinance.getETHPriceUSD());
       } catch (err) {
         console.error(err);
       }
     }
     fetchSharePrice();
-  }, [setStat, helioFinance, slowRefresh]);
+  }, [setStat, respectFinance, slowRefresh]);
 
   return stat;
 };

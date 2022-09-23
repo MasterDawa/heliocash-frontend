@@ -1,23 +1,23 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import {BigNumber} from 'ethers';
 import useRefresh from './useRefresh';
 
 const useCurrentEpoch = () => {
   const [currentEpoch, setCurrentEpoch] = useState<BigNumber>(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const {slowRefresh} = useRefresh();
 
   useEffect(() => {
     async function fetchCurrentEpoch() {
       try {
-        setCurrentEpoch(await helioFinance.getCurrentEpoch());
+        setCurrentEpoch(await respectFinance.getCurrentEpoch());
       } catch (err) {
         console.error(err);
       }
     }
     fetchCurrentEpoch();
-  }, [setCurrentEpoch, helioFinance, slowRefresh]);
+  }, [setCurrentEpoch, respectFinance, slowRefresh]);
 
   return currentEpoch;
 };

@@ -1,15 +1,15 @@
 import {useCallback} from 'react';
-import useHelioFinance from './useHelioFinance';
+import userespectFinance from './useRespectFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useRedeemOnBoardroom = ( description?: string) => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleRedeem = useCallback(() => {
-    const alertDesc = description || 'Redeem HSHARE from Boardroom';
-    handleTransactionReceipt(helioFinance.exitFromBoardroom(), alertDesc);
-  }, [helioFinance, description, handleTransactionReceipt]);
+    const alertDesc = description || 'Redeem RSHARE from Boardroom';
+    handleTransactionReceipt(respectFinance.exitFromBoardroom(), alertDesc);
+  }, [respectFinance, description, handleTransactionReceipt]);
   return {onRedeem: handleRedeem};
 };
 

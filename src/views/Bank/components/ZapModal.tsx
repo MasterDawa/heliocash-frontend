@@ -12,10 +12,10 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 import Label from '../../../components/Label';
 import useLpStats from '../../../hooks/useLpStats';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import useHelioFinance from '../../../hooks/useHelioFinance';
+import useHelioFinance from '../../../hooks/useRespectFinance';
 import { useWallet } from 'use-wallet';
 import useApproveZapper, { ApprovalState } from '../../../hooks/useApproveZapper';
-import { HELIO_TICKER, HSHARE_TICKER, MATIC_TICKER, ETH_TICKER } from '../../../utils/constants';
+import { RESPECT_TICKER, RSHARE_TICKER, MATIC_TICKER, ETH_TICKER } from '../../../utils/constants';
 import { Alert } from '@material-ui/lab';
 import PercentInput from '../../../components/PercentInput';
 
@@ -27,23 +27,23 @@ interface ZapProps extends ModalProps {
 }
 
 const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', decimals = 18, showEstimates = false }) => {
-  const helioFinance = useHelioFinance();
+  const helioFinance = useRespectFinance();
   const { balance } = useWallet();
   const ftmBalance = (Number(balance) / 1e18).toFixed(4).toString();
-  const helioBalance = useTokenBalance(helioFinance.HELIO);
-  const bshareBalance = useTokenBalance(helioFinance.HSHARE);
-  const btcBalance = useTokenBalance(helioFinance.ETH);
+  const respectBalance = useTokenBalance(respectFinance.RESPECT);
+  const bshareBalance = useTokenBalance(respectFinance.RSHARE);
+  const btcBalance = useTokenBalance(respectFinance.ETH);
   const [val, setVal] = useState('');
   const [slippage, setSlippage] = useState('2');
   const [zappingToken, setZappingToken] = useState(MATIC_TICKER);
   const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be MATIC in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
-  const helioFtmLpStats = useLpStats('HELIO-ETH-LP');
-  const tShareFtmLpStats = useLpStats('HSHARE-MATIC-LP');
-  const helioLPStats = useMemo(() => (helioFtmLpStats ? helioFtmLpStats : null), [helioFtmLpStats]);
+  const respectFtmLpStats = useLpStats('RESPECT-ETH-LP');
+  const tShareFtmLpStats = useLpStats('RSHARE-MATIC-LP');
+  const RESPECTLPStats = useMemo(() => (respectFtmLpStats ? respectFtmLpStats : null), [respectFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
-  const ftmAmountPerLP = tokenName.startsWith(HELIO_TICKER) ? helioLPStats?.ftmAmount : bshareLPStats?.ftmAmount;
+  const ftmAmountPerLP = tokenName.startsWith(RESPECT_TICKER) ? respectLPStats?.ftmAmount : bshareLPStats?.ftmAmount;
   /**
    * Checks if a value is a valid number or not
    * @param n is the value to be evaluated for a number
@@ -56,11 +56,11 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
     const value = event.target.value;
     setZappingToken(value);
     setZappingTokenBalance(ftmBalance);
-    if (event.target.value === HSHARE_TICKER) {
+    if (event.target.value === RSHARE_TICKER) {
       setZappingTokenBalance(getDisplayBalance(bshareBalance, decimals));
     }
-    if (event.target.value === HELIO_TICKER) {
-      setZappingTokenBalance(getDisplayBalance(helioBalance, decimals));
+    if (event.target.value === RESPECT_TICKER) {
+      setZappingTokenBalance(getDisplayBalance(respectBalance, decimals));
     }
     if (event.target.value === ETH_TICKER) {
       setZappingTokenBalance(getDisplayBalance(btcBalance, decimals));
@@ -75,7 +75,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
     if (!isNumeric(e.currentTarget.value)) return;
     setVal(e.currentTarget.value);
     if (showEstimates) {
-      const estimateZap = await helioFinance.estimateZapIn(zappingToken, tokenName, String(e.currentTarget.value));
+      const estimateZap = await respectFinance.estimateZapIn(zappingToken, tokenName, String(e.currentTarget.value));
       setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
     }
   };
@@ -83,7 +83,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const handleSelectMax = async () => {
     setVal(zappingTokenBalance);
     if (showEstimates) {
-      const estimateZap = await helioFinance.estimateZapIn(zappingToken, tokenName, String(zappingTokenBalance));
+      const estimateZap = await respectFinance.estimateZapIn(zappingToken, tokenName, String(zappingTokenBalance));
       setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
     }
   };
@@ -100,8 +100,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       <Select variant="outlined" onChange={handleChangeAsset} style={{ color: 'white', background: 'rgb(8, 9, 13, 1, 0.9)' }} labelId="label" id="select" value={zappingToken}>
         <StyledMenuItem value={MATIC_TICKER}>MATIC</StyledMenuItem>
         <StyledMenuItem value={ETH_TICKER}>ETH</StyledMenuItem>
-        <StyledMenuItem value={HSHARE_TICKER}>HSHARE</StyledMenuItem>
-        <StyledMenuItem value={HELIO_TICKER}>HELIO</StyledMenuItem>
+        <StyledMenuItem value={RSHARE_TICKER}>RSHARE</StyledMenuItem>
+        <StyledMenuItem value={RESPECT_TICKER}>RESPECT</StyledMenuItem>
       </Select>
       <TokenInput
         onSelectMax={handleSelectMax}
@@ -117,17 +117,17 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
           {' '}
           {tokenName}: {Number(estimate.token0) / Number(ftmAmountPerLP)}
         </StyledDescriptionText>
-        {tokenName.startsWith(HELIO_TICKER) ?
+        {tokenName.startsWith(RESPECT_TICKER) ?
           <StyledDescriptionText>
             {' '}
-            ({Number(estimate.token0)} {tokenName.startsWith(HELIO_TICKER) ? ETH_TICKER : HELIO_TICKER} /{' '}
-            {Number(estimate.token1)} {tokenName.startsWith(HELIO_TICKER) ? HELIO_TICKER : ETH_TICKER}){' '}
+            ({Number(estimate.token0)} {tokenName.startsWith(RESPECT_TICKER) ? ETH_TICKER : RESPECT_TICKER} /{' '}
+            {Number(estimate.token1)} {tokenName.startsWith(RESPECT_TICKER) ? RESPECT_TICKER : ETH_TICKER}){' '}
           </StyledDescriptionText>
           :
           <StyledDescriptionText>
             {' '}
-            ({Number(estimate.token0)} {tokenName.startsWith(HSHARE_TICKER) ? HSHARE_TICKER : MATIC_TICKER} /{' '}
-            {Number(estimate.token1)} {tokenName.startsWith(HSHARE_TICKER) ? MATIC_TICKER : HSHARE_TICKER}){' '}
+            ({Number(estimate.token0)} {tokenName.startsWith(RSHARE_TICKER) ? RSHARE_TICKER : MATIC_TICKER} /{' '}
+            {Number(estimate.token1)} {tokenName.startsWith(RSHARE_TICKER) ? MATIC_TICKER : RSHARE_TICKER}){' '}
           </StyledDescriptionText>}
       </>}
       <InputLabel style={{ color: '#7e48aa', marginBottom: '1rem' }} id="label">
@@ -151,7 +151,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
           onClick={() =>
             approveZapperStatus !== ApprovalState.APPROVED 
               ? approveZapper() 
-              : onConfirm(zappingToken, tokenName, val, tokenName === 'HSHARE-MATIC-LP' ? '10000' : String(+slippage * 100))
+              : onConfirm(zappingToken, tokenName, val, tokenName === 'RSHARE-MATIC-LP' ? '10000' : String(+slippage * 100))
           }
         >
           {approveZapperStatus !== ApprovalState.APPROVED ? 'Approve' : "Zap"}

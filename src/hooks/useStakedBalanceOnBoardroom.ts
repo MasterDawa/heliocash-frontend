@@ -1,17 +1,17 @@
 import {useEffect, useState} from 'react';
 import {BigNumber} from 'ethers';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useRefresh from './useRefresh';
 
 const useStakedBalanceOnBoardroom = () => {
   const {slowRefresh} = useRefresh();
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
-  const isUnlocked = helioFinance?.isUnlocked;
+  const respectFinance = useRespectFinance();
+  const isUnlocked = respectFinance?.isUnlocked;
   useEffect(() => {
     async function fetchBalance() {
       try {
-        setBalance(await helioFinance.getStakedSharesOnBoardroom());
+        setBalance(await respectFinance.getStakedSharesOnBoardroom());
       } catch (e) {
         console.error(e);
       }
@@ -19,7 +19,7 @@ const useStakedBalanceOnBoardroom = () => {
     if (isUnlocked) {
       fetchBalance();
     }
-  }, [slowRefresh, isUnlocked, helioFinance]);
+  }, [slowRefresh, isUnlocked, respectFinance]);
   return balance;
 };
 

@@ -1,4 +1,4 @@
-import {TokenStat} from '../../helio-finance/types';
+import {TokenStat} from '../../respect-finance/types';
 
 export interface OverviewData {
   cash?: TokenStat;

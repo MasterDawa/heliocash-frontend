@@ -5,7 +5,7 @@ import useTokenBalance from '../../../../hooks/useTokenBalance'
 import { useWallet } from 'use-wallet'
 import { useDepositLottery, useGetUserInfoTotals } from '../../../../hooks/useDetonator'
 import BuyTicketModal from './BuyTicketModal'
-import useHelioFinance from '../../../../hooks/useHelioFinance'
+import useHelioFinance from '../../../../hooks/useRespectFinance'
 import useBank from '../../../../hooks/useBank'
 import { Flex } from '../../../../components/Flex'
 import { Text } from '../../../../components/Text'
@@ -35,11 +35,11 @@ const Copy = styled.div`
 
 const TicketCard: React.FC = () => {
   const [requestedApproval, setRequestedApproval] = useState(false)
-  const { Detonator } = useHelioFinance().contracts
-  const bank = useBank('HelioEthHShareRewardPool')
+  const { Detonator } = useRespectFinance().contracts
+  const bank = useBank('RespectEthHShareRewardPool')
   const [approvalState, approve] = useApprove(bank.depositToken, Detonator.address);
   const lpBalance = useTokenBalance(bank.depositToken);
-  // const displayHelioBalance = useMemo(() => getDisplayBalance(helioBalance), [helioBalance]);
+  // const displayRespectBalance = useMemo(() => getDisplayBalance(respectBalance), [respectBalance]);
   const { account } = useWallet()
   const userInfo = useGetUserInfoTotals()
 
@@ -49,11 +49,11 @@ const TicketCard: React.FC = () => {
   const { onDeposit } = useDepositLottery()
   const minRef = 0.15;
   const refLink =
-    account && userInfo && +userInfo.total_deposits / 1e18 >= 0.15 && `https://helio.cash/detonator?ref=${account}`
+    account && userInfo && +userInfo.total_deposits / 1e18 >= 0.15 && `https://respect.finance/detonator?ref=${account}`
 
   // const [onPresentApprove] = useModal(<PurchaseWarningModal />)
   const [onPresentBuy] = useModal(
-    <BuyTicketModal max={new BigNumber(lpBalance.toString()).toFixed(4, BigNumber.ROUND_FLOOR)} tokenName="HELIO-ETH-LP" />
+    <BuyTicketModal max={new BigNumber(lpBalance.toString()).toFixed(4, BigNumber.ROUND_FLOOR)} tokenName="RESPECT-ETH-LP" />
   )
   const { onZapIn } = useZap(bank);
   const [onPresentZap, onDissmissZap] = useModal(
@@ -117,7 +117,7 @@ const TicketCard: React.FC = () => {
               disabled={requestedApproval}
               onClick={handleApprove}
               className={"shinyButtonSecondary"}>
-              Approve HELIO-ETH-LP
+              Approve RESPECT-ETH-LP
             </Button>
           </Flex>
         </>

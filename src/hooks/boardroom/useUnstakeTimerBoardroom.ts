@@ -1,19 +1,19 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from '../useHelioFinance';
-import {AllocationTime} from '../../helio-finance/types';
+import useHelioFinance from '../useRespectFinance';
+import {AllocationTime} from '../../respect-finance/types';
 
 const useUnstakeTimerBoardroom = () => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
   });
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
-    if (helioFinance) {
-      helioFinance.getUserUnstakeTime().then(setTime);
+    if (respectFinance) {
+      respectFinance.getUserUnstakeTime().then(setTime);
     }
-  }, [helioFinance]);
+  }, [respectFinance]);
   return time;
 };
 

@@ -12,18 +12,18 @@ import useClaimRewardCheck from '../../../hooks/boardroom/useClaimRewardCheck';
 import ProgressCountdown from './ProgressCountdown';
 import useHarvestFromBoardroom from '../../../hooks/useHarvestFromBoardroom';
 import useEarningsOnBoardroom from '../../../hooks/useEarningsOnBoardroom';
-import useHelioStats from '../../../hooks/useHelioStats';
+import useRespectStats from '../../../hooks/useRespectStats';
 import {getDisplayBalance} from '../../../utils/formatBalance';
 
 const Harvest: React.FC = () => {
-  const helioStats = useHelioStats();
+  const respectStats = useRespectStats();
   const {onReward} = useHarvestFromBoardroom();
   const earnings = useEarningsOnBoardroom();
   const canClaimReward = useClaimRewardCheck();
 
   const tokenPriceInDollars = useMemo(
-    () => (helioStats ? Number(helioStats.priceInDollars).toFixed(2) : null),
-    [helioStats],
+    () => (respectStats ? Number(respectStats.priceInDollars).toFixed(2) : null),
+    [respectStats],
   );
 
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
@@ -37,11 +37,11 @@ const Harvest: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <CardIcon>
-                <TokenSymbol symbol="HELIO" />
+                <TokenSymbol symbol="RESPECT" />
               </CardIcon>
               <Value value={getDisplayBalance(earnings)} />
               <Label text={`≈ $${earnedInDollars}`} variant="yellow" />
-              <Label text="HELIO Earned" variant="yellow" />
+              <Label text="RESPECT Earned" variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button

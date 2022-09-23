@@ -1,6 +1,6 @@
-export const HELIO_TICKER = 'HELIO';
-export const HSHARE_TICKER = 'HSHARE';
-export const HBOND_TICKER = 'HBOND';
+export const RESPECT_TICKER = 'RESPECT';
+export const RSHARE_TICKER = 'RSHARE';
+export const BOND_TICKER = 'RBOND';
 export const MATIC_TICKER = 'MATIC';
 export const WMATIC_TICKER = 'WMATIC';
 export const ETH_TICKER = 'ETH';

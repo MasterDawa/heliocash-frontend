@@ -1,22 +1,22 @@
 import { BigNumber } from 'ethers';
-import { HSHARE_TICKER } from './../utils/constants';
+import { RSHARE_TICKER } from './../utils/constants';
 import { useCallback } from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 
 const useStrategy = () => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const ZERO = BigNumber.from('0');
 
   const handleStrategy = useCallback(async (percentHelioLP: number = 80, stakeBoardroom: number = 20) => {
-    if (!helioFinance.myAccount) return;
+    if (!respectFinance.myAccount) return;
     const harvestTxs = [];
 
-    if ((await helioFinance.canUserClaimRewardFromBoardroom()) && (await helioFinance.getEarningsOnBoardroom()).gt(ZERO))
-      harvestTxs.push(await helioFinance.harvestCashFromBoardroom());
-    if ((await helioFinance.earnedFromBank('HShareMaticHShareRewardPool', HSHARE_TICKER, 0, helioFinance.myAccount)).gt(ZERO))
-      harvestTxs.push(await helioFinance.harvest('HShareMaticHShareRewardPool', 0, 2));
-    if ((await helioFinance.earnedFromBank('HelioEthHShareRewardPool', HSHARE_TICKER, 1, helioFinance.myAccount)).gt(ZERO))
-      harvestTxs.push(await helioFinance.harvest('HelioEthHShareRewardPool', 1, 2));
+    if ((await respectFinance.canUserClaimRewardFromBoardroom()) && (await respectFinance.getEarningsOnBoardroom()).gt(ZERO))
+      harvestTxs.push(await respectFinance.harvestCashFromBoardroom());
+    if ((await respectFinance.earnedFromBank('RShareMaticRShareRewardPool', RSHARE_TICKER, 0, respectFinance.myAccount)).gt(ZERO))
+      harvestTxs.push(await respectFinance.harvest('RShareMaticRShareRewardPool', 0, 2));
+    if ((await respectFinance.earnedFromBank('RespectEthRShareRewardPool', RSHARE_TICKER, 1, respectFinance.myAccount)).gt(ZERO))
+      harvestTxs.push(await respectFinance.harvest('RespectEthRShareRewardPool', 1, 2));
 
     await Promise.all(harvestTxs.map((tx) => tx.wait()));
     let shareBoardroomAmount = ZERO;
@@ -24,9 +24,9 @@ const useStrategy = () => {
 
     for (let retries = 0; retries < 3; retries++) {
 
-      const [helioBalance, shareBalance] = await Promise.all([
-        helioFinance.HELIO.balanceOf(helioFinance.myAccount),
-        helioFinance.HSHARE.balanceOf(helioFinance.myAccount)
+      const [respectBalance, shareBalance] = await Promise.all([
+        respectFinance.RESPECT.balanceOf(respectFinance.myAccount),
+        respectFinance.RSHARE.balanceOf(respectFinance.myAccount)
       ]);
       const shareCompoundAmount = stakeBoardroom > 0 ? shareBalance.mul(100 - stakeBoardroom).div(100) : shareBalance;
       shareBoardroomAmount = stakeBoardroom > 0 && !zapsCompleted[1] ? shareBalance.sub(shareCompoundAmount) : ZERO;
@@ -34,10 +34,10 @@ const useStrategy = () => {
       const zapTxs = [];
       let txIndex = 0;
 
-      if (helioBalance.gt(BigNumber.from('2000000000000000000')) && !zapsCompleted[0])
-        zapTxs.push(await helioFinance.zapStrategy(helioFinance.HELIO.address, helioBalance, percentHelioLP, BigNumber.from('1500000').mul(retries + 1)));
+      if (respectBalance.gt(BigNumber.from('2000000000000000000')) && !zapsCompleted[0])
+        zapTxs.push(await respectFinance.zapStrategy(respectFinance.RESPECT.address, respectBalance, percentRespectLP, BigNumber.from('1500000').mul(retries + 1)));
       if (shareCompoundAmount.gt(BigNumber.from('500000000000000')) && !zapsCompleted[1])
-        zapTxs.push(await helioFinance.zapStrategy(helioFinance.HSHARE.address, shareCompoundAmount, percentHelioLP, BigNumber.from('1500000').mul(retries + 1)));
+        zapTxs.push(await respectFinance.zapStrategy(respectFinance.RSHARE.address, shareCompoundAmount, percentRespectLP, BigNumber.from('1500000').mul(retries + 1)));
 
       try {
         for (; txIndex < zapTxs.length; txIndex++) {
@@ -52,23 +52,23 @@ const useStrategy = () => {
       }
     }
 
-    const [balanceHELIOLP, balanceSHARELP] = await Promise.all([
-      helioFinance.externalTokens['HELIO-ETH-LP'].balanceOf(helioFinance.myAccount),
-      helioFinance.externalTokens['HSHARE-MATIC-LP'].balanceOf(helioFinance.myAccount)
+    const [balanceRESPECTLP, balanceSHARELP] = await Promise.all([
+      respectFinance.externalTokens['RESPECT-ETH-LP'].balanceOf(respectFinance.myAccount),
+      respectFinance.externalTokens['RSHARE-MATIC-LP'].balanceOf(respectFinance.myAccount)
     ]);
 
     const stakeTxs = [];
 
-    if (balanceHELIOLP.gt(ZERO))
-      stakeTxs.push(await helioFinance.stake('HelioEthHShareRewardPool', 1, 2, balanceHELIOLP));
+    if (balanceRESPECTLP.gt(ZERO))
+      stakeTxs.push(await respectFinance.stake('RespectEthRShareRewardPool', 1, 2, balanceRESPECTLP));
     if (balanceSHARELP.gt(ZERO))
-      stakeTxs.push(await helioFinance.stake('HShareMaticHShareRewardPool', 0, 2, balanceSHARELP));
+      stakeTxs.push(await respectFinance.stake('RShareMaticRShareRewardPool', 0, 2, balanceSHARELP));
     if (stakeBoardroom > 0 && shareBoardroomAmount.gt(ZERO))
-      stakeTxs.push(await helioFinance.currentBoardroom().stake(shareBoardroomAmount));
+      stakeTxs.push(await respectFinance.currentBoardroom().stake(shareBoardroomAmount));
 
     await Promise.all(stakeTxs.map((tx) => tx.wait()));
 
-  }, [helioFinance, ZERO]);
+  }, [respectFinance, ZERO]);
   return { onStrategy: handleStrategy };
 };
 

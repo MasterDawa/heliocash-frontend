@@ -1,12 +1,12 @@
 import {useCallback} from 'react';
-import useHelioFinance from './useHelioFinance';
-import {Bank} from '../helio-finance';
+import useRespectFinance from './useRespectFinance';
+import {Bank} from '../respect-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 import {parseUnits} from 'ethers/lib/utils';
 import { BigNumber } from 'ethers';
 
 const useStake = (bank: Bank) => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = userespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleStake = useCallback(
@@ -15,11 +15,11 @@ const useStake = (bank: Bank) => {
         ? parseUnits(amount, bank.depositToken.decimal)
         : BigNumber.from(amount);
       handleTransactionReceipt(
-        helioFinance.stake(bank.contract, bank.poolId, bank.sectionInUI, amountBn),
+        respectFinance.stake(bank.contract, bank.poolId, bank.sectionInUI, amountBn),
         `Stake ${amount} ${bank.depositTokenName} to ${bank.contract}`,
       );
     },
-    [bank, helioFinance, handleTransactionReceipt],
+    [bank, respectFinance, handleTransactionReceipt],
   );
   return {onStake: handleStake};
 };

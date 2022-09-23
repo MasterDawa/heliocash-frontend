@@ -89,8 +89,8 @@ const LotteryCard = () => {
   const poolBalance = usePoolBalance()
   const lotteryPrize = poolBalance && getBalance(poolBalance.times('0.01'))
 
-  const helioEthLpStats = useLpStats('HELIO-ETH-LP');
-  const lpPrice = useMemo(() => (helioEthLpStats ? Number(helioEthLpStats.priceOfOne).toFixed(2) : null), [helioEthLpStats]);
+  const respectEthLpStats = useLpStats('RESPECT-ETH-LP');
+  const lpPrice = useMemo(() => (respectEthLpStats ? Number(respectEthLpStats.priceOfOne).toFixed(2) : null), [respectEthLpStats]);
   const numTickets = useNumTicketsTotal()
   const remainingDepositTickets = useNumDepositTicketsRemaining()
   const remainingCompoundTickets = useNumCompoundTicketsRemaining()

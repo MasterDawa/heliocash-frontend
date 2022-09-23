@@ -2,13 +2,13 @@ import { useState, useEffect, useCallback } from 'react'
 import { Contract, Provider } from 'ethers-multicall';
 import { useWallet } from 'use-wallet'
 import BigNumber from 'bignumber.js'
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useRefresh from './useRefresh'
 import { claim, compound, deposit, getDepositMultiplier, getNumCompoundTicketsRemaining, getNumDepositTicketsRemaining, getNumTicketsTotal, getNumTicketsDay, getLotteryTime, getPastRandomWinners, getContractInfoTotals, getDayDripEstimate, getGlassBalance, getGlassBalancePool, getLargestDayDepositor, getTimeToReward, getTotalDeposited, getTotalRewards, getUserInfo, getUserInfoTotals, getLargestTime, getLotteryMin, getNumRandQualified, getTotalUsers, getDepositEvents, getDayDeposits, getDayTime, getDayTimeIncrement, getPastLargestDepositor, getLargestDeposit, getWhaleTax, getReferralRewards } from '../utils/detonatorUtils'
 import { getDefaultProvider } from '../utils/provider';
 
 export const useClaimLottery = () => {
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
 
   const handleClaim = useCallback(async () => {
     try {
@@ -23,7 +23,7 @@ export const useClaimLottery = () => {
 }
 
 export const useCompoundLottery = () => {
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
 
   const handleCompound = useCallback(async (manualGas = false) => {
     try {
@@ -39,7 +39,7 @@ export const useCompoundLottery = () => {
 
 export const useDepositLottery = () => {
   const { account } = useWallet()
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
 
   const handleDeposit = useCallback(
     async (amount: string) => {
@@ -58,7 +58,7 @@ export const useDepositLottery = () => {
 
 export const useTotalRewards = () => {
   const { account } = useWallet()
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const [rewards, setRewards] = useState(new BigNumber(0))
   const { instantRefresh } = useRefresh()
 
@@ -78,7 +78,7 @@ export const useTotalRewards = () => {
 
 export const usePoolBalance = () => {
   const [poolBalance, setPoolBalance] = useState(new BigNumber(0))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { slowRefresh } = useRefresh()
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export const usePoolBalance = () => {
 
 export const useTotalDeposited = (scaled = true) => {
   const [totalDeposited, setTotalDeposited] = useState(new BigNumber(0))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { slowRefresh } = useRefresh()
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export const useTotalDeposited = (scaled = true) => {
 
 export const useGlassBalance = (account: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
-  const token = useHelioFinance().HELIOETH_LP;
+  const token = useRespectFinance().RESPECTETH_LP;
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
@@ -135,7 +135,7 @@ export const useGlassBalance = (account: string) => {
 
 export const useTimeToReward = () => {
   const [timeToReward, setTimeToReward] = useState('')
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
@@ -154,7 +154,7 @@ export const useTimeToReward = () => {
 
 export const useLargestTime = (prevRounds = 0) => {
   const [rewardTime, setRewardTime] = useState('')
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
@@ -179,7 +179,7 @@ export const useLargestTime = (prevRounds = 0) => {
 
 export const useDayTime = (prevRound = 0) => {
   const [rewardTime, setRewardTime] = useState('')
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh, slowRefresh } = useRefresh()
   const refresh = prevRound < 2 ? fastRefresh : slowRefresh
 
@@ -200,7 +200,7 @@ export const useDayTime = (prevRound = 0) => {
 
 export const useLotteryTime = () => {
   const [lotteryTime, setLotteryTime] = useState('')
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
@@ -219,7 +219,7 @@ export const useLotteryTime = () => {
 
 export const useLotteryMin = () => {
   const [lotteryMin, setLotteryMin] = useState(new BigNumber('0'))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -238,7 +238,7 @@ export const useLotteryMin = () => {
 export const useNumDepositTicketsRemaining = () => {
   const [lotteryMin, setLotteryMin] = useState(new BigNumber('0'))
   const { account } = useWallet()
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { slowRefresh } = useRefresh()
 
   useEffect(() => {
@@ -258,7 +258,7 @@ export const useNumDepositTicketsRemaining = () => {
 export const useDayDeposits = () => {
   const [dayDeposits, setDayDeposits] = useState(new BigNumber('0'))
   const { account } = useWallet()
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
@@ -278,7 +278,7 @@ export const useDayDeposits = () => {
 export const useReferralRewards = () => {
   const [rewards, setRewards] = useState(new BigNumber('0'))
   const { account } = useWallet()
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
@@ -298,7 +298,7 @@ export const useReferralRewards = () => {
 export const useNumCompoundTicketsRemaining = () => {
   const [lotteryMin, setLotteryMin] = useState(new BigNumber('0'))
   const { account } = useWallet()
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { slowRefresh } = useRefresh()
 
   useEffect(() => {
@@ -317,7 +317,7 @@ export const useNumCompoundTicketsRemaining = () => {
 
 export const useGetRandQualified = () => {
   const [randQualified, setRandQualified] = useState(new BigNumber('0'))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { slowRefresh } = useRefresh()
 
   useEffect(() => {
@@ -336,7 +336,7 @@ export const useGetRandQualified = () => {
 
 export const useLargestDayDepositor = () => {
   const [largestDayDepositer, setLargestDayDepositer] = useState('')
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { instantRefresh } = useRefresh()
 
   useEffect(() => {
@@ -355,7 +355,7 @@ export const useLargestDayDepositor = () => {
 
 export const usePastLargestWinner = (prevRound = 0) => {
   const [largestDayDepositer, setLargestDayDepositer] = useState('')
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
@@ -375,7 +375,7 @@ export const usePastLargestWinner = (prevRound = 0) => {
 
 export const useDayDripEstimate = () => {
   const [dayDripEstimate, setDayDripEstimate] = useState(new BigNumber(0))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { account } = useWallet()
   const { fastRefresh } = useRefresh()
 
@@ -395,7 +395,7 @@ export const useDayDripEstimate = () => {
 
 export const useDepositMultiplier = () => {
   const [dayDripEstimate, setDayDripEstimate] = useState(new BigNumber(0))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -413,7 +413,7 @@ export const useDepositMultiplier = () => {
 
 export const useNumTicketsTotal = () => {
   const [numTickets, setNumTickets] = useState(new BigNumber(0))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { account } = useWallet()
   const { fastRefresh } = useRefresh()
 
@@ -433,7 +433,7 @@ export const useNumTicketsTotal = () => {
 
 export const useNumTicketsDay = () => {
   const [numTickets, setNumTickets] = useState(new BigNumber(0))
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { account } = useWallet()
   const { fastRefresh } = useRefresh()
 
@@ -453,7 +453,7 @@ export const useNumTicketsDay = () => {
 
 export const useDepositEvents = () => {
   const [events, setEvents] = useState([])
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { fastRefresh } = useRefresh()
   const provider = getDefaultProvider();
   
@@ -475,7 +475,7 @@ export const useDepositEvents = () => {
 
 export const useGetContractInfo = () => {
   const [contractInfo, setContractInfo] = useState({} as any)
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { slowRefresh } = useRefresh()
 
   useEffect(() => {
@@ -494,7 +494,7 @@ export const useGetContractInfo = () => {
 
 export const useGetUserInfoTotals = () => {
   const [userInfoTotals, setUserInfoTotals] = useState({} as any)
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { account } = useWallet()
   const { fastRefresh } = useRefresh()
 
@@ -514,7 +514,7 @@ export const useGetUserInfoTotals = () => {
 
 export const useGetUserInfo = () => {
   const [userInfo, setUserInfo] = useState({} as any)
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { account } = useWallet()
   const { fastRefresh } = useRefresh()
 
@@ -534,7 +534,7 @@ export const useGetUserInfo = () => {
 
 export const usePastRandomWinners = (prevRound = 1) => {
   const [pastRandomWinner, setPastRandomWinner] = useState([])
-  const { Detonator } = useHelioFinance().contracts;
+  const { Detonator } = useRespectFinance().contracts;
   const { slowRefresh } = useRefresh()
 
   useEffect(() => {
@@ -554,8 +554,8 @@ export const usePastRandomWinners = (prevRound = 1) => {
 
 export const useLargestDeposit = () => {
   const [largestQualified, setLargestQualified] = useState(new BigNumber(0))
-  const helioFinance = useHelioFinance()
-  const { Detonator } = helioFinance.contracts;
+  const respectFinance = useRespectFinance()
+  const { Detonator } = respectFinance.contracts;
   const { instantRefresh } = useRefresh()
 
   useEffect(() => {
@@ -568,35 +568,35 @@ export const useLargestDeposit = () => {
     if (Detonator) {
       fetchBalance()
     }
-  }, [instantRefresh, Detonator, helioFinance, setLargestQualified])
+  }, [instantRefresh, Detonator, respectFinance, setLargestQualified])
 
   return largestQualified
 }
 
 export const useWhaleTax = () => {
   const [whaleTax, setWhaleTax] = useState(new BigNumber(0))
-  const helioFinance = useHelioFinance()
-  const { Detonator } = helioFinance.contracts;
+  const respectFinance = useRespectFinance()
+  const { Detonator } = respectFinance.contracts;
 
   useEffect(() => {
     const fetchBalance = async () => {
 
-      const data = await getWhaleTax(Detonator, helioFinance.myAccount)
+      const data = await getWhaleTax(Detonator, respectFinance.myAccount)
       setWhaleTax(new BigNumber(data.toString()))
     }
 
-    if (Detonator && helioFinance.myAccount) {
+    if (Detonator && respectFinance.myAccount) {
       fetchBalance()
     }
-  }, [Detonator, helioFinance, setWhaleTax,])
+  }, [Detonator, respectFinance, setWhaleTax,])
 
   return whaleTax
 }
 
 export const useTopDayDeposits = (): any[] => {
   const [users, setUsers] = useState([] as any[])
-  const helioFinance = useHelioFinance();
-  const { Detonator } = helioFinance.contracts;
+  const respectFinance = useRespectFinance();
+  const { Detonator } = respectFinance.contracts;
   const provider = getDefaultProvider();
   const { fastRefresh } = useRefresh()
 
@@ -648,8 +648,8 @@ export const useTopDayDeposits = (): any[] => {
 
 export const useSortedUsers = (): any[] => {
   const [users, setUsers] = useState([] as any[])
-  const helioFinance = useHelioFinance();
-  const { Detonator } = helioFinance.contracts;
+  const respectFinance = useRespectFinance();
+  const { Detonator } = respectFinance.contracts;
   const provider = getDefaultProvider();
 
   useEffect(() => {

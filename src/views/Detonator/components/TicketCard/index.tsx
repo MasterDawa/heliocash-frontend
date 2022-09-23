@@ -42,8 +42,8 @@ const Row = styled.div`
 
 const TicketCard: React.FC<CardProps> = ({ isSecondCard = false }) => {
   const time = useCurrentTime()
-  const helioEthLpStats = useLpStats('HELIO-ETH-LP');
-  const lpPrice = useMemo(() => (helioEthLpStats ? Number(helioEthLpStats.priceOfOne).toFixed(2) : null), [helioEthLpStats]);
+  const respectEthLpStats = useLpStats('RESPECT-ETH-LP');
+  const lpPrice = useMemo(() => (respectEthLpStats ? Number(respectEthLpStats.priceOfOne).toFixed(2) : null), [respectEthLpStats]);
   const user = useGetUserInfo()
   const deposits = user.total_deposits_scaled && +user.total_deposits_scaled > 0 ? getFullDisplayBalance(new BigNumber(user.total_deposits_scaled.toString())) : '0'
   const maxPayout = user.total_deposits_scaled && +user.total_deposits_scaled > 0 ? getFullDisplayBalance(new BigNumber(user.total_deposits_scaled.toString()).times(3.65)) : '0'

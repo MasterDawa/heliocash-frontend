@@ -1,22 +1,22 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useRefresh from './useRefresh';
 
 const useTotalValueLocked = () => {
   const [totalValueLocked, setTotalValueLocked] = useState<Number>(0);
   const {slowRefresh} = useRefresh();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     async function fetchTVL() {
       try {
-        setTotalValueLocked(await helioFinance.getTotalValueLocked());
+        setTotalValueLocked(await respectFinance.getTotalValueLocked());
       } catch (err) {
         console.error(err);
       }
     }
     fetchTVL();
-  }, [setTotalValueLocked, helioFinance, slowRefresh]);
+  }, [setTotalValueLocked, respectFinance, slowRefresh]);
 
   return totalValueLocked;
 };

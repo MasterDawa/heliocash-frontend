@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
-import {AllocationTime} from '../helio-finance/types';
+import useRespectFinance from './useRespectFinance';
+import {AllocationTime} from '../respect-finance/types';
 import useRefresh from './useRefresh';
 
 const useTreasuryAllocationTimes = () => {
@@ -9,12 +9,12 @@ const useTreasuryAllocationTimes = () => {
     from: new Date(),
     to: new Date(),
   });
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   useEffect(() => {
-    if (helioFinance) {
-      helioFinance.getTreasuryNextAllocationTime().then(setTime);
+    if (respectFinance) {
+      respectFinance.getTreasuryNextAllocationTime().then(setTime);
     }
-  }, [helioFinance, slowRefresh]);
+  }, [respectFinance, slowRefresh]);
   return time;
 };
 

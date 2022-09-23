@@ -1,22 +1,22 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useRefresh from './useRefresh';
 
 const useMaticStats = () => {
   const [stat, setStat] = useState<string>();
   const {slowRefresh} = useRefresh();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     async function fetchSharePrice() {
       try {
-        setStat(await helioFinance.getWMATICPriceFromQuickswap());
+        setStat(await respectFinance.getWMATICPriceFromQuickswap());
       } catch (err) {
         console.error(err);
       }
     }
     fetchSharePrice();
-  }, [setStat, helioFinance, slowRefresh]);
+  }, [setStat, respectFinance, slowRefresh]);
 
   return stat;
 };

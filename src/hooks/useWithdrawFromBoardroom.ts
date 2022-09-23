@@ -1,19 +1,19 @@
 import {useCallback} from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useWithdrawFromBoardroom = () => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleWithdraw = useCallback(
     (amount: string) => {
       handleTransactionReceipt(
-        helioFinance.withdrawShareFromBoardroom(amount),
-        `Withdraw ${amount} HSHARE from the boardroom`,
+        respectFinance.withdrawShareFromBoardroom(amount),
+        `Withdraw ${amount} RSHARE from the boardroom`,
       );
     },
-    [helioFinance, handleTransactionReceipt],
+    [respectFinance, handleTransactionReceipt],
   );
   return {onWithdraw: handleWithdraw};
 };

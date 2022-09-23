@@ -12,9 +12,9 @@ import useHarvest from '../../../hooks/useHarvest';
 
 import { getDisplayBalance } from '../../../utils/formatBalance';
 import TokenSymbol from '../../../components/TokenSymbol';
-import { Bank } from '../../../helio-finance';
-import useHelioStats from '../../../hooks/useHelioStats';
-import useShareStats from '../../../hooks/usehShareStats';
+import { Bank } from '../../../respect-finance';
+import useHelioStats from '../../../hooks/useRespectStats';
+import useShareStats from '../../../hooks/usehRhareStats';
 import useRedeem from '../../../hooks/useRedeem';
 
 interface HarvestProps {
@@ -27,8 +27,8 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const helioStats = useHelioStats();
   const tShareStats = useShareStats();
 
-  const tokenName = bank.earnTokenName === 'HSHARE' ? 'HSHARE' : 'HELIO';
-  const tokenStats = bank.earnTokenName === 'HSHARE' ? tShareStats : helioStats;
+  const tokenName = bank.earnTokenName === 'RSHARE' ? 'RSHARE' : 'RESPECT';
+  const tokenStats = bank.earnTokenName === 'RSHARE' ? tShareStats : respectStats;
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],

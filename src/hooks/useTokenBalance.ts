@@ -1,17 +1,17 @@
 import {useCallback, useEffect, useState} from 'react';
 import {BigNumber} from 'ethers';
-import ERC20 from '../helio-finance/ERC20';
-import useHelioFinance from './useHelioFinance';
+import ERC20 from '../respect-finance/ERC20';
+import useRespectFinance from './useRespectFinance';
 import config from '../config';
 
 const useTokenBalance = (token: ERC20) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
-  const isUnlocked = helioFinance?.isUnlocked;
+  const respectFinance = useRespectFinance();
+  const isUnlocked = respectFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
-    setBalance(await token.balanceOf(helioFinance.myAccount));
-  }, [token, helioFinance.myAccount]);
+    setBalance(await token.balanceOf(respectFinance.myAccount));
+  }, [token, respectFinance.myAccount]);
 
   useEffect(() => {
     if (isUnlocked) {
@@ -19,7 +19,7 @@ const useTokenBalance = (token: ERC20) => {
       let refreshInterval = setInterval(fetchBalance, config.refreshInterval);
       return () => clearInterval(refreshInterval);
     }
-  }, [isUnlocked, token, fetchBalance, helioFinance]);
+  }, [isUnlocked, token, fetchBalance, respectFinance]);
 
   return balance;
 };

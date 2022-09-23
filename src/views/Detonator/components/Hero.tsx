@@ -80,7 +80,7 @@ const Hero = () => {
       <StyledContainer isMobile={isMobile}>
         <LeftWrapper>
           <Title isMobile={isMobile}>Detonator</Title>
-          <Blurb isMobile={isMobile}>Deposit your HELIO-ETH LP</Blurb>
+          <Blurb isMobile={isMobile}>Deposit your RESPECT-ETH LP</Blurb>
           <Blurb isMobile={isMobile}>Into the pool and earn back 365%</Blurb>
           {/* <SmallBlurb style={{ paddingTop: '0.5rem' }}>
             Disclaimer: This is a decentralized social experiment | Use at your own risk!

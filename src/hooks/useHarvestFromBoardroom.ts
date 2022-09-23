@@ -1,14 +1,14 @@
 import {useCallback} from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useHarvestFromBoardroom = () => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleReward = useCallback(() => {
-    handleTransactionReceipt(helioFinance.harvestCashFromBoardroom(), 'Claim HELIO from Boardroom');
-  }, [helioFinance, handleTransactionReceipt]);
+    handleTransactionReceipt(respectFinance.harvestCashFromBoardroom(), 'Claim RESPECT from Boardroom');
+  }, [respectFinance, handleTransactionReceipt]);
 
   return {onReward: handleReward};
 };

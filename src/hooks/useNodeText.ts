@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import useHelioFinance from './useHelioFinance';
-import { Bank } from '../helio-finance';
+import useRespectFinance from './useRespectFinance';
+import { Bank } from '../respect-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 import { parseUnits } from 'ethers/lib/utils';
 

@@ -21,7 +21,7 @@ import {getDisplayBalance} from '../../../utils/formatBalance';
 
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
-import useHelioFinance from '../../../hooks/useHelioFinance';
+import useRespectFinance from '../../../hooks/useRespectFinance';
 import ProgressCountdown from './ProgressCountdown';
 import useStakedBalanceOnBoardroom from '../../../hooks/useStakedBalanceOnBoardroom';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
@@ -31,14 +31,14 @@ import useStakeToBoardroom from '../../../hooks/useStakeToBoardroom';
 import useWithdrawFromBoardroom from '../../../hooks/useWithdrawFromBoardroom';
 
 const Stake: React.FC = () => {
-  const helioFinance = useHelioFinance();
-  const [approveStatus, approve] = useApprove(helioFinance.HSHARE, helioFinance.contracts.Boardroom.address);
+  const respectFinance = useRespectFinance();
+  const [approveStatus, approve] = useApprove(respectFinance.RSHARE, respectFinance.contracts.Boardroom.address);
 
-  const tokenBalance = useTokenBalance(helioFinance.HSHARE);
+  const tokenBalance = useTokenBalance(respectFinance.RSHARE);
   const stakedBalance = useStakedBalanceOnBoardroom();
   const {from, to} = useUnstakeTimerBoardroom();
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('HSHARE', helioFinance.HSHARE);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('RSHARE', respectFinance.RShare);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars
@@ -59,7 +59,7 @@ const Stake: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'HShare'}
+      tokenName={'RShare'}
     />,
   );
 
@@ -70,7 +70,7 @@ const Stake: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'HShare'}
+      tokenName={'RShare'}
     />,
   );
 
@@ -81,11 +81,11 @@ const Stake: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <CardIcon>
-                <TokenSymbol symbol="HSHARE" />
+                <TokenSymbol symbol="RShare" />
               </CardIcon>
               <Value value={getDisplayBalance(stakedBalance)} />
               <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
-              <Label text={'HSHARE Staked'} variant="yellow" />
+              <Label text={'RShare Staked'} variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
               {approveStatus !== ApprovalState.APPROVED ? (
@@ -95,7 +95,7 @@ const Stake: React.FC = () => {
                   style={{marginTop: '20px'}}
                   onClick={approve}
                 >
-                  Approve HSHARE
+                  Approve RShare
                 </Button>
               ) : (
                 <>

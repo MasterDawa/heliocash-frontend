@@ -1,16 +1,16 @@
 import { BigNumber } from 'ethers';
 import { useCallback, useState, useEffect } from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import config from '../config';
 
 const useNodes = (contract: string, sectionInUI: number, user: string) => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   const [poolAPRs, setPoolAPRs] = useState<BigNumber[]>([]);
 
   const fetchNodes = useCallback(async () => {
-    setPoolAPRs(await helioFinance.getNodes(contract, user));
-  }, [helioFinance, contract, user]);
+    setPoolAPRs(await respectFinance.getNodes(contract, user));
+  }, [respectFinance, contract, user]);
 
   useEffect(() => {
     if (user && sectionInUI === 3) {
@@ -18,7 +18,7 @@ const useNodes = (contract: string, sectionInUI: number, user: string) => {
       const refreshInterval = setInterval(fetchNodes, config.refreshInterval);
       return () => clearInterval(refreshInterval);
     }
-  }, [setPoolAPRs, helioFinance, fetchNodes, user, sectionInUI]);
+  }, [setPoolAPRs, respectFinance, fetchNodes, user, sectionInUI]);
 
   return poolAPRs;
 };

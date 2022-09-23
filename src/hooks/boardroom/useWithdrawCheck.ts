@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from '../useHelioFinance';
+import useHelioFinance from '../useRespectinance';
 import useRefresh from '../useRefresh';
 
 const useWithdrawCheck = () => {
   const [canWithdraw, setCanWithdraw] = useState(false);
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const {slowRefresh} = useRefresh();
-  const isUnlocked = helioFinance?.isUnlocked;
+  const isUnlocked = respectFinance?.isUnlocked;
 
   useEffect(() => {
     async function canUserWithdraw() {
@@ -19,7 +19,7 @@ const useWithdrawCheck = () => {
     if (isUnlocked) {
       canUserWithdraw();
     }
-  }, [isUnlocked, helioFinance, slowRefresh]);
+  }, [isUnlocked, respectFinance, slowRefresh]);
 
   return canWithdraw;
 };

@@ -1,21 +1,21 @@
 import {useCallback, useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance' from './useRespectFinance';
 import useStakedBalanceOnBoardroom from './useStakedBalanceOnBoardroom';
 
 const useBoardroomVersion = () => {
   const [boardroomVersion, setBoardroomVersion] = useState('latest');
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const stakedBalance = useStakedBalanceOnBoardroom();
 
   const updateState = useCallback(async () => {
-    setBoardroomVersion(await helioFinance.fetchBoardroomVersionOfUser());
-  }, [helioFinance?.isUnlocked, stakedBalance]);
+    setBoardroomVersion(await respectFinance.fetchBoardroomVersionOfUser());
+  }, [respectFinance?.isUnlocked, stakedBalance]);
 
   useEffect(() => {
-    if (helioFinance?.isUnlocked) {
+    if (respectFinance?.isUnlocked) {
       updateState().catch((err) => console.error(err.stack));
     }
-  }, [helioFinance?.isUnlocked, stakedBalance]);
+  }, [respectFinance?.isUnlocked, stakedBalance]);
 
   return boardroomVersion;
 };

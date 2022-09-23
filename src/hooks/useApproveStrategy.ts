@@ -1,7 +1,7 @@
 import { BigNumber, ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
 import { useTransactionAdder } from '../state/transactions/hooks';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useApprove from './useApprove';
 import { addTransaction } from '../state/transactions/actions';
 import useBank from './useBank';
@@ -18,21 +18,21 @@ export enum ApprovalState {
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 function useApproveStrategy(): [ApprovalState, () => Promise<void>] {
-  const helioFinance = useHelioFinance();
-  const { HShareRewardPool, Strategy, Boardroom } = helioFinance.contracts;
-  const bankHelioLP = useBank('HelioEthHShareRewardPool');
-  const bankHshareLP = useBank('HShareMaticHShareRewardPool');
-  const [approveStatusStrategy, approveStrategy] = useApprove(helioFinance.HELIO, Strategy.address);
-  const [approveStatusStrategy2, approveStrategy2] = useApprove(helioFinance.HSHARE, Strategy.address);
-  const [approveStatusBoardroom, approveBoardroom] = useApprove(helioFinance.HSHARE, Boardroom.address);
-  const [approveStatusHelioPair, approveHelioPair] = useApprove(bankHelioLP.depositToken, HShareRewardPool.address);
-  const [approveStatusHsharePair, approveHsharePair] = useApprove(bankHshareLP.depositToken, HShareRewardPool.address);
+  const respectFinance = useRespectFinance();
+  const { RShareRewardPool, Strategy, Boardroom } = respectFinance.contracts;
+  const bankHelioLP = useBank('RespectEthRShareRewardPool');
+  const bankHshareLP = useBank('RShareMaticRShareRewardPool');
+  const [approveStatusStrategy, approveStrategy] = useApprove(respectFinance.RESPECT, Strategy.address);
+  const [approveStatusStrategy2, approveStrategy2] = useApprove(respectFinance.RSHARE, Strategy.address);
+  const [approveStatusBoardroom, approveBoardroom] = useApprove(respectFinance.RSHARE, Boardroom.address);
+  const [approveStatusHelioPair, approveHelioPair] = useApprove(bankRespectLP.depositToken, RShareRewardPool.address);
+  const [approveStatusHsharePair, approveHsharePair] = useApprove(bankRshareLP.depositToken, RShareRewardPool.address);
 
   const approvalState: ApprovalState = useMemo(() => {
     return approveStatusStrategy === ApprovalState.APPROVED && approveStatusStrategy2 === ApprovalState.APPROVED && approveStatusBoardroom === ApprovalState.APPROVED && approveStatusHelioPair === ApprovalState.APPROVED && approveStatusHsharePair === ApprovalState.APPROVED
      ? ApprovalState.APPROVED
      : ApprovalState.NOT_APPROVED;
-  }, [approveStatusStrategy, approveStatusStrategy2, approveStatusBoardroom, approveStatusHelioPair, approveStatusHsharePair]);
+  }, [approveStatusStrategy, approveStatusStrategy2, approveStatusBoardroom, approveStatusRespectPair, approveStatusRsharePair]);
 
   const approve = useCallback(async (): Promise<void> => {
     if (
@@ -52,11 +52,11 @@ function useApproveStrategy(): [ApprovalState, () => Promise<void>] {
       await approveStrategy2();
     if (approveStatusBoardroom !== ApprovalState.APPROVED)
       await approveBoardroom();
-    if (approveStatusHelioPair !== ApprovalState.APPROVED)
-      await approveHelioPair();
-    if (approveStatusHsharePair !== ApprovalState.APPROVED)
-      await approveHsharePair();
-  }, [approveStatusStrategy, approveStatusStrategy2, approveStatusBoardroom, approveStatusHelioPair, approveStatusHsharePair]);
+    if (approveStatusRespectPair !== ApprovalState.APPROVED)
+      await approveRespectPair();
+    if (approveStatusRsharePair !== ApprovalState.APPROVED)
+      await approveRsharePair();
+  }, [approveStatusStrategy, approveStatusStrategy2, approveStatusBoardroom, approveStatusRespectPair, approveStatusRsharePair]);
 
   return [approvalState, approve];
 }

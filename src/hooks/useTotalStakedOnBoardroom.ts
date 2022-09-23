@@ -1,18 +1,18 @@
 import {useEffect, useState} from 'react';
 import {BigNumber} from 'ethers';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useRefresh from './useRefresh';
 
 const useTotalStakedOnBoardroom = () => {
   const [totalStaked, setTotalStaked] = useState(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const {slowRefresh} = useRefresh();
-  const isUnlocked = helioFinance?.isUnlocked;
+  const isUnlocked = respectFinance?.isUnlocked;
 
   useEffect(() => {
     async function fetchTotalStaked() {
       try {
-        setTotalStaked(await helioFinance.getTotalStakedInBoardroom());
+        setTotalStaked(await respectFinance.getTotalStakedInBoardroom());
       } catch (err) {
         console.error(err);
       }
@@ -20,7 +20,7 @@ const useTotalStakedOnBoardroom = () => {
     if (isUnlocked) {
       fetchTotalStaked();
     }
-  }, [isUnlocked, slowRefresh, helioFinance]);
+  }, [isUnlocked, slowRefresh, respectFinance]);
 
   return totalStaked;
 };

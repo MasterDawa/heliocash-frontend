@@ -1,23 +1,23 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
-import {TokenStat} from '../helio-finance/types';
+import useHelioFinance from './useRespectFinance';
+import {TokenStat} from '../respect-finance/types';
 import useRefresh from './useRefresh';
 
 const useBondStats = () => {
   const [stat, setStat] = useState<TokenStat>();
   const {slowRefresh} = useRefresh();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     async function fetchBondPrice() {
       try {
-        setStat(await helioFinance.getBondStat());
+        setStat(await respectFinance.getBondStat());
       } catch (err) {
         console.error(err);
       }
     }
     fetchBondPrice();
-  }, [setStat, helioFinance, slowRefresh]);
+  }, [setStat, respectFinance, slowRefresh]);
 
   return stat;
 };

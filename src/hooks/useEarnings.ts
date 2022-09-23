@@ -1,16 +1,16 @@
 import {useCallback, useEffect, useState} from 'react';
 import {BigNumber} from 'ethers';
-import useHelioFinance from './useHelioFinance';
-import {ContractName} from '../helio-finance';
+import useRespectFinance from './useRespectFinance';
+import {ContractName} from '../respect-finance';
 import config from '../config';
 
 const useEarnings = (poolName: ContractName, earnTokenName: String, poolId: Number) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
-  const isUnlocked = helioFinance?.isUnlocked;
+  const respectFinance = useRespectFinance();
+  const isUnlocked = respectFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
-    const balance = await helioFinance.earnedFromBank(poolName, earnTokenName, poolId, helioFinance.myAccount);
+    const balance = await respectFinance.earnedFromBank(poolName, earnTokenName, poolId, respectFinance.myAccount);
     setBalance(balance);
   }, [poolName, earnTokenName, poolId, helioFinance]);
 
@@ -21,7 +21,7 @@ const useEarnings = (poolName: ContractName, earnTokenName: String, poolId: Numb
       const refreshBalance = setInterval(fetchBalance, config.refreshInterval);
       return () => clearInterval(refreshBalance);
     }
-  }, [isUnlocked, poolName, helioFinance, fetchBalance]);
+  }, [isUnlocked, poolName, respectFinance, fetchBalance]);
 
   return balance;
 };

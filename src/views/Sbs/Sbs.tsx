@@ -9,12 +9,12 @@ import PageHeader from '../../components/PageHeader';
 import {Box, /* Paper, Typography,*/ Button, Grid} from '@material-ui/core';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
-import useHelioFinance from '../../hooks/useHelioFinance';
+import useRespectFinance from '../../hooks/useRespectFinance';
 import {getDisplayBalance /*, getBalance*/} from '../../utils/formatBalance';
 import {BigNumber /*, ethers*/} from 'ethers';
-import useSwapHBondToHShare from '../../hooks/HShareSwapper/useSwapHBondToHShare';
+import useSwapRBondToRShare from '../../hooks/RShareSwapper/useSwapRBondToRShare';
 import useApprove, {ApprovalState} from '../../hooks/useApprove';
-import useHShareSwapperStats from '../../hooks/HShareSwapper/useHShareSwapperStats';
+import useRShareSwapperStats from '../../hooks/RShareSwapper/useRShareSwapperStats';
 import TokenInput from '../../components/TokenInput';
 import Card from '../../components/Card';
 import CardContent from '../../components/CardContent';
@@ -35,13 +35,13 @@ function isNumeric(n: any) {
 const Sbs: React.FC = () => {
   const {path} = useRouteMatch();
   const {account} = useWallet();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const [bbondAmount, setBbondAmount] = useState('');
-  const [bshareAmount, setHshareAmount] = useState('');
+  const [bshareAmount, setRshareAmount] = useState('');
 
-  const [approveStatus, approve] = useApprove(helioFinance.HBOND, helioFinance.contracts.HShareSwapper.address);
-  const {onSwapHShare} = useSwapHBondToHShare();
-  const bshareSwapperStat = useHShareSwapperStats(account);
+  const [approveStatus, approve] = useApprove(respectFinance.RBOND, respectFinance.contracts.RShareSwapper.address);
+  const {onSwapRShare} = useSwapRBondToRShare();
+  const bshareSwapperStat = useRShareSwapperStats(account);
 
   const bshareBalance = useMemo(
     () => (bshareSwapperStat ? Number(bshareSwapperStat.bshareBalance) : 0),
@@ -52,49 +52,49 @@ const Sbs: React.FC = () => {
     [bshareSwapperStat],
   );
 
-  const handleHBondChange = async (e: any) => {
+  const handleRBondChange = async (e: any) => {
     if (e.currentTarget.value === '') {
       setBbondAmount('');
-      setHshareAmount('');
+      setRshareAmount('');
       return;
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setBbondAmount(e.currentTarget.value);
-    const updateHShareAmount = await helioFinance.estimateAmountOfHShare(e.currentTarget.value);
-    setHshareAmount(updateHShareAmount);
+    const updateRShareAmount = await recpectFinance.estimateAmountOfRShare(e.currentTarget.value);
+    setRshareAmount(updateRShareAmount);
   };
 
-  const handleHBondSelectMax = async () => {
-    setBbondAmount(String(bondBalance));
-    const updateHShareAmount = await helioFinance.estimateAmountOfHShare(String(bondBalance));
-    setHshareAmount(updateHShareAmount);
+  const handleRBondSelectMax = async () => {
+    setRbondAmount(String(bondBalance));
+    const updateRShareAmount = await respectFinance.estimateAmountOfRShare(String(bondBalance));
+    setRshareAmount(updateRShareAmount);
   };
 
-  const handleHShareSelectMax = async () => {
-    setHshareAmount(String(bshareBalance));
-    const rateHSharePerHelio = (await helioFinance.getHShareSwapperStat(account)).rateHSharePerHelio;
-    const updateHBondAmount = BigNumber.from(10)
+  const handleRShareSelectMax = async () => {
+    setRshareAmount(String(bshareBalance));
+    const rateRSharePerRespect = (await respectFinance.getRShareSwapperStat(account)).rateRSharePerRespect;
+    const updateRBondAmount = BigNumber.from(10)
       .pow(30)
-      .div(BigNumber.from(rateHSharePerHelio))
+      .div(BigNumber.from(rateRSharePerRespect))
       .mul(Number(bshareBalance) * 1e6);
-    setBbondAmount(getDisplayBalance(updateHBondAmount, 18, 6));
+    setBbondAmount(getDisplayBalance(updateRBondAmount, 18, 6));
   };
 
-  const handleHShareChange = async (e: any) => {
+  const handleRShareChange = async (e: any) => {
     const inputData = e.currentTarget.value;
     if (inputData === '') {
-      setHshareAmount('');
+      setRshareAmount('');
       setBbondAmount('');
       return;
     }
     if (!isNumeric(inputData)) return;
-    setHshareAmount(inputData);
-    const rateHSharePerHelio = (await helioFinance.getHShareSwapperStat(account)).rateHSharePerHelio;
-    const updateHBondAmount = BigNumber.from(10)
+    setRshareAmount(inputData);
+    const rateRSharePerRespect = (await respectFinance.getRShareSwapperStat(account)).rateRSharePerRespect;
+    const updateRBondAmount = BigNumber.from(10)
       .pow(30)
-      .div(BigNumber.from(rateHSharePerHelio))
+      .div(BigNumber.from(rateRSharePerRespect))
       .mul(Number(inputData) * 1e6);
-    setBbondAmount(getDisplayBalance(updateHBondAmount, 18, 6));
+    setBbondAmount(getDisplayBalance(updateRBondAmount, 18, 6));
   };
 
   return (
@@ -104,7 +104,7 @@ const Sbs: React.FC = () => {
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader icon={'🏦'} title="HBond -> HShare Swap" subtitle="Swap HBond to HShare" />
+              <PageHeader icon={'🏦'} title="RBond -> RShare Swap" subtitle="Swap RBond to RShare" />
             </Route>
             <Box mt={5}>
               <Grid container justify="center" spacing={6}>
@@ -114,24 +114,24 @@ const Sbs: React.FC = () => {
                       <Card>
                         <CardContent>
                           <StyledCardContentInner>
-                            <StyledCardTitle>HBonds</StyledCardTitle>
+                            <StyledCardTitle>RBonds</StyledCardTitle>
                             <StyledExchanger>
                               <StyledToken>
                                 <StyledCardIcon>
-                                  <TokenSymbol symbol={helioFinance.HBOND.symbol} size={54} />
+                                  <TokenSymbol symbol={respectFinance.RBOND.symbol} size={54} />
                                 </StyledCardIcon>
                               </StyledToken>
                             </StyledExchanger>
                             <Grid item xs={12}>
                               <TokenInput
-                                onSelectMax={handleHBondSelectMax}
-                                onChange={handleHBondChange}
+                                onSelectMax={handleRBondSelectMax}
+                                onChange={handleRBondChange}
                                 value={bbondAmount}
                                 max={bondBalance}
-                                symbol="HBond"
+                                symbol="RBond"
                               ></TokenInput>
                             </Grid>
-                            <StyledDesc>{`${bondBalance} HBOND Available in Wallet`}</StyledDesc>
+                            <StyledDesc>{`${bondBalance} RBOND Available in Wallet`}</StyledDesc>
                           </StyledCardContentInner>
                         </CardContent>
                       </Card>
@@ -141,24 +141,24 @@ const Sbs: React.FC = () => {
                       <Card>
                         <CardContent>
                           <StyledCardContentInner>
-                            <StyledCardTitle>HShare</StyledCardTitle>
+                            <StyledCardTitle>RShare</StyledCardTitle>
                             <StyledExchanger>
                               <StyledToken>
                                 <StyledCardIcon>
-                                  <TokenSymbol symbol={helioFinance.HSHARE.symbol} size={54} />
+                                  <TokenSymbol symbol={respectFinance.RSHARE.symbol} size={54} />
                                 </StyledCardIcon>
                               </StyledToken>
                             </StyledExchanger>
                             <Grid item xs={12}>
                               <TokenInput
-                                onSelectMax={handleHShareSelectMax}
-                                onChange={handleHShareChange}
+                                onSelectMax={handleRShareSelectMax}
+                                onChange={handleRShareChange}
                                 value={bshareAmount}
                                 max={bshareBalance}
-                                symbol="HShare"
+                                symbol="RShare"
                               ></TokenInput>
                             </Grid>
-                            <StyledDesc>{`${bshareBalance} HSHARE Available in Swapper`}</StyledDesc>
+                            <StyledDesc>{`${bshareBalance} RSHARE Available in Swapper`}</StyledDesc>
                           </StyledCardContentInner>
                         </CardContent>
                       </Card>
@@ -182,13 +182,13 @@ const Sbs: React.FC = () => {
                             onClick={approve}
                             size="medium"
                           >
-                            Approve HBOND
+                            Approve RBOND
                           </Button>
                         ) : (
                           <Button
                             color="primary"
                             variant="contained"
-                            onClick={() => onSwapHShare(bbondAmount.toString())}
+                            onClick={() => onSwapRShare(bbondAmount.toString())}
                             size="medium"
                           >
                             Swap

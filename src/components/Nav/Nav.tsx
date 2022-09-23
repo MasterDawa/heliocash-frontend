@@ -18,9 +18,9 @@ import {
 } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
-import useHelioStats from '../../hooks/useHelioStats';
+import useHelioStats from '../../hooks/useRespectStats';
 import useEthStats from '../../hooks/useEthStats';
-import useShareStats from '../../hooks/usehShareStats';
+import useShareStats from '../../hooks/usehRhareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';

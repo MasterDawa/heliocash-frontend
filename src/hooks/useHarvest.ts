@@ -1,20 +1,20 @@
 import { useCallback } from 'react';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
-import { Bank } from '../helio-finance';
+import { Bank } from '../respect-finance';
 
 const useHarvest = (bank: Bank) => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleReward = useCallback(() => {
 
     handleTransactionReceipt(
-      helioFinance.harvest(bank.contract, bank.poolId, bank.sectionInUI),
+      respectFinance.harvest(bank.contract, bank.poolId, bank.sectionInUI),
       `Claim ${bank.earnTokenName} from ${bank.contract}`,
     );
 
-  }, [bank, helioFinance, handleTransactionReceipt]);
+  }, [bank, respectFinance, handleTransactionReceipt]);
 
   return { onReward: handleReward };
 };

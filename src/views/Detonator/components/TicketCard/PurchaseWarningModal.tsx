@@ -8,9 +8,9 @@ const WarningModal: React.FC<{ onDismiss?: () => void }> = ({ onDismiss }) => {
   return (
     <Modal title={'Warning'} onDismiss={onDismiss}>
       <TicketsList>
-        GLASS deposits are final.
+        Emeralds deposits are final.
         <br />
-        Your GLASS will not be returned to you after you deposit it to the prize pool.
+        Your Emeralds will not be returned to you after you deposit it to the prize pool.
         <br />
         Deposits are only valid for the daily rewards for that current day.
         <br />

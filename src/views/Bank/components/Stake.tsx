@@ -27,7 +27,7 @@ import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
 import ZapModal from './ZapModal';
 import TokenSymbol from '../../../components/TokenSymbol';
-import { Bank } from '../../../helio-finance';
+import { Bank } from '../../../respect-finance';
 import useNodePrice from '../../../hooks/useNodePrice';
 import useNodeText from '../../../hooks/useNodeText';
 import useWallet from 'use-wallet';
@@ -103,7 +103,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <TokenSymbol symbol={bank.sectionInUI !== 3 ? bank.depositToken.symbol : 'HELIONODE'} size={54} />
+              <TokenSymbol symbol={bank.sectionInUI !== 3 ? bank.depositToken.symbol : 'RESPECTNODE'} size={54} />
             </CardIcon>
             <Value value={getDisplayBalance(bank.sectionInUI !== 3 ? stakedBalance : nodePrice, bank.depositToken.decimal, bank.sectionInUI === 3 ? 0 : 4)} />
 
@@ -147,8 +147,8 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                   <IconButton
                     disabled={
                       bank.closedForStaking ||
-                      bank.depositTokenName === 'HELIO-HSHARE-LP' ||
-                      bank.depositTokenName === 'HELIO'
+                      bank.depositTokenName === 'RESPECT-RSHARE-LP' ||
+                      bank.depositTokenName === 'RESPECT'
                     }
                     onClick={() => (bank.closedForStaking ? null : onPresentZap())}
                   >

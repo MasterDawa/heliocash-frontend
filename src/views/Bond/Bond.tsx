@@ -9,15 +9,15 @@ import ExchangeCard from './components/ExchangeCard';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useBondStats from '../../hooks/useBondStats';
-import useHelioStats from '../../hooks/useHelioStats';
-import useHelioFinance from '../../hooks/useHelioFinance';
+import useRespectStats from '../../hooks/useRespectStats';
+import useRespectFinance from '../../hooks/useRespectFinance';
 import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
 import {useTransactionAdder} from '../../state/transactions/hooks';
 import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import {getDisplayBalance} from '../../utils/formatBalance';
-import {BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN} from '../../helio-finance/constants';
+import {BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN} from '../../respect-finance/constants';
 
 import HomeImage from '../../assets/img/background.jpg';
 import LaunchCountdown from '../../components/LaunchCountdown';
@@ -33,33 +33,33 @@ const BackgroundImage = createGlobalStyle`
 const Bond: React.FC = () => {
   const {path} = useRouteMatch();
   const {account} = useWallet();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
-  const helioStat = useHelioStats();
+  const respectStat = useRespectStats();
   const cashPrice = useCashPriceInLastTWAP();
 
   const bondsPurchasable = useBondsPurchasable();
 
-  const bondBalance = useTokenBalance(helioFinance?.HBOND);
+  const bondBalance = useTokenBalance(respectFinance?.RBOND);
   // const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice).toFixed(4) : null), [cashPrice]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
-      const tx = await helioFinance.buyBonds(amount);
+      const tx = await respectFinance.buyBonds(amount);
       addTransaction(tx, {
-        summary: `Buy ${Number(amount).toFixed(2)} HBOND with ${amount} HELIO`,
+        summary: `Buy ${Number(amount).toFixed(2)} RBOND with ${amount} RESPECT`,
       });
     },
-    [helioFinance, addTransaction],
+    [respectFinance, addTransaction],
   );
 
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
-      const tx = await helioFinance.redeemBonds(amount);
-      addTransaction(tx, {summary: `Redeem ${amount} HBOND`});
+      const tx = await respectFinance.redeemBonds(amount);
+      addTransaction(tx, {summary: `Redeem ${amount} RBOND`});
     },
-    [helioFinance, addTransaction],
+    [respectFinance, addTransaction],
   );
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
   const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInETH) < 1.01, [bondStat]);
@@ -72,20 +72,20 @@ const Bond: React.FC = () => {
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader icon={'🏦'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redheliotion" />
+              <PageHeader icon={'🏦'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon respect power" />
             </Route>
             <StyledBond>
               <StyledCardWrapper>
                 <ExchangeCard
                   action="Purchase"
-                  fromToken={helioFinance.HELIO}
-                  fromTokenName="HELIO"
-                  toToken={helioFinance.HBOND}
-                  toTokenName="HBOND"
+                  fromToken={respectFinance.RESPECT}
+                  fromTokenName="RESPECT"
+                  toToken={respectFinance.RBOND}
+                  toTokenName="RBOND"
                   priceDesc={
                     !isBondPurchasable
-                      ? 'HELIO is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' HBOND available for purchase'
+                      ? 'RESPECT is over peg'
+                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' RBOND available for purchase'
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
@@ -93,28 +93,28 @@ const Bond: React.FC = () => {
               </StyledCardWrapper>
               <StyledStatsWrapper>
                 <ExchangeStat
-                  tokenName="4,000 HELIO"
+                  tokenName="4,000 RESPECT"
                   description="Last-Hour TWAP Price"
-                  price={Number(helioStat?.tokenInETH).toFixed(4) || '-'}
+                  price={Number(respectStat?.tokenInETH).toFixed(4) || '-'}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
-                  tokenName="4,000 HBOND"
-                  description="Current Price: (HELIO)^2"
+                  tokenName="4,000 RBOND"
+                  description="Current Price: (RESPECT)^2"
                   price={Number(bondStat?.tokenInETH).toFixed(4) || '-'}
                 />
               </StyledStatsWrapper>
               <StyledCardWrapper>
                 <ExchangeCard
                   action="Redeem"
-                  fromToken={helioFinance.HBOND}
-                  fromTokenName="HBOND"
-                  toToken={helioFinance.HELIO}
-                  toTokenName="HELIO"
-                  priceDesc={`${getDisplayBalance(bondBalance)} HBOND Available in wallet`}
+                  fromToken={respectFinance.RBOND}
+                  fromTokenName="RBOND"
+                  toToken={respectFinance.RESPECT}
+                  toTokenName="RESPECT"
+                  priceDesc={`${getDisplayBalance(bondBalance)} RBOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when 4,000 HELIO > ${BOND_REDEEM_PRICE}ETH` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when 4,000 RESPECT > ${BOND_REDEEM_PRICE}ETH` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

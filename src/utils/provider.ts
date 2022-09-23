@@ -1,6 +1,6 @@
 import {ethers} from 'ethers';
 import config from '../config';
-import {web3ProviderFrom} from '../helio-finance/ether-utils';
+import {web3ProviderFrom} from '../respect-finance/ether-utils';
 
 let provider: ethers.providers.Web3Provider = null;
 

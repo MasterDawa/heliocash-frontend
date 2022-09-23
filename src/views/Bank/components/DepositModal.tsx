@@ -13,7 +13,7 @@ import { BigNumber } from 'ethers';
 import { BigNumber as BigNumberJS } from 'bignumber.js';
 import useNodeText from '../../../hooks/useNodeText';
 import useNodePrice from '../../../hooks/useNodePrice';
-import { Bank } from '../../../helio-finance';
+import { Bank } from '../../../respect-finance';
 
 interface DepositModalProps extends ModalProps {
   bank: Bank;
@@ -84,7 +84,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ bank, max, decimals, onConf
         <div style={{ display: 'flex' }}>
           {numNodes.map((num, i) => {
             return (<>
-              <Button data-tip={`${getDisplayBalance(nodePrice.mul(num), 18, 0)} HELIO`} style={{ whiteSpace: 'nowrap', marginRight: i === numNodes.length - 1 ? '0' : '1rem' }} className="shinyButtonSecondary" onClick={() => onConfirm(num.toString())}>
+              <Button data-tip={`${getDisplayBalance(nodePrice.mul(num), 18, 0)} RESPECT`} style={{ whiteSpace: 'nowrap', marginRight: i === numNodes.length - 1 ? '0' : '1rem' }} className="shinyButtonSecondary" onClick={() => onConfirm(num.toString())}>
                 {num} {getNodeText(bank.poolId).split(' ')[0]}
               </Button>
             </>

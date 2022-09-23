@@ -1,23 +1,23 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
-import {LPStat} from '../helio-finance/types';
+import userespectFinance from './useRespectFinance';
+import {LPStat} from '../respect-finance/types';
 import useRefresh from './useRefresh';
 
 const useLpStats = (lpTicker: string) => {
   const [stat, setStat] = useState<LPStat>();
   const {slowRefresh} = useRefresh();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     async function fetchLpPrice() {
       try {
-        setStat(await helioFinance.getLPStat(lpTicker));
+        setStat(await respectFinance.getLPStat(lpTicker));
       } catch (err) {
         console.error(err);
       }
     }
     fetchLpPrice();
-  }, [setStat, helioFinance, slowRefresh, lpTicker]);
+  }, [setStat, respectFinance, slowRefresh, lpTicker]);
 
   return stat;
 };

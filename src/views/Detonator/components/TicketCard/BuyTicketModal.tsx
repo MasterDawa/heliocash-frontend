@@ -73,13 +73,13 @@ const BuyTicketModal: React.FC<BuyTicketModalProps> = ({ max, onDismiss }) => {
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         max={fullBalance}
-        symbol="HELIO-ETH LP"
-        availableSymbol="HELIO-ETH LP"
+        symbol="RESPECT-ETH LP"
+        availableSymbol="RESPECT-ETH LP"
       />
       <div style={{ marginTop: "4px" }}>
         <Tips style={{ marginBottom: "4px" }}>Daily Lottery - {ticketPrice} per ticket.</Tips>
         <Tips>Daily Largest - Deposit more than {minLargest}</Tips>
-        {/* <Tips>{TranslateString(999, '1 Ticket = 100 Million GLASS')}</Tips> */}
+        {/* <Tips>{TranslateString(999, '1 Ticket = 100 Million EMERALDS')}</Tips> */}
       </div>
       <div style={{ marginBottom: '-16px' }}>
         <ModalActions>

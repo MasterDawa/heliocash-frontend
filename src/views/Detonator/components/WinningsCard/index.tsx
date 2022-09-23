@@ -81,8 +81,8 @@ const WinningsCard = () => {
   const isMobile = width <= 768;
 
   const [showFooter, setShowFooter] = useState(false)
-  const helioEthLpStats = useLpStats('HELIO-ETH-LP');
-  const lpPrice = useMemo(() => (helioEthLpStats ? Number(helioEthLpStats.priceOfOne).toFixed(2) : null), [helioEthLpStats]);
+  const respectEthLpStats = useLpStats('RESPECT-ETH-LP');
+  const lpPrice = useMemo(() => (respectEthLpStats ? Number(respectEthLpStats.priceOfOne).toFixed(2) : null), [respectEthLpStats]);
 
   const whaleTax = useWhaleTax()
   const user = useGetUserInfo()

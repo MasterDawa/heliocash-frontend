@@ -1,17 +1,17 @@
 import {useEffect, useState} from 'react';
 import {BigNumber} from 'ethers';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 
 const useTreasuryAmount = () => {
   const [amount, setAmount] = useState(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
-    if (helioFinance) {
-      const {Treasury} = helioFinance.contracts;
-      helioFinance.HELIO.balanceOf(Treasury.address).then(setAmount);
+    if (respectFinance) {
+      const {Treasury} = respectFinance.contracts;
+      respectFinance.RESPECT.balanceOf(Treasury.address).then(setAmount);
     }
-  }, [helioFinance]);
+  }, [respectFinance]);
   return amount;
 };
 

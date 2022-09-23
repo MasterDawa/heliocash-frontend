@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useState, useMemo } from 'react';
 
 import {BigNumber} from 'ethers';
-import useHelioFinance from './useHelioFinance';
-import {ContractName} from '../helio-finance';
+import useRespectFinance from './useRespectFinance';
+import {ContractName} from '../respect-finance';
 import config from '../config';
 
 const useStakedBalance = (poolName: ContractName, poolId: Number, sectionInUI: Number, account: string) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   const fetchBalance = useCallback(async () => {
-    const balance = await helioFinance.stakedBalanceOnBank(poolName, poolId, sectionInUI, account);
+    const balance = await respectFinance.stakedBalanceOnBank(poolName, poolId, sectionInUI, account);
     setBalance(balance);
-  }, [poolName, poolId, sectionInUI, account, helioFinance]);
+  }, [poolName, poolId, sectionInUI, account, respectFinance]);
 
   useEffect(() => {
     if (account) {
@@ -21,7 +21,7 @@ const useStakedBalance = (poolName: ContractName, poolId: Number, sectionInUI: N
       const refreshBalance = setInterval(fetchBalance, config.refreshInterval);
       return () => clearInterval(refreshBalance);
     }
-  }, [account, poolName, helioFinance, sectionInUI, fetchBalance]);
+  }, [account, poolName, respectFinance, sectionInUI, fetchBalance]);
 
   return balance;
 };

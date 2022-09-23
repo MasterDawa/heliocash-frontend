@@ -1,23 +1,23 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Context from './context';
-import useHelioFinance from '../../hooks/useHelioFinance';
-import {Bank} from '../../helio-finance';
+import useHelioFinance from '../../hooks/useRespectFinance';
+import {Bank} from '../../respect-finance';
 import config, {bankDefinitions} from '../../config';
 
 const Banks: React.FC = ({children}) => {
   const [banks, setBanks] = useState<Bank[]>([]);
-  const helioFinance = useHelioFinance();
-  const isUnlocked = helioFinance?.isUnlocked;
+  const helioFinance = useRespectFinance();
+  const isUnlocked = respectFinance?.isUnlocked;
 
   const fetchPools = useCallback(async () => {
     const banks: Bank[] = [];
 
     for (const bankInfo of Object.values(bankDefinitions)) {
       if (bankInfo.finished) {
-        if (!helioFinance.isUnlocked) continue;
+        if (!respectFinance.isUnlocked) continue;
 
         // only show pools staked by user
-        const balance = await helioFinance.stakedBalanceOnBank(
+        const balance = await respectFinance.stakedBalanceOnBank(
           bankInfo.contract,
           bankInfo.poolId,
           bankInfo.sectionInUI,
@@ -30,19 +30,19 @@ const Banks: React.FC = ({children}) => {
       banks.push({
         ...bankInfo,
         address: config.deployments[bankInfo.contract].address,
-        depositToken: helioFinance.externalTokens[bankInfo.depositTokenName],
-        earnToken: bankInfo.earnTokenName === 'HELIO' ? helioFinance.HELIO : helioFinance.HSHARE,
+        depositToken: respectFinance.externalTokens[bankInfo.depositTokenName],
+        earnToken: bankInfo.earnTokenName === 'HELIO' ? respectFinance.RESPECT : respect.Finance.RSHARE,
       });
     }
     banks.sort((a, b) => (a.sort > b.sort ? 1 : -1));
     setBanks(banks);
-  }, [helioFinance, setBanks]);
+  }, [respectFinance, setBanks]);
 
   useEffect(() => {
-    if (helioFinance) {
+    if (respectFinance) {
       fetchPools().catch((err) => console.error(`Failed to fetch pools: ${err.stack}`));
     }
-  }, [isUnlocked, helioFinance, fetchPools]);
+  }, [isUnlocked, respectFinance, fetchPools]);
 
   return <Context.Provider value={{banks}}>{children}</Context.Provider>;
 };

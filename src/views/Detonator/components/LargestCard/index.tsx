@@ -77,8 +77,8 @@ const LargestCard = () => {
   const largestDeposit = useLargestDeposit();
   const largestPrize = formatBalance(usePoolBalance().times(1).div(100));
 
-  const helioEthLpStats = useLpStats('HELIO-ETH-LP');
-  const lpPrice = useMemo(() => (helioEthLpStats ? Number(helioEthLpStats.priceOfOne).toFixed(2) : null), [helioEthLpStats]);
+  const respectEthLpStats = useLpStats('RESPECT-ETH-LP');
+  const lpPrice = useMemo(() => (respectEthLpStats ? Number(respectEthLpStats.priceOfOne).toFixed(2) : null), [respectEthLpStats]);
 
   const parseAddr = (addr: string) => {
     return `${addr.substring(0, 5)}...${addr.substring(addr.length - 3, addr.length)}`

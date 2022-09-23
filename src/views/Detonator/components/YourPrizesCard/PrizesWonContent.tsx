@@ -87,8 +87,8 @@ const PrizesWonContent: React.FC = () => {
   const rewardsAfterFee = getFullDisplayBalance(rewards.times(new BigNumber(80).minus(whaleTax)).div(100))
   const { onClaim } = useClaimLottery()
   const { onCompound } = useCompoundLottery()
-  const helioEthLpStats = useLpStats('HELIO-ETH-LP');
-  const lpPrice = useMemo(() => (helioEthLpStats ? Number(helioEthLpStats.priceOfOne).toFixed(2) : null), [helioEthLpStats]);
+  const respectEthLpStats = useLpStats('HELIO-ETH-LP');
+  const lpPrice = useMemo(() => (respectEthLpStats ? Number(respectEthLpStats.priceOfOne).toFixed(2) : null), [respectEthLpStats]);
   // const dailyDrip = useDayDripEstimate()
   // const dailyDripFormat = dailyDrip && formatBalance(getBalanceNumber(dailyDrip.times(FEE_RATIO)))
 

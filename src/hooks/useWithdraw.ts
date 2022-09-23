@@ -1,22 +1,22 @@
 import {useCallback} from 'react';
-import useHelioFinance from './useHelioFinance';
-import {Bank} from '../helio-finance';
+import useRespectFinance from './useRespectFinance';
+import {Bank} from '../respect-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 import {parseUnits} from 'ethers/lib/utils';
 
 const useWithdraw = (bank: Bank) => {
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleWithdraw = useCallback(
     (amount: string) => {
       const amountBn = parseUnits(amount, bank.depositToken.decimal);
       handleTransactionReceipt(
-        helioFinance.unstake(bank.contract, bank.poolId, amountBn),
+        respectFinance.unstake(bank.contract, bank.poolId, amountBn),
         `Withdraw ${amount} ${bank.depositTokenName} from ${bank.contract}`,
       );
     },
-    [bank, helioFinance, handleTransactionReceipt],
+    [bank, respectFinance, handleTransactionReceipt],
   );
   return {onWithdraw: handleWithdraw};
 };

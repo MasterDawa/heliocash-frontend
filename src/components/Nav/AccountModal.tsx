@@ -6,7 +6,7 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import Label from '../Label';
 import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
-import useHelioFinance from '../../hooks/useHelioFinance';
+import useHelioFinance from '../../hooks/useRespectFinance';
 import TokenSymbol from '../TokenSymbol';
 import { useMediaQuery } from '@material-ui/core';
 

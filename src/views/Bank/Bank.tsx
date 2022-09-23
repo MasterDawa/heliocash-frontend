@@ -15,8 +15,8 @@ import Stake from './components/Stake';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 import useRedeem from '../../hooks/useRedeem';
-import { Bank as BankEntity } from '../../helio-finance';
-import useHelioFinance from '../../hooks/useHelioFinance';
+import { Bank as BankEntity } from '../../respect-finance';
+import useRespectFinance from '../../hooks/useRespectFinance';
 import useNodes from '../../hooks/useNodes';
 import { Text } from '../../components/Text';
 import useNodeText from '../../hooks/useNodeText';
@@ -147,7 +147,7 @@ const Bank: React.FC = () => {
           <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
             <Card className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
-                <Typography>Est Yearly HELIO</Typography>
+                <Typography>Est Yearly RESPECT</Typography>
                 <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.userYearlyBurst}</Typography>
               </CardContent>
             </Card>
@@ -155,7 +155,7 @@ const Bank: React.FC = () => {
           <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
             <Card className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
-                <Typography>Est Daily HELIO</Typography>
+                <Typography>Est Daily RESPECT</Typography>
                 <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.userDailyBurst}</Typography>
               </CardContent>
             </Card>
@@ -234,20 +234,20 @@ const Bank: React.FC = () => {
 };
 
 const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
-  const helioFinance = useHelioFinance();
-  const helioAddr = helioFinance.HELIO.address;
-  const bshareAddr = helioFinance.HSHARE.address;
+  const respectFinance = useRespectFinance();
+  const respectAddr = respectFinance.RESPECT.address;
+  const bshareAddr = respectFinance.RSHARE.address;
 
   let pairName: string;
   let uniswapUrl: string;
-  if (bank.depositTokenName === 'HELIO-ETH-LP') {
-    pairName = 'HELIO-ETH pair';
-    uniswapUrl = 'https://quickswap.exchange/#/add/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619/' + helioAddr;
-  } else if (bank.depositTokenName === 'HELIO-HSHARE-LP') {
-    pairName = 'HELIO-HSHARE pair';
-    uniswapUrl = 'https://quickswap.exchange/#/add/' + bshareAddr + '/' + helioAddr;
+  if (bank.depositTokenName === 'RESPECT-ETH-LP') {
+    pairName = 'RESPECT-ETH pair';
+    uniswapUrl = 'https://quickswap.exchange/#/add/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619/' + respectAddr;
+  } else if (bank.depositTokenName === 'RESPECT-RSHARE-LP') {
+    pairName = 'RESPECT-RSHARE pair';
+    uniswapUrl = 'https://quickswap.exchange/#/add/' + bshareAddr + '/' + respectAddr;
   } else {
-    pairName = 'HSHARE-MATIC pair';
+    pairName = 'RSHARE-MATIC pair';
     uniswapUrl = 'https://quickswap.exchange/#/add/ETH' + bshareAddr;
   }
   return (

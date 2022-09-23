@@ -2,9 +2,9 @@ import { BigNumber, ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks';
 import useAllowance from './useAllowance';
-import ERC20 from '../helio-finance/ERC20';
+import ERC20 from '../respect-finance/ERC20';
 import { TAX_OFFICE_ADDR } from '../utils/constants';
-import useHelioFinance from './useHelioFinance';
+import useRespectFinance from './useRespectFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;
 const APPROVE_BASE_AMOUNT = BigNumber.from('1000000000000000000000000');
@@ -18,12 +18,12 @@ export enum ApprovalState {
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 function useApproveTaxOffice(): [ApprovalState, ApprovalState, () => Promise<void>] {
-  const helioFinance = useHelioFinance();
-  let token0: ERC20 = helioFinance.HELIO;
-  let token1: ERC20 = helioFinance.ETH;
-  // if (zappingToken === MATIC_TICKER) token = helioFinance.MATIC;
-  // else if (zappingToken === HELIO_TICKER) token = helioFinance.HELIO;
-  // else if (zappingToken === HSHARE_TICKER) token = helioFinance.HSHARE;
+  const helioFinance = useRespectFinance();
+  let token0: ERC20 = respectFinance.RESPECT;
+  let token1: ERC20 = respectFinance.ETH;
+  // if (zappingToken === MATIC_TICKER) token = respectFinance.MATIC;
+  // else if (zappingToken === RESPECT_TICKER) token = respectFinance.RESPECT;
+  // else if (zappingToken === RSHARE_TICKER) token = respectFinance.RSHARE;
   const pendingApproval0 = useHasPendingApproval(token0.address, TAX_OFFICE_ADDR);
   const pendingApproval1 = useHasPendingApproval(token1.address, TAX_OFFICE_ADDR);
   const currentAllowance0 = useAllowance(token0, TAX_OFFICE_ADDR, pendingApproval0);
@@ -41,7 +41,7 @@ function useApproveTaxOffice(): [ApprovalState, ApprovalState, () => Promise<voi
         : ApprovalState.NOT_APPROVED
       : ApprovalState.APPROVED;
     // amountToApprove will be defined if currentAllowance is
-  }, [currentAllowance0, pendingApproval0, helioFinance]);
+  }, [currentAllowance0, pendingApproval0, respectFinance]);
 
   // check the current approval status
   const approvalState1: ApprovalState = useMemo(() => {
@@ -55,7 +55,7 @@ function useApproveTaxOffice(): [ApprovalState, ApprovalState, () => Promise<voi
         : ApprovalState.NOT_APPROVED
       : ApprovalState.APPROVED;
     // amountToApprove will be defined if currentAllowance is
-  }, [currentAllowance1, pendingApproval1, helioFinance]);
+  }, [currentAllowance1, pendingApproval1, respectFinance]);
 
   const addTransaction = useTransactionAdder();
 

@@ -1,23 +1,23 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useHelioFinance';
-import {TokenStat} from '../helio-finance/types';
+import useRespectFinance from './useRespectFinance';
+import {TokenStat} from '../respect-finance/types';
 import useRefresh from './useRefresh';
 
 const useCashPriceInEstimatedTWAP = () => {
   const [stat, setStat] = useState<TokenStat>();
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
   const {slowRefresh} = useRefresh();
 
   useEffect(() => {
     async function fetchCashPrice() {
       try {
-        setStat(await helioFinance.getHelioStatInEstimatedTWAP());
+        setStat(await respectFinance.getRespectStatInEstimatedTWAP());
       } catch (err) {
         console.error(err);
       }
     }
     fetchCashPrice();
-  }, [setStat, helioFinance, slowRefresh]);
+  }, [setStat, respectFinance, slowRefresh]);
 
   return stat;
 };

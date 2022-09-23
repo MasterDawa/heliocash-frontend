@@ -77,8 +77,8 @@ const TotalPrizesCard = () => {
     getBalance(new BigNumber(contractInfo._total_deposited.toString()))
 
   const largestPrize = poolBalance && getFullDisplayBalance(poolBalance.times('0.01'))
-  const helioEthLpStats = useLpStats('HELIO-ETH-LP');
-  const lpPrice = useMemo(() => (helioEthLpStats ? Number(helioEthLpStats.priceOfOne).toFixed(2) : null), [helioEthLpStats]);
+  const respectEthLpStats = useLpStats('RESPECT-ETH-LP');
+  const lpPrice = useMemo(() => (respectEthLpStats ? Number(respectEthLpStats.priceOfOne).toFixed(2) : null), [respectEthLpStats]);
 
   // const largestDepositor = useLargestDayDepositor()
   // const largestDeposit = getFullDisplayBalance(useLargestDeposit())
@@ -93,7 +93,7 @@ const TotalPrizesCard = () => {
               <Text fontSize="14px" color="#7e48aa" bold>
                 Pool Balance
               </Text>
-              <Heading size="lg"><CardValue value={poolBalanceFormat} fontSize="24px" decimals={2} bold> HELIO-ETH LP</CardValue></Heading>
+              <Heading size="lg"><CardValue value={poolBalanceFormat} fontSize="24px" decimals={2} bold> RESPECT-ETH LP</CardValue></Heading>
               <CardValue value={poolBalanceFormat * +lpPrice} fontSize="14px" decimals={2} bold={false} color="rgb(189,189,189)" prefix="~$" />
             </PrizeCountWrapper>
           </Left>

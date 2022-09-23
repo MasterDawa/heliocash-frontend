@@ -103,7 +103,7 @@ const HowItWorks = () => {
             How It Works
           </StyledHeading>
           <StyledText>
-            Deposit HELIO-ETH LP for burst rewards, instant rewards, daily largest prize, and entry into the daily lottery!
+            Deposit RESPECT-ETH LP for burst rewards, instant rewards, daily largest prize, and entry into the daily lottery!
           </StyledText>
           <StyledText>
             💰 DAILY LARGEST DEPOSITOR 💰
@@ -132,7 +132,7 @@ const HowItWorks = () => {
       <Text color='rgb(189,189,189)' fontSize="11px" style={{ marginLeft: '5rem', marginRight: '5rem', marginTop: '18px' }}>
         Distribution: 90% reward pool, 6% all depositors (based on total deposits), 3% referrer, 1% Treasury.
       </Text>
-      <StyledLink href="https://helio.cash/detonator_whitepaper.pdf" marginTop="8px">Read more</StyledLink>
+      <StyledLink href="https://respect.finance/detonator_whitepaper.pdf" marginTop="8px">Read more</StyledLink>
     </LayoutWrapper>
   )
 }

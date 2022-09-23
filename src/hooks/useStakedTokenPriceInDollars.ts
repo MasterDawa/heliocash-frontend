@@ -1,18 +1,18 @@
 import {useCallback, useEffect, useState} from 'react';
 
-import useHelioFinance from './useHelioFinance';
+import userespectFinance from './useRespectFinance';
 import config from '../config';
-import ERC20 from '../helio-finance/ERC20';
+import ERC20 from '../respect-finance/ERC20';
 
 const useStakedTokenPriceInDollars = (stakedTokenName: string, stakedToken: ERC20) => {
   const [stakedTokenPriceInDollars, setStakedTokenPriceInDollars] = useState('0');
-  const helioFinance = useHelioFinance();
-  const isUnlocked = helioFinance?.isUnlocked;
+  const respectFinance = useRespectFinance();
+  const isUnlocked = respectFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
-    const balance = await helioFinance.getDepositTokenPriceInDollars(stakedTokenName, stakedToken);
+    const balance = await respectFinance.getDepositTokenPriceInDollars(stakedTokenName, stakedToken);
     setStakedTokenPriceInDollars(balance);
-  }, [stakedToken, stakedTokenName, helioFinance]);
+  }, [stakedToken, stakedTokenName, respectFinance]);
 
   useEffect(() => {
     if (isUnlocked) {
@@ -21,7 +21,7 @@ const useStakedTokenPriceInDollars = (stakedTokenName: string, stakedToken: ERC2
       const refreshStakedTokenPriceInDollars = setInterval(fetchBalance, config.refreshInterval);
       return () => clearInterval(refreshStakedTokenPriceInDollars);
     }
-  }, [isUnlocked, setStakedTokenPriceInDollars, helioFinance, fetchBalance]);
+  }, [isUnlocked, setStakedTokenPriceInDollars, respectFinance, fetchBalance]);
 
   return stakedTokenPriceInDollars;
 };

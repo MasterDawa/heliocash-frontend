@@ -1,23 +1,23 @@
 import { useEffect, useState, useMemo } from 'react';
 
 import {BigNumber} from 'ethers';
-import useHelioFinance from './useHelioFinance';
-import {ContractName} from '../helio-finance';
+import useRespectFinance from './useRespectFinance';
+import {ContractName} from '../respect-finance';
 
 const useClaimedBalance = (poolName: ContractName, sectionInUI: Number, account: string) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const helioFinance = useHelioFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const res = await helioFinance.claimedBalanceNode(poolName, account) 
+      const res = await respectFinance.claimedBalanceNode(poolName, account) 
       setBalance(res)
     }
 
-    if (account && sectionInUI === 3 && helioFinance && poolName) {
+    if (account && sectionInUI === 3 && respectFinance && poolName) {
       fetchBalance();
     }
-  }, [account, poolName, setBalance, helioFinance, sectionInUI]);
+  }, [account, poolName, setBalance, respectFinance, sectionInUI]);
 
   return balance;
 };
