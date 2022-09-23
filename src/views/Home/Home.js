@@ -260,7 +260,7 @@ const Home = () => {
               </Button> 
               <Button
                 target="_blank"
-                href={buyRespectAddress}
+                href={buyrespectAddress}
                 style={{ margin: '4px' }}
                 className={'shinyButtonSecondary ' + classes.button}
               >
