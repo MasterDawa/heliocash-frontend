@@ -1,12 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Context from './context';
-import useHelioFinance from '../../hooks/useRespectFinance';
+import useRespectFinance from '../../hooks/useRespectFinance';
 import {Bank} from '../../respect-finance';
 import config, {bankDefinitions} from '../../config';
 
 const Banks: React.FC = ({children}) => {
   const [banks, setBanks] = useState<Bank[]>([]);
-  const helioFinance = useRespectFinance();
+  const respectFinance = useRespectFinance();
   const isUnlocked = respectFinance?.isUnlocked;
 
   const fetchPools = useCallback(async () => {
@@ -21,7 +21,7 @@ const Banks: React.FC = ({children}) => {
           bankInfo.contract,
           bankInfo.poolId,
           bankInfo.sectionInUI,
-          helioFinance.myAccount,
+          respectFinance.myAccount,
         );
         if (balance.lte(0)) {
           continue;
@@ -31,7 +31,7 @@ const Banks: React.FC = ({children}) => {
         ...bankInfo,
         address: config.deployments[bankInfo.contract].address,
         depositToken: respectFinance.externalTokens[bankInfo.depositTokenName],
-        earnToken: bankInfo.earnTokenName === 'HELIO' ? respectFinance.RESPECT : respect.Finance.RSHARE,
+        earnToken: bankInfo.earnTokenName === 'RESPECT' ? respectFinance.RESPECT : respectFinance.RSHARE,
       });
     }
     banks.sort((a, b) => (a.sort > b.sort ? 1 : -1));
