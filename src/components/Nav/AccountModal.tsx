@@ -65,7 +65,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           <StyledBalanceWrapper style={{ paddingBottom: '15px' }}>
             <TokenSymbol symbol="RESPECT-ETH-LP" />
             <StyledBalance>
-              <StyledValue>{displayRESPECTLpBalance}</StyledValue>
+              <StyledValue>{displayRespectLpBalance}</StyledValue>
               <Label text="RESPECT-ETH-LP" color="#7e48aa" />
             </StyledBalance>
           </StyledBalanceWrapper>
