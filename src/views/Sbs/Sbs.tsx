@@ -60,7 +60,7 @@ const Sbs: React.FC = () => {
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setBbondAmount(e.currentTarget.value);
-    const updateRShareAmount = await recpectFinance.estimateAmountOfRShare(e.currentTarget.value);
+    const updateRShareAmount = await respectFinance.estimateAmountOfRShare(e.currentTarget.value);
     setRshareAmount(updateRShareAmount);
   };
 
