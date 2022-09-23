@@ -38,7 +38,7 @@ const Stake: React.FC = () => {
   const stakedBalance = useStakedBalanceOnBoardroom();
   const {from, to} = useUnstakeTimerBoardroom();
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('RSHARE', respectFinance.RShare);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('RSHARE', respectFinance.RSHARE);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars
