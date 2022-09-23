@@ -22,4 +22,4 @@ const useRespectStats = () => {
   return stat;
 };
 
-export default userespectStats;
+export default useRespectStats;
