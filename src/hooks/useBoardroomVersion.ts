@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react';
-import useRespectFinance' from './useRespectFinance';
+import useRespectFinance from './useRespectFinance';
 import useStakedBalanceOnBoardroom from './useStakedBalanceOnBoardroom';
 
 const useBoardroomVersion = () => {
