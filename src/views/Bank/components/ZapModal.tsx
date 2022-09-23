@@ -12,7 +12,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 import Label from '../../../components/Label';
 import useLpStats from '../../../hooks/useLpStats';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import useHelioFinance from '../../../hooks/useRespectFinance';
+import useRespectFinance from '../../../hooks/useRespectFinance';
 import { useWallet } from 'use-wallet';
 import useApproveZapper, { ApprovalState } from '../../../hooks/useApproveZapper';
 import { RESPECT_TICKER, RSHARE_TICKER, MATIC_TICKER, ETH_TICKER } from '../../../utils/constants';
@@ -27,7 +27,7 @@ interface ZapProps extends ModalProps {
 }
 
 const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', decimals = 18, showEstimates = false }) => {
-  const helioFinance = useRespectFinance();
+  const respectFinance = useRespectFinance();
   const { balance } = useWallet();
   const ftmBalance = (Number(balance) / 1e18).toFixed(4).toString();
   const respectBalance = useTokenBalance(respectFinance.RESPECT);
@@ -43,7 +43,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const tShareFtmLpStats = useLpStats('RSHARE-MATIC-LP');
   const RESPECTLPStats = useMemo(() => (respectFtmLpStats ? respectFtmLpStats : null), [respectFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
-  const ftmAmountPerLP = tokenName.startsWith(RESPECT_TICKER) ? respectLPStats?.ftmAmount : bshareLPStats?.ftmAmount;
+  const ftmAmountPerLP = tokenName.startsWith(RESPECT_TICKER) ? RESPECTLPStats?.ftmAmount : bshareLPStats?.ftmAmount;
   /**
    * Checks if a value is a valid number or not
    * @param n is the value to be evaluated for a number
