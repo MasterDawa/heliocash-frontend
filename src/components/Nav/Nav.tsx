@@ -20,7 +20,7 @@ import {
 import ListItemLink from '../ListItemLink';
 import useRespectStats from '../../hooks/useRespectStats';
 import useEthStats from '../../hooks/useEthStats';
-import useShareStats from '../../hooks/usehRhareStats';
+import useShareStats from '../../hooks/userShareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
