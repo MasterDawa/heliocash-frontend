@@ -240,7 +240,7 @@ export class RespectFinance {
     const expectedPrice = await Oracle.twap(this.RESPECT.address, ethers.utils.parseEther('4000'));
 
     const supply = await this.RESPECT.totalSupply();
-    const respectRewardPoolSupply = await this.RSPECT.balanceOf(RespectRewardPool.address);
+    const respectRewardPoolSupply = await this.RESPECT.balanceOf(RespectRewardPool.address);
     const respectCirculatingSupply = supply.sub(respectRewardPoolSupply);
     return {
       tokenInETH: getDisplayBalance(expectedPrice),
