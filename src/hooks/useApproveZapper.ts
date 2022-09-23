@@ -3,8 +3,8 @@ import {useCallback, useMemo} from 'react';
 import {useHasPendingApproval, useTransactionAdder} from '../state/transactions/hooks';
 import useAllowance from './useAllowance';
 import ERC20 from '../respect-finance/ERC20';
-import {MATIC_TICKER, HELIO_TICKER, HSHARE_TICKER, ETH_TICKER, ZAPPER_ROUTER_ADDR} from '../utils/constants';
-import useHelioFinance from './useRespectFinance';
+import {MATIC_TICKER, RESPECT_TICKER, RSHARE_TICKER, ETH_TICKER, ZAPPER_ROUTER_ADDR} from '../utils/constants';
+import useRespectFinance from './useRespectFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;
 const APPROVE_BASE_AMOUNT = BigNumber.from('1000000000000000000000000');

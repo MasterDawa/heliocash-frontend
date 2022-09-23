@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from '../useRespectFinance';
+import useRespectFinance from '../useRespectFinance';
 import {AllocationTime} from '../../respect-finance/types';
 
 const useUnstakeTimerBoardroom = () => {

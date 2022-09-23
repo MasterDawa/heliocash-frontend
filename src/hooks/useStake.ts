@@ -6,7 +6,7 @@ import {parseUnits} from 'ethers/lib/utils';
 import { BigNumber } from 'ethers';
 
 const useStake = (bank: Bank) => {
-  const respectFinance = userespectFinance();
+  const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleStake = useCallback(

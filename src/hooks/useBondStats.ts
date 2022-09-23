@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from './useRespectFinance';
+import useRespectFinance from './useRespectFinance';
 import {TokenStat} from '../respect-finance/types';
 import useRefresh from './useRefresh';
 

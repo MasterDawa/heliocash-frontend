@@ -13,8 +13,8 @@ import useHarvest from '../../../hooks/useHarvest';
 import { getDisplayBalance } from '../../../utils/formatBalance';
 import TokenSymbol from '../../../components/TokenSymbol';
 import { Bank } from '../../../respect-finance';
-import useHelioStats from '../../../hooks/useRespectStats';
-import useShareStats from '../../../hooks/usehRhareStats';
+import useRespectStats from '../../../hooks/useRespectStats';
+import useShareStats from '../../../hooks/userShareStats';
 import useRedeem from '../../../hooks/useRedeem';
 
 interface HarvestProps {
@@ -24,7 +24,7 @@ interface HarvestProps {
 const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const earnings = useEarnings(bank.contract, bank.earnTokenName, bank.poolId);
   const { onReward } = useHarvest(bank);
-  const helioStats = useHelioStats();
+  const respectStats = useRespectStats();
   const tShareStats = useShareStats();
 
   const tokenName = bank.earnTokenName === 'RSHARE' ? 'RSHARE' : 'RESPECT';

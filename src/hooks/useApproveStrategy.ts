@@ -20,16 +20,16 @@ export enum ApprovalState {
 function useApproveStrategy(): [ApprovalState, () => Promise<void>] {
   const respectFinance = useRespectFinance();
   const { RShareRewardPool, Strategy, Boardroom } = respectFinance.contracts;
-  const bankHelioLP = useBank('RespectEthRShareRewardPool');
-  const bankHshareLP = useBank('RShareMaticRShareRewardPool');
+  const bankRespectLP = useBank('RespectEthRShareRewardPool');
+  const bankRshareLP = useBank('RShareMaticRShareRewardPool');
   const [approveStatusStrategy, approveStrategy] = useApprove(respectFinance.RESPECT, Strategy.address);
   const [approveStatusStrategy2, approveStrategy2] = useApprove(respectFinance.RSHARE, Strategy.address);
   const [approveStatusBoardroom, approveBoardroom] = useApprove(respectFinance.RSHARE, Boardroom.address);
-  const [approveStatusHelioPair, approveHelioPair] = useApprove(bankRespectLP.depositToken, RShareRewardPool.address);
-  const [approveStatusHsharePair, approveHsharePair] = useApprove(bankRshareLP.depositToken, RShareRewardPool.address);
+  const [approveStatusRespectPair, approveRespectPair] = useApprove(bankRespectLP.depositToken, RShareRewardPool.address);
+  const [approveStatusRsharePair, approveRsharePair] = useApprove(bankRshareLP.depositToken, RShareRewardPool.address);
 
   const approvalState: ApprovalState = useMemo(() => {
-    return approveStatusStrategy === ApprovalState.APPROVED && approveStatusStrategy2 === ApprovalState.APPROVED && approveStatusBoardroom === ApprovalState.APPROVED && approveStatusHelioPair === ApprovalState.APPROVED && approveStatusHsharePair === ApprovalState.APPROVED
+    return approveStatusStrategy === ApprovalState.APPROVED && approveStatusStrategy2 === ApprovalState.APPROVED && approveStatusBoardroom === ApprovalState.APPROVED && approveStatusRespectPair === ApprovalState.APPROVED && approveStatusRsharePair === ApprovalState.APPROVED
      ? ApprovalState.APPROVED
      : ApprovalState.NOT_APPROVED;
   }, [approveStatusStrategy, approveStatusStrategy2, approveStatusBoardroom, approveStatusRespectPair, approveStatusRsharePair]);
@@ -39,8 +39,8 @@ function useApproveStrategy(): [ApprovalState, () => Promise<void>] {
       approveStatusStrategy !== ApprovalState.NOT_APPROVED &&
       approveStatusStrategy2 !== ApprovalState.NOT_APPROVED &&
       approveStatusBoardroom !== ApprovalState.NOT_APPROVED &&
-      approveStatusHelioPair !== ApprovalState.NOT_APPROVED &&
-      approveStatusHsharePair !== ApprovalState.NOT_APPROVED
+      approveStatusRespectPair !== ApprovalState.NOT_APPROVED &&
+      approveStatusRsharePair !== ApprovalState.NOT_APPROVED
     ) {
       console.error('approve was called unnecessarily');
       return;

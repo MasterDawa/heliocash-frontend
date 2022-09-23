@@ -17,7 +17,7 @@ import moment from 'moment';
 import { Interface, parseUnits } from 'ethers/lib/utils';
 import { MATIC_TICKER, QUICK_ROUTER_ADDR, RESPECT_TICKER } from '../utils/constants';
 /**
- * An API module of Helio Cash contracts.
+ * An API module of Respect Finance contracts.
  * All contract-interacting domain logic should be defined in here.
  */
 export class RespectFinance {
@@ -100,7 +100,7 @@ export class RespectFinance {
   //=========================IN HOME PAGE==============================
   //===================================================================
 
-  async getHelioStat(): Promise<TokenStat> {
+  async getRespectStat(): Promise<TokenStat> {
     const { RespectRewardPool, RespectGenesisRewardPool, Treasury } = this.contracts;
     const [supply, circSupply, priceInETH, priceOfOneETH] = await Promise.all([
       this.RESPECT.totalSupply(),
@@ -112,7 +112,7 @@ export class RespectFinance {
     // const priceInMATIC = await this.getTokenPriceFromQuickswap(this.RESPECT);
     // const priceOfOneMATIC = await this.getWMATICPriceFromQuickswap();
     // const priceInDollars = await this.getTokenPriceFromQuickswapRESPECTUSD();
-    const priceOfHelioInDollars = ((Number(priceInETH) * Number(priceOfOneETH)) / 4000).toFixed(2);
+    const priceOfRespectInDollars = ((Number(priceInETH) * Number(priceOfOneETH)) / 4000).toFixed(2);
     //console.log('priceOfRespectInDollars', priceOfRespectInDollars);
 
     return {
@@ -186,7 +186,7 @@ export class RespectFinance {
     };
   }
   /**
-   * Use this method to get price for Helio
+   * Use this method to get price for Respect
    * @returns TokenStat for RBOND
    * priceInMATIC
    * priceInDollars
@@ -198,7 +198,7 @@ export class RespectFinance {
     const respectStat = await this.getRespectStat();
     const bondRespectRatioBN = await Treasury.getBondPremiumRate();
     const modifier = bondRespectRatioBN / 1e18 > 1 ? bondRespectRatioBN / 1e18 : 1;
-    const bondPriceInETH = (Number(helioStat.tokenInETH) * modifier).toFixed(2);
+    const bondPriceInETH = (Number(respectStat.tokenInETH) * modifier).toFixed(2);
     const priceOfRBondInDollars = (Number(respectStat.priceInDollars) * modifier).toFixed(2);
     const supply = await this.RBOND.displayedTotalSupply();
     return {
@@ -240,7 +240,7 @@ export class RespectFinance {
     const expectedPrice = await Oracle.twap(this.RESPECT.address, ethers.utils.parseEther('4000'));
 
     const supply = await this.RESPECT.totalSupply();
-    const respectRewardPoolSupply = await this.RSPECT.balanceOf(RespectRewardPool.address);
+    const respectRewardPoolSupply = await this.RESPECT.balanceOf(RespectRewardPool.address);
     const respectCirculatingSupply = supply.sub(respectRewardPoolSupply);
     return {
       tokenInETH: getDisplayBalance(expectedPrice),
@@ -252,7 +252,7 @@ export class RespectFinance {
 
   async getRespectPriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
-    return Treasury.getHelioUpdatedPrice();
+    return Treasury.getRespectUpdatedPrice();
   }
 
   // async getRespectPegTWAP(): Promise<any> {
@@ -424,7 +424,7 @@ export class RespectFinance {
     } else {
       if (tokenName === 'RESPECT-ETH-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.RESPECT, true);
-      } else if (tokenName === 'RESPECT-HSHARE-LP') {
+      } else if (tokenName === 'RESPECT-RSHARE-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.RESPECT, true);
       } else if (tokenName === 'RSHARE-MATIC-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.RSHARE, false);
@@ -432,9 +432,9 @@ export class RespectFinance {
         tokenPrice = await this.getApeLPTokenPrice(token, this.RSHARE, false);
       } else if (tokenName === 'RESPECT-ETH-APELP') {
         tokenPrice = await this.getApeLPTokenPrice(token, this.RESPECT, true);
-      } else if (tokenName === 'HELIO') {
-        const helioStat = this.getHelioStat();
-        tokenPrice = (await helioStat).priceInDollars;
+      } else if (tokenName === 'RESPECT') {
+        const respectStat = this.getRespectStat();
+        tokenPrice = (await respectStat).priceInDollars;
       }
       else {
         const [priceToken, priceMATIC] = await Promise.all([
@@ -521,7 +521,7 @@ export class RespectFinance {
    * Reference https://github.com/DefiDebauchery/discordpricebot/blob/4da3cdb57016df108ad2d0bb0c91cd8dd5f9d834/pricebot/pricebot.py#L150
    * @param lpToken the token under calculation
    * @param token the token pair used as reference (the other one would be MATIC in most cases)
-   * @param isHelio sanity check for usage of helio token or tShare
+   * @param isRespect sanity check for usage of respect token or tShare
    * @returns price of the LP token
    */
   async getLPTokenPrice(lpToken: ERC20, token: ERC20, isRespect: boolean): Promise<string> {
@@ -965,14 +965,14 @@ export class RespectFinance {
     if (ethereum && ethereum.networkVersion === config.chainId.toString()) {
       let asset;
       let assetUrl;
-      if (assetName === 'HELIO') {
+      if (assetName === 'RESPECT') {
         asset = this.RESPECT;
         assetUrl = 'https://Respect.Finance/assets/img/respect-logo.png';
-      } else if (assetName === 'HSHARE') {
-        asset = this.HSHARE;
+      } else if (assetName === 'RSHARE') {
+        asset = this.RSHARE;
         assetUrl = 'https://Respect.Finance/assets/img/rshares-final2.png';
-      } else if (assetName === 'HBOND') {
-        asset = this.HBOND;
+      } else if (assetName === 'RBOND') {
+        asset = this.RBOND;
         assetUrl = 'https://Respect.Finance/assets/img/respect-bond-final.png';
       }
       await ethereum.request({
@@ -991,16 +991,16 @@ export class RespectFinance {
     return true;
   }
 
-  async provideHelioEthLP(ethAmount: BigNumber, helioAmount: BigNumber): Promise<TransactionResponse> {
+  async provideRespectEthLP(ethAmount: BigNumber, respectAmount: BigNumber): Promise<TransactionResponse> {
     const { TaxOfficeV2 } = this.contracts;
     // let overrides = {
     //   value: parseUnits(ftmAmount, 18),
     // };
     return await TaxOfficeV2.addLiquidityTaxFree(
       this.ETH.address,
-      helioAmount,
+      respectAmount,
       ethAmount,
-      helioAmount.mul(980).div(1000),
+      respectAmount.mul(980).div(1000),
       ethAmount.mul(980).div(1000),
       // overrides,
     );

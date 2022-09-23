@@ -27,11 +27,8 @@ import useRespectFinance from '../../hooks/useRespectFinance';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 
 import RespectImage from '../../assets/img/respect_animated.gif';
-import RugDocImage from '../../assets/img/rugdoc-badge.png';
-import ZrxGuardImage from '../../assets/img/0x-guard.png';
 
 import HomeImage from '../../assets/img/background.jpg';
-import AcademyBanner from '../../assets/img/academy-button.png';
 import useStrategy from '../../hooks/useStrategy';
 import useApproveStrategy, { ApprovalState } from '../../hooks/useApproveStrategy';
 const BackgroundImage = createGlobalStyle`
@@ -129,7 +126,11 @@ const Home = () => {
     RShare.address;
 
   const respectLPStats = useMemo(() => (respectFtmLpStats ? respectFtmLpStats : null), [respectFtmLpStats]);
+<<<<<<< HEAD
   const bshareLPStats = useMemo(() => (RShareFtmLpStats ? RShareFtmLpStats : null), [RShareFtmLpStats]);
+=======
+  const bshareLPStats = useMemo(() => (rShareFtmLpStats ? rShareFtmLpStats : null), [rShareFtmLpStats]);
+>>>>>>> df7a912dd9056e923186bce7203c7fd13ff1ae82
   const respectPriceInDollars = useMemo(
     () => (respectStats ? Number(respectStats.priceInDollars).toFixed(2) : null),
     [respectStats],
@@ -260,7 +261,11 @@ const Home = () => {
               </Button> 
               <Button
                 target="_blank"
+<<<<<<< HEAD
                 href={buyRespectAddress}
+=======
+                href={buyrespectAddress}
+>>>>>>> df7a912dd9056e923186bce7203c7fd13ff1ae82
                 style={{ margin: '4px' }}
                 className={'shinyButtonSecondary ' + classes.button}
               >

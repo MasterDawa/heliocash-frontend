@@ -4,7 +4,7 @@ import RespectFinance from '../../respect-finance';
 import config from '../../config';
 
 export interface RespectFinanceContext {
-  helioFinance?: RespectFinance;
+  respectFinance?: RespectFinance;
 }
 
 export const Context = createContext<RespectFinanceContext>({respectFinance: null});
@@ -15,7 +15,7 @@ export const RespectFinanceProvider: React.FC = ({children}) => {
 
   useEffect(() => {
     if (!respectFinance) {
-      const helio = new RespectFinance(config);
+      const respect = new RespectFinance(config);
       if (account) {
         // wallet was unlocked at initialization
         respect.unlockWallet(ethereum, account);

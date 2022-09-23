@@ -11,13 +11,13 @@ const useLpStatsETH = (lpTicker: string) => {
   useEffect(() => {
     async function fetchLpPrice() {
       try {
-        setStat(await respectFinance.getLPStatETH(lpTicker));
+        setStat(await RespectFinance.getLPStatETH(lpTicker));
       } catch (err) {
         console.error(err);
       }
     }
     fetchLpPrice();
-  }, [setStat, respectFinance, slowRefresh, lpTicker]);
+  }, [setStat, RespectFinance, slowRefresh, lpTicker]);
 
   return stat;
 };

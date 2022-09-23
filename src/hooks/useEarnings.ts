@@ -12,7 +12,7 @@ const useEarnings = (poolName: ContractName, earnTokenName: String, poolId: Numb
   const fetchBalance = useCallback(async () => {
     const balance = await respectFinance.earnedFromBank(poolName, earnTokenName, poolId, respectFinance.myAccount);
     setBalance(balance);
-  }, [poolName, earnTokenName, poolId, helioFinance]);
+  }, [poolName, earnTokenName, poolId, respectFinance]);
 
   useEffect(() => {
     if (isUnlocked) {
