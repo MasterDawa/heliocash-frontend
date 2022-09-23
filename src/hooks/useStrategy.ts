@@ -7,7 +7,7 @@ const useStrategy = () => {
   const respectFinance = useRespectFinance();
   const ZERO = BigNumber.from('0');
 
-  const handleStrategy = useCallback(async (percentHelioLP: number = 80, stakeBoardroom: number = 20) => {
+  const handleStrategy = useCallback(async (percentRespectLP: number = 80, stakeBoardroom: number = 20) => {
     if (!respectFinance.myAccount) return;
     const harvestTxs = [];
 

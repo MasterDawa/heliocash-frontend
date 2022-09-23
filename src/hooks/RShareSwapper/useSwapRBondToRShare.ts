@@ -8,7 +8,7 @@ const useSwapRBondToRShare = () => {
   const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
-  const handleSwapHShare = useCallback(
+  const handleSwapRShare = useCallback(
     (bbondAmount: string) => {
       const bbondAmountBn = parseUnits(bbondAmount, 18);
       handleTransactionReceipt(respectFinance.swapRBondToRShare(bbondAmountBn), `Swap ${bbondAmount} RBond to RShare`);

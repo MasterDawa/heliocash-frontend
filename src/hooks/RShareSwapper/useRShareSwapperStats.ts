@@ -4,7 +4,7 @@ import {RShareSwapperStat} from '../../respect-finance/types';
 import useRefresh from '../useRefresh';
 
 const useRShareSwapperStats = (account: string) => {
-  const [stat, setStat] = useState<RSwapperStat>();
+  const [stat, setStat] = useState<RShareSwapperStat>();
   const {fastRefresh /*, slowRefresh*/} = useRefresh();
   const respectFinance = useRespectFinance();
 
@@ -24,4 +24,4 @@ const useRShareSwapperStats = (account: string) => {
   return stat;
 };
 
-export default useRSwapperStats;
+export default useRShareSwapperStats;

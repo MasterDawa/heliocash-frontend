@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import useRespectFinance from '../useRespectinance';
+import useRespectFinance from '../useRespectFinance';
 import useRefresh from '../useRefresh';
 
 const useWithdrawCheck = () => {

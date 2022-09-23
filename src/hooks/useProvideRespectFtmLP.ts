@@ -9,7 +9,7 @@ const useProviderespectEthLP = () => {
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleProvideRespectEthLP = useCallback(
-    (ftmAmount: string, helioAmount: string) => {
+    (ftmAmount: string, respectAmount: string) => {
       const respectAmountBn = parseUnits(respectAmount);
       const ftmAmountBn = parseUnits(ftmAmount);
       handleTransactionReceipt(
@@ -22,4 +22,4 @@ const useProviderespectEthLP = () => {
   return {onProviderespectEthLP: handleProvideRespectEthLP};
 };
 
-export default useProvideRespectEthLP;
+export default useProviderespectEthLP;

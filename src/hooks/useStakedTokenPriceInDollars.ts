@@ -6,7 +6,7 @@ import ERC20 from '../respect-finance/ERC20';
 
 const useStakedTokenPriceInDollars = (stakedTokenName: string, stakedToken: ERC20) => {
   const [stakedTokenPriceInDollars, setStakedTokenPriceInDollars] = useState('0');
-  const respectFinance = useRespectFinance();
+  const respectFinance = userespectFinance();
   const isUnlocked = respectFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {

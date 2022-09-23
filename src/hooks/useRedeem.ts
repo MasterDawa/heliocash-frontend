@@ -4,7 +4,7 @@ import {Bank} from '../respect-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useRedeem = (bank: Bank) => {
-  const respectFinance = useRespectFinance();
+  const respectFinance = userespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleRedeem = useCallback(() => {

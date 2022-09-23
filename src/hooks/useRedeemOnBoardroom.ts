@@ -3,7 +3,7 @@ import userespectFinance from './useRespectFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useRedeemOnBoardroom = ( description?: string) => {
-  const respectFinance = useRespectFinance();
+  const respectFinance = userespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleRedeem = useCallback(() => {
