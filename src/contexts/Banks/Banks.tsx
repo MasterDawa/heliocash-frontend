@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Context from './context';
-import useRespectFinance from '../../hooks/useRespectFinance';
+import useRespectfinance from '../../hooks/useRespectFinance';
 import {Bank} from '../../respect-finance';
 import config, {bankDefinitions} from '../../config';
 
