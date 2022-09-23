@@ -1,16 +1,16 @@
 import React from 'react';
 
 //Graveyard ecosystem logos
-import helioLogo from '../../assets/img/helio-logo.png';
-import tShareLogo from '../../assets/img/hshares-final2.png';
-import helioLogoPNG from '../../assets/img/helio-logo.png';
-import tShareLogoPNG from '../../assets/img/hshares-final2.png';
-import tBondLogo from '../../assets/img/helio-bond-final.png';
-import helioNodePNG from '../../assets/img/detonator.png';
+import respectLogo from '../../assets/img/respect-logo.png';
+import tShareLogo from '../../assets/img/rshares-final2.png';
+import respectLogoPNG from '../../assets/img/respect-logo.png';
+import tShareLogoPNG from '../../assets/img/rshares-final2.png';
+import tBondLogo from '../../assets/img/respect-bond-final.png';
+import respectNodePNG from '../../assets/img/detonator.png';
 
-import helioFtmLpLogo from '../../assets/img/HELIO-ETH-LP.png';
-import helioHshareLpLogo from '../../assets/img/helio-hshares-lp.png';
-import bshareFtmLpLogo from '../../assets/img/hshares-matic-lp.png';
+import respectFtmLpLogo from '../../assets/img/RESPECT-ETH-LP.png';
+import respectRshareLpLogo from '../../assets/img/respect-rshares-lp.png';
+import bshareFtmLpLogo from '../../assets/img/rshares-matic-lp.png';
 
 import maticLogo from '../../assets/img/matic.png';
 import btcLogo from '../../assets/img/eth-logo.png';
@@ -18,11 +18,11 @@ import btcLogo from '../../assets/img/eth-logo.png';
 const logosBySymbol: {[title: string]: string} = {
   //Real tokens
   //=====================
-  HELIO: helioLogo,
-  HELIOPNG: helioLogoPNG,
-  HSHAREPNG: tShareLogoPNG,
-  HSHARE: tShareLogo,
-  HBOND: tBondLogo,
+  RESPECT: respectLogo,
+  RESPECTPNG: respectLogoPNG,
+  RSHAREPNG: tShareLogoPNG,
+  RSHARE: tShareLogo,
+  RBOND: tBondLogo,
   WMATIC: maticLogo,
   BOO: maticLogo,
   QUICK: maticLogo,
@@ -30,13 +30,13 @@ const logosBySymbol: {[title: string]: string} = {
   SETH: btcLogo,
   ETH: btcLogo,
   SVL: maticLogo,
-  HELIONODE: helioNodePNG,
-  'ETH-MATIC-LP': helioFtmLpLogo,
-  'HELIO-ETH-LP': helioFtmLpLogo,
-  'HELIO-HSHARE-LP': helioHshareLpLogo,
-  'HSHARE-MATIC-LP': bshareFtmLpLogo,
-  'HSHARE-MATIC-APELP': bshareFtmLpLogo,
-  'HELIO-ETH-APELP': helioFtmLpLogo,
+  RESPECTNODE: respectNodePNG,
+  'ETH-MATIC-LP': respectFtmLpLogo,
+  'RESPECT-ETH-LP': respectFtmLpLogo,
+  'RESPECT-RSHARE-LP': respectRshareLpLogo,
+  'RSHARE-MATIC-LP': bshareFtmLpLogo,
+  'RSHARE-MATIC-APELP': bshareFtmLpLogo,
+  'RESPECT-ETH-APELP': respectFtmLpLogo,
 };
 
 type LogoProps = {
