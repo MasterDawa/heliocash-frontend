@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from '../useRespectFinance';
+import useRespectFinance from '../useRespectFinance';
 import {AllocationTime} from '../../respect-finance/types';
 
 const useClaimRewardTimerBoardroom = () => {
@@ -7,7 +7,7 @@ const useClaimRewardTimerBoardroom = () => {
     from: new Date(),
     to: new Date(),
   });
-  const helioFinance = useRespectFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     if (respectFinance) {

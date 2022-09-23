@@ -18,7 +18,7 @@ export enum ApprovalState {
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 function useApproveTaxOffice(): [ApprovalState, ApprovalState, () => Promise<void>] {
-  const helioFinance = useRespectFinance();
+  const respectFinance = useRespectFinance();
   let token0: ERC20 = respectFinance.RESPECT;
   let token1: ERC20 = respectFinance.ETH;
   // if (zappingToken === MATIC_TICKER) token = respectFinance.MATIC;
@@ -32,7 +32,7 @@ function useApproveTaxOffice(): [ApprovalState, ApprovalState, () => Promise<voi
   // check the current approval status
   const approvalState0: ApprovalState = useMemo(() => {
     // we might not have enough data to know whether or not we need to approve
-    // if (token === helioFinance.MATIC) return ApprovalState.APPROVED;
+    // if (token === respectFinance.MATIC) return ApprovalState.APPROVED;
     if (!currentAllowance0) return ApprovalState.UNKNOWN;
 
     return currentAllowance0.lt(APPROVE_BASE_AMOUNT)
@@ -46,7 +46,7 @@ function useApproveTaxOffice(): [ApprovalState, ApprovalState, () => Promise<voi
   // check the current approval status
   const approvalState1: ApprovalState = useMemo(() => {
     // we might not have enough data to know whether or not we need to approve
-    // if (token === helioFinance.MATIC) return ApprovalState.APPROVED;
+    // if (token === respectFinance.MATIC) return ApprovalState.APPROVED;
     if (!currentAllowance1) return ApprovalState.UNKNOWN;
 
     return currentAllowance1.lt(APPROVE_BASE_AMOUNT)

@@ -6,7 +6,7 @@ import useRefresh from './useRefresh';
 const useLpStats = (lpTicker: string) => {
   const [stat, setStat] = useState<LPStat>();
   const {slowRefresh} = useRefresh();
-  const respectFinance = useRespectFinance();
+  const respectFinance = userespectFinance();
 
   useEffect(() => {
     async function fetchLpPrice() {

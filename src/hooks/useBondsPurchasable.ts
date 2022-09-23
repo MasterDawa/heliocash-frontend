@@ -4,7 +4,7 @@ import useRespectFinance from './useRespectFinance';
 
 const useBondsPurchasable = () => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const helioFinance = useRespectFinance();
+  const respectFinance = useRespectFinance();
 
   useEffect(() => {
     async function fetchBondsPurchasable() {

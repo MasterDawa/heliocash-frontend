@@ -19,9 +19,9 @@ const useEstimateRShare = (bbondAmount: string) => {
     if (account) {
       estimateAmountOfRShare().catch((err) => console.error(`Failed to get estimateAmountOfHShare: ${err.stack}`));
     }
-  }, [account, estimateAmountOfHShare]);
+  }, [account, estimateAmountOfRShare]);
 
   return estimateAmount;
 };
 
-export default useEstimateHShare;
+export default useEstimateRShare;

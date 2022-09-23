@@ -4,7 +4,7 @@ import useHandleTransactionReceipt from '../useHandleTransactionReceipt';
 // import { BigNumber } from "ethers";
 import {parseUnits} from 'ethers/lib/utils';
 
-const useSwapHBondToHShare = () => {
+const useSwapRBondToRShare = () => {
   const respectFinance = useRespectFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
@@ -15,7 +15,7 @@ const useSwapHBondToHShare = () => {
     },
     [respectFinance, handleTransactionReceipt],
   );
-  return {onSwapHShare: handleSwapHShare};
+  return {onSwapRShare: handleSwapRShare};
 };
 
 export default useSwapRBondToRShare;

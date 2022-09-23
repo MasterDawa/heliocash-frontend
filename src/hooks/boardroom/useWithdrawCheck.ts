@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import useHelioFinance from '../useRespectinance';
+import useRespectFinance from '../useRespectinance';
 import useRefresh from '../useRefresh';
 
 const useWithdrawCheck = () => {
@@ -11,7 +11,7 @@ const useWithdrawCheck = () => {
   useEffect(() => {
     async function canUserWithdraw() {
       try {
-        setCanWithdraw(await helioFinance.canUserUnstakeFromBoardroom());
+        setCanWithdraw(await respectFinance.canUserUnstakeFromBoardroom());
       } catch (err) {
         console.error(err);
       }
