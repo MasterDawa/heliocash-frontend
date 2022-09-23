@@ -59,12 +59,12 @@ const Boardroom = () => {
     const canWithdraw = useWithdrawCheck();
     const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
     const { to } = useTreasuryAllocationTimes();
-    const hsharesActive = Date.now() >= config.boardroomLaunchesAt.getTime();
+    const rsharesActive = Date.now() >= config.boardroomLaunchesAt.getTime();
 
     return ( <
         Page >
         <
-        BackgroundImage / > {!!account ? (!hsharesActive ? < LaunchCountdown deadline = { config.boardroomLaunchesAt }
+        BackgroundImage / > {!!account ? (!rsharesActive ? < LaunchCountdown deadline = { config.boardroomLaunchesAt }
                 description = 'Home'
                 descriptionLink = '/' / >
                 :
@@ -162,7 +162,7 @@ const Boardroom = () => {
                 CardContent align = "center" >
                 <
                 Typography style = {
-                    { textTransform: 'uppercase', color: '#7e48aa' } } > RSHARES Staked < /Typography> <
+                    { textTransform: 'uppercase', color: '#7e48aa' } } > HSHARES Staked < /Typography> <
                 Typography > { getDisplayBalance(totalStaked) } < /Typography> <
                 /CardContent> <
                 /Card> <
