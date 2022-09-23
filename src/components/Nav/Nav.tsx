@@ -20,7 +20,7 @@ import {
 import ListItemLink from '../ListItemLink';
 import useRespectStats from '../../hooks/useRespectStats';
 import useEthStats from '../../hooks/useEthStats';
-import useShareStats from '../../hooks/userShareStats';
+import useShareStats from '../../hooks/usehShareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -106,7 +106,7 @@ const Nav = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const respectStats = userespectStats();
+  const respectStats = useRespectStats();
   const btcStats = useEthStats();
   const maticStats = useMaticStats();
   const shareStats = useShareStats();
@@ -136,7 +136,7 @@ const Nav = () => {
         {matches ? (
           <>
             <Typography variant="h6" color="inherit" noWrap style={{ flexGrow: '0', marginBottom: '-10px', marginLeft: '-10px' }} className={classes.toolbarTitle}>
-              {/* <a className={ classes.brandLink } href="/">respect Cash</a> */}
+              {/* <a className={ classes.brandLink } href="/">Respect Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 <img alt="respect.finance" src={respectLogo} height="80px" />
               </Link>
@@ -149,7 +149,7 @@ const Nav = () => {
                 Farm
               </Link>
               
-              <Link to="/farm/respectMasterNode" className={'navLink ' + classes.link}>
+              <Link to="/farm/RespectMasterNode" className={'navLink ' + classes.link}>
                 Nodes
               </Link>
               <Link to="/boardroom" className={'navLink ' + classes.link}>
@@ -256,7 +256,7 @@ const Nav = () => {
                 </ListItem>
                 <ListItemLink primary="Home" to="/" />
                 <ListItemLink primary="Farm" to="/farm" />
-                <ListItemLink primary="Nodes" to="/farm/respectMasterNode" />
+                <ListItemLink primary="Nodes" to="/farm/RespectMasterNode" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
                 <ListItemLink primary="Bond" to="/bond" />
                 <ListItem button component="a" href="https://respect.finance/#">
@@ -293,7 +293,7 @@ const Nav = () => {
                     <div style={{ height: '45px' }}>{' '}</div>
                     <div>
                       <a
-                        href="https://twitter.com/RespectFinance"
+                        href="https://twitter.com/Respect_Cash"
                         rel="noopener noreferrer"
                         target="_blank"
                         className={classes.link}
