@@ -26,7 +26,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import useHelioFinance from '../../hooks/useHelioFinance';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 
-import HelioImage from '../../assets/img/helio_animated.gif';
+import HelioImage from '../../assets/img/respect_animated.gif';
 import RugDocImage from '../../assets/img/rugdoc-badge.png';
 import ZrxGuardImage from '../../assets/img/0x-guard.png';
 
