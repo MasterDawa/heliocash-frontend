@@ -260,7 +260,7 @@ const Home = () => {
               </Button> 
               <Button
                 target="_blank"
-                href={buyHelioAddress}
+                href={buyRespectAddress}
                 style={{ margin: '4px' }}
                 className={'shinyButtonSecondary ' + classes.button}
               >
@@ -276,7 +276,7 @@ const Home = () => {
               </Button>
               <Button
                 target="_blank"
-                href={buyHShareAddress}
+                href={buyRShareAddress}
                 className={'shinyButtonSecondary ' + classes.button}
                 style={{ margin: '4px' }}
               >
@@ -292,7 +292,7 @@ const Home = () => {
               </Button>
               { <Button
                 target="_blank"
-                href="https://docs.helio.cash/"
+                href="https://docs.respect.finance/"
                 className={'tutorial ' + classes.button}
                 style={{ margin: '10px' }}
               >
@@ -314,7 +314,7 @@ const Home = () => {
               </Box>
               <Button
                 onClick={() => {
-                  helioFinance.watchAssetInMetamask('HELIO');
+                  respectFinance.watchAssetInMetamask('RESPECT');
                 }}
                 style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
               >
@@ -325,17 +325,17 @@ const Home = () => {
               <h2 style={{ marginBottom: '10px' }}>RESPECT</h2>
               4,000 RESPECT (1.0 Peg) =
               <Box>
-                <span style={{ fontSize: '30px', color: 'white' }}>{helioPriceInMATIC ? helioPriceInMATIC : '-.----'} ETH</span>
+                <span style={{ fontSize: '30px', color: 'white' }}>{respectPriceInMATIC ? respectPriceInMATIC : '-.----'} ETH</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
-                  ${helioPriceInDollars ? roundAndFormatNumber(helioPriceInDollars, 2) : '-.--'} / RESPECT
+                  ${respectPriceInDollars ? roundAndFormatNumber(respectPriceInDollars, 2) : '-.--'} / RESPECT
                 </span>
               </Box>
               <span style={{ fontSize: '12px' }}>
-                Market Cap: ${roundAndFormatNumber(helioCirculatingSupply * helioPriceInDollars, 2)} <br />
-                Circulating Supply: {roundAndFormatNumber(helioCirculatingSupply, 2)} <br />
-                Total Supply: {roundAndFormatNumber(helioTotalSupply, 2)}
+                Market Cap: ${roundAndFormatNumber(respectCirculatingSupply * respectPriceInDollars, 2)} <br />
+                Circulating Supply: {roundAndFormatNumber(respectCirculatingSupply, 2)} <br />
+                Total Supply: {roundAndFormatNumber(respectTotalSupply, 2)}
               </span>
             </CardContent>
           </Card>
@@ -347,7 +347,7 @@ const Home = () => {
             <CardContent align="center" style={{ position: 'relative' }}>
               <Button
                 onClick={() => {
-                  helioFinance.watchAssetInMetamask('HSHARE');
+                  respectFinance.watchAssetInMetamask('HSHARE');
                 }}
                 style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
               >
@@ -357,24 +357,24 @@ const Home = () => {
               </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="HSHARE" />
+                  <TokenSymbol symbol="RSHARE" />
                 </CardIcon>
               </Box>
               <h2 style={{ marginBottom: '10px' }}>RSHARE</h2>
               Current Price
               <Box>
                 <span style={{ fontSize: '30px', color: 'white' }}>
-                  {hSharePriceInMATIC ? hSharePriceInMATIC : '-.----'} MATIC
+                  {rSharePriceInMATIC ? rSharePriceInMATIC : '-.----'} MATIC
                 </span>
               </Box>
               <Box>
-                <span style={{ fontSize: '16px' }}>${hSharePriceInDollars ? hSharePriceInDollars : '-.--'} / RSHARE</span>
+                <span style={{ fontSize: '16px' }}>${rSharePriceInDollars ? rSharePriceInDollars : '-.--'} / RSHARE</span>
               </Box>
               <span style={{ fontSize: '12px' }}>
-                Market Cap: ${roundAndFormatNumber((hShareCirculatingSupply * hSharePriceInDollars).toFixed(2), 2)}{' '}
+                Market Cap: ${roundAndFormatNumber((rShareCirculatingSupply * rSharePriceInDollars).toFixed(2), 2)}{' '}
                 <br />
-                Circulating Supply: {roundAndFormatNumber(hShareCirculatingSupply, 2)} <br />
-                Total Supply: {roundAndFormatNumber(hShareTotalSupply, 2)}
+                Circulating Supply: {roundAndFormatNumber(rShareCirculatingSupply, 2)} <br />
+                Total Supply: {roundAndFormatNumber(rShareTotalSupply, 2)}
               </span>
             </CardContent>
           </Card>
@@ -386,7 +386,7 @@ const Home = () => {
             <CardContent align="center" style={{ position: 'relative' }}>
               <Button
                 onClick={() => {
-                  helioFinance.watchAssetInMetamask('HBOND');
+                  respectFinance.watchAssetInMetamask('RBOND');
                 }}
                 style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
               >
@@ -396,7 +396,7 @@ const Home = () => {
               </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="HBOND" />
+                  <TokenSymbol symbol="RBOND" />
                 </CardIcon>
               </Box>
               <h2 style={{ marginBottom: '10px' }}>RBOND</h2>
@@ -422,26 +422,26 @@ const Home = () => {
             <CardContent align="center" style={{ marginBottom: isMobile ? '0' : '5.1rem' }}>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="HELIO-ETH-LP" />
+                  <TokenSymbol symbol="RESPECT-ETH-LP" />
                 </CardIcon>
               </Box>
               <h2>RESPECT-ETH QuickSwap LP</h2>
               <Box mt={2}>
-                <Button onClick={onPresentHelioZap} className="shinyButtonSecondary">
+                <Button onClick={onPresentRespectZap} className="shinyButtonSecondary">
                   Zap In
                 </Button>
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {helioLPStats?.tokenAmount ? helioLPStats?.tokenAmount : '-.--'} RESPECT /{' '}
-                  {helioLPStats?.ftmAmount ? helioLPStats?.ftmAmount : '-.--'} ETH
+                  {respectLPStats?.tokenAmount ? respectLPStats?.tokenAmount : '-.--'} RESPECT /{' '}
+                  {respectLPStats?.ftmAmount ? respectLPStats?.ftmAmount : '-.--'} ETH
                 </span>
               </Box>
-              <Box>${helioLPStats?.priceOfOne ? helioLPStats.priceOfOne : '-.--'}</Box>
+              <Box>${respectLPStats?.priceOfOne ? respectLPStats.priceOfOne : '-.--'}</Box>
               <span style={{ fontSize: '12px' }}>
-                Liquidity: ${helioLPStats?.totalLiquidity ? roundAndFormatNumber(helioLPStats.totalLiquidity, 2) : '-.--'}{' '}
+                Liquidity: ${respectLPStats?.totalLiquidity ? roundAndFormatNumber(respectLPStats.totalLiquidity, 2) : '-.--'}{' '}
                 <br />
-                Total Supply: {helioLPStats?.totalSupply ? roundAndFormatNumber(helioLPStats.totalSupply, 2) : '-.--'}
+                Total Supply: {respectLPStats?.totalSupply ? roundAndFormatNumber(respectLPStats.totalSupply, 2) : '-.--'}
               </span>
             </CardContent>
           </Card>
@@ -450,9 +450,9 @@ const Home = () => {
           <Card>
             <CardContent align="center">
               <Box mt={2}>
-                <TokenSymbol symbol="HELIOPNG" />
+                <TokenSymbol symbol="RESPECTPNG" />
                 <span style={{ fontSize: '38px' }}>{' ♟️ '}</span>
-                <TokenSymbol symbol="HSHARE" />
+                <TokenSymbol symbol="RSHARE" />
               </Box>
               <br />
               <h2>Execute Strategy</h2>
@@ -565,7 +565,7 @@ const Home = () => {
             <CardContent align="center" style={{ marginBottom: isMobile ? '0' : '3.35rem' }}>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="HSHARE-MATIC-LP" />
+                  <TokenSymbol symbol="RSHARE-MATIC-LP" />
                 </CardIcon>
               </Box>
               <h2>RSHARE-MATIC QuickSwap LP</h2>
@@ -576,7 +576,7 @@ const Home = () => {
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} HSHARE /{' '}
+                  {bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} RSHARE /{' '}
                   {bshareLPStats?.ftmAmount ? bshareLPStats?.ftmAmount : '-.--'} MATIC
                 </span>
               </Box>
