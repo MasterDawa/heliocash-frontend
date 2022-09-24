@@ -7,15 +7,15 @@ import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
-import useHelioStats from '../../hooks/useHelioStats';
+import useHelioStats from '../../hooks/useRespectStats';
 import useLpStats from '../../hooks/useLpStats';
 import useLpStatsETH from '../../hooks/useLpStatsETH';
 import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
-import usehShareStats from '../../hooks/usehShareStats';
+import usehShareStats from '../../hooks/userShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-import { Helio as helioProd, HShare as hShareProd } from '../../helio-finance/deployments/deployments.mainnet.json';
+import { Helio as helioProd, HShare as hShareProd } from '../../respect-finance/deployments/deployments.mainnet.json';
 import { roundAndFormatNumber } from '../../0x';
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
@@ -23,7 +23,7 @@ import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
 
 import { makeStyles } from '@material-ui/core/styles';
-import useHelioFinance from '../../hooks/useHelioFinance';
+import useRespectFinance from '../../hooks/useRespectFinance';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 
 import HelioImage from '../../assets/img/respect_animated.gif';
