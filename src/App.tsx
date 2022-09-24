@@ -6,7 +6,7 @@ import {ThemeProvider as TP1} from 'styled-components';
 import {UseWalletProvider} from 'use-wallet';
 import usePromptNetwork from './hooks/useNetworkPrompt';
 import BanksProvider from './contexts/Banks';
-import HelioFinanceProvider from './contexts/BombFinanceProvider';
+import HelioFinanceProvider from './contexts/RespectFinanceProvider';
 import ModalsProvider from './contexts/Modals';
 import store from './state';
 import theme from './theme';
