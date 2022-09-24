@@ -13,7 +13,7 @@ import useLpStatsETH from '../../hooks/useLpStatsETH';
 import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
-import userShareStats from '../../hooks/usehShareStats';
+import userShareStats from '../../hooks/userShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import { Respect as respectProd, RShare as rShareProd } from '../../respect-finance/deployments/deployments.mainnet.json';
 import { roundAndFormatNumber } from '../../0x';
@@ -63,7 +63,7 @@ const Home = () => {
   const respectFtmLpStats = useLpStatsETH('RESPECT-ETH-LP');
   const rShareFtmLpStats = useLpStats('RSHARE-MATIC-LP');
   const respectStats = useRespectStats();
-  const rShareStats = usehShareStats();
+  const rShareStats = userShareStats();
   const tBondStats = useBondStats();
   const respectFinance = useRespectFinance();
   const [approvalStateStrategy, approveStrategy] = useApproveStrategy();
@@ -178,13 +178,13 @@ const Home = () => {
     />,
   );
 
-  const [onPresentHshareZap, onDissmissHshareZap] = useModal(
+  const [onPresentRshareZap, onDissmissRshareZap] = useModal(
     <ZapModal
       decimals={18}
       onConfirm={(zappingToken, tokenName, amount, slippageBp) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         bshareLpZap.onZap(zappingToken, tokenName, amount, slippageBp);
-        onDissmissHshareZap();
+        onDissmissRshareZap();
       }}
       tokenName={'RSHARE-MATIC-LP'}
     />,
@@ -364,7 +364,7 @@ const Home = () => {
               Current Price
               <Box>
                 <span style={{ fontSize: '30px', color: 'white' }}>
-                  {hSharePriceInMATIC ? hSharePriceInMATIC : '-.----'} MATIC
+                  {rSharePriceInMATIC ? rSharePriceInMATIC : '-.----'} MATIC
                 </span>
               </Box>
               <Box>
@@ -570,7 +570,7 @@ const Home = () => {
               </Box>
               <h2>RSHARE-MATIC QuickSwap LP</h2>
               <Box mt={2}>
-                <Button onClick={onPresentHshareZap} className="shinyButtonSecondary">
+                <Button onClick={onPresentRshareZap} className="shinyButtonSecondary">
                   Zap In
                 </Button>
               </Box>
