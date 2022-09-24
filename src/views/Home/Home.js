@@ -13,9 +13,9 @@ import useLpStatsETH from '../../hooks/useLpStatsETH';
 import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
-import userShareStats from '../../hooks/userShareStats';
+import userShareStats from '../../hooks/usehShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-import { Respect as respectProd, RShare as RShareProd } from '../../respect-finance/deployments/deployments.mainnet.json';
+import { Respect as respectProd, RShare as rShareProd } from '../../respect-finance/deployments/deployments.mainnet.json';
 import { roundAndFormatNumber } from '../../0x';
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
@@ -27,8 +27,11 @@ import useRespectFinance from '../../hooks/useRespectFinance';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 
 import RespectImage from '../../assets/img/respect_animated.gif';
+import RugDocImage from '../../assets/img/rugdoc-badge.png';
+import ZrxGuardImage from '../../assets/img/0x-guard.png';
 
 import HomeImage from '../../assets/img/background.jpg';
+import AcademyBanner from '../../assets/img/academy-button.png';
 import useStrategy from '../../hooks/useStrategy';
 import useApproveStrategy, { ApprovalState } from '../../hooks/useApproveStrategy';
 const BackgroundImage = createGlobalStyle`
@@ -60,7 +63,7 @@ const Home = () => {
   const respectFtmLpStats = useLpStatsETH('RESPECT-ETH-LP');
   const rShareFtmLpStats = useLpStats('RSHARE-MATIC-LP');
   const respectStats = useRespectStats();
-  const rShareStats = userShareStats();
+  const rShareStats = usehShareStats();
   const tBondStats = useBondStats();
   const respectFinance = useRespectFinance();
   const [approvalStateStrategy, approveStrategy] = useApproveStrategy();
@@ -116,21 +119,17 @@ const Home = () => {
   };
 
   const respect = respectProd;
-  const RShare = RShareProd;
+  const rShare = rShareProd;
 
-  const buyrespectAddress =
+  const buyRespectAddress =
     'https://quickswap.exchange/#/swap?inputCurrency=0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619&outputCurrency=' +
     respect.address;
   const buyRShareAddress =
     'https://quickswap.exchange/#/swap?outputCurrency=' +
-    RShare.address;
+    rShare.address;
 
   const respectLPStats = useMemo(() => (respectFtmLpStats ? respectFtmLpStats : null), [respectFtmLpStats]);
-<<<<<<< HEAD
-  const bshareLPStats = useMemo(() => (RShareFtmLpStats ? RShareFtmLpStats : null), [RShareFtmLpStats]);
-=======
   const bshareLPStats = useMemo(() => (rShareFtmLpStats ? rShareFtmLpStats : null), [rShareFtmLpStats]);
->>>>>>> df7a912dd9056e923186bce7203c7fd13ff1ae82
   const respectPriceInDollars = useMemo(
     () => (respectStats ? Number(respectStats.priceInDollars).toFixed(2) : null),
     [respectStats],
@@ -139,19 +138,19 @@ const Home = () => {
   const respectCirculatingSupply = useMemo(() => (respectStats ? String(respectStats.circulatingSupply) : null), [respectStats]);
   const respectTotalSupply = useMemo(() => (respectStats ? String(respectStats.totalSupply) : null), [respectStats]);
 
-  const RSharePriceInDollars = useMemo(
+  const rSharePriceInDollars = useMemo(
     () => (rShareStats ? Number(rShareStats.priceInDollars).toFixed(2) : null),
     [rShareStats],
   );
-  const RSharePriceInMATIC = useMemo(
+  const rSharePriceInMATIC = useMemo(
     () => (rShareStats ? Number(rShareStats.tokenInETH).toFixed(4) : null),
     [rShareStats],
   );
-  const RShareCirculatingSupply = useMemo(
+  const rShareCirculatingSupply = useMemo(
     () => (rShareStats ? String(rShareStats.circulatingSupply) : null),
     [rShareStats],
   );
-  const RShareTotalSupply = useMemo(() => (rShareStats ? String(rShareStats.totalSupply) : null), [rShareStats]);
+  const rShareTotalSupply = useMemo(() => (rShareStats ? String(rShareStats.totalSupply) : null), [rShareStats]);
 
   const tBondPriceInDollars = useMemo(
     () => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null),
@@ -179,13 +178,13 @@ const Home = () => {
     />,
   );
 
-  const [onPresentRshareZap, onDissmissRshareZap] = useModal(
+  const [onPresentHshareZap, onDissmissHshareZap] = useModal(
     <ZapModal
       decimals={18}
       onConfirm={(zappingToken, tokenName, amount, slippageBp) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         bshareLpZap.onZap(zappingToken, tokenName, amount, slippageBp);
-        onDissmissRshareZap();
+        onDissmissHshareZap();
       }}
       tokenName={'RSHARE-MATIC-LP'}
     />,
@@ -210,10 +209,10 @@ const Home = () => {
             <Box p={4} style={{ textAlign: 'center' }}>
               <h2>Welcome to Respect Finance</h2>
               <p>
-                The algocoin that follows Ethereum's price! Now you can have high yields normally only found on risky assets, but with exposure to the worlds favorite cryptocurrency instead.
+                The algocoin that follows Ethereum's price! Now you can have high yields normally only found on risky assets, but with exposure to the world’s favorite cryptocurrency instead.
               </p>
               <p>
-                <strong>Respect is pegged via algorithm to a 4,000:1 ratio to ETH. $4k ETH = $1 Respect PEG</strong>
+                <strong>RESPECT is pegged via algorithm to a 4,000:1 ratio to ETH. $4k ETH = $1 RESPECT PEG</strong>
                 </p>
               <p>   Stake your RESPECT-ETH LP in the Farm to earn RSHARE rewards. Then stake your earned RSHARE in the
                 Boardroom to earn more RESPECT! 
@@ -261,11 +260,7 @@ const Home = () => {
               </Button> 
               <Button
                 target="_blank"
-<<<<<<< HEAD
                 href={buyRespectAddress}
-=======
-                href={buyrespectAddress}
->>>>>>> df7a912dd9056e923186bce7203c7fd13ff1ae82
                 style={{ margin: '4px' }}
                 className={'shinyButtonSecondary ' + classes.button}
               >
@@ -369,23 +364,23 @@ const Home = () => {
               Current Price
               <Box>
                 <span style={{ fontSize: '30px', color: 'white' }}>
-                  {RSharePriceInMATIC ? RSharePriceInMATIC : '-.----'} MATIC
+                  {hSharePriceInMATIC ? hSharePriceInMATIC : '-.----'} MATIC
                 </span>
               </Box>
               <Box>
-                <span style={{ fontSize: '16px' }}>${RSharePriceInDollars ? RSharePriceInDollars : '-.--'} / RSHARE</span>
+                <span style={{ fontSize: '16px' }}>${rSharePriceInDollars ? rSharePriceInDollars : '-.--'} / RSHARE</span>
               </Box>
               <span style={{ fontSize: '12px' }}>
-                Market Cap: ${roundAndFormatNumber((RShareCirculatingSupply * RSharePriceInDollars).toFixed(2), 2)}{' '}
+                Market Cap: ${roundAndFormatNumber((rShareCirculatingSupply * rSharePriceInDollars).toFixed(2), 2)}{' '}
                 <br />
-                Circulating Supply: {roundAndFormatNumber(RShareCirculatingSupply, 2)} <br />
-                Total Supply: {roundAndFormatNumber(RShareTotalSupply, 2)}
+                Circulating Supply: {roundAndFormatNumber(rShareCirculatingSupply, 2)} <br />
+                Total Supply: {roundAndFormatNumber(rShareTotalSupply, 2)}
               </span>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* HBOND */}
+        {/* RBOND */}
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
@@ -401,7 +396,7 @@ const Home = () => {
               </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="HBOND" />
+                  <TokenSymbol symbol="RBOND" />
                 </CardIcon>
               </Box>
               <h2 style={{ marginBottom: '10px' }}>RBOND</h2>
@@ -430,7 +425,7 @@ const Home = () => {
                   <TokenSymbol symbol="RESPECT-ETH-LP" />
                 </CardIcon>
               </Box>
-              <h2>HELIO-ETH QuickSwap LP</h2>
+              <h2>RESPECT-ETH QuickSwap LP</h2>
               <Box mt={2}>
                 <Button onClick={onPresentRespectZap} className="shinyButtonSecondary">
                   Zap In
@@ -515,7 +510,7 @@ const Home = () => {
                   fontSize='12px'
                   gutterBottom>
                   <div style={{ flexDirection: 'column', textAlign: 'left' }}>
-                    <div>HELIO-LP</div>
+                    <div>RESPECT-LP</div>
                     <b style={{ fontSize: '14px' }}>{strategyValue}%</b>
                   </div>
                   <div style={{ width: '100%' }}>{' '}</div>
@@ -575,7 +570,7 @@ const Home = () => {
               </Box>
               <h2>RSHARE-MATIC QuickSwap LP</h2>
               <Box mt={2}>
-                <Button onClick={onPresentRshareZap} className="shinyButtonSecondary">
+                <Button onClick={onPresentHshareZap} className="shinyButtonSecondary">
                   Zap In
                 </Button>
               </Box>
