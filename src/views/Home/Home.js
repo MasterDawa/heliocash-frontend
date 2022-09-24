@@ -62,10 +62,10 @@ const Home = () => {
   const TVL = useTotalValueLocked();
   const helioFtmLpStats = useLpStatsETH('HELIO-ETH-LP');
   const hShareFtmLpStats = useLpStats('HSHARE-MATIC-LP');
-  const helioStats = useHelioStats();
-  const hShareStats = usehShareStats();
+  const helioStats = useRespectStats();
+  const hShareStats = userShareStats();
   const tBondStats = useBondStats();
-  const helioFinance = useHelioFinance();
+  const helioFinance = useRespectFinance();
   const [approvalStateStrategy, approveStrategy] = useApproveStrategy();
   const { onStrategy } = useStrategy()
   const [strategyValue, setStrategyValue] = useState(80);
@@ -201,7 +201,7 @@ const Home = () => {
           sm={4}
           style={{ display: 'flex', justifyContent: 'center', verticalAlign: 'middle', overflow: 'hidden' }}
         >
-          <img src={HelioImage} alt="helio-logo" style={{ maxHeight: '300px' }} />
+          <img src={RespectImage} alt="helio-logo" style={{ maxHeight: '300px' }} />
         </Grid>
         {/* Explanation text */}
         <Grid item xs={12} sm={8}>
@@ -323,7 +323,7 @@ const Home = () => {
                 <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
               </Button>
               <h2 style={{ marginBottom: '10px' }}>RESPECT</h2>
-              4,000 HELIO (1.0 Peg) =
+              4,000 RESPECT (1.0 Peg) =
               <Box>
                 <span style={{ fontSize: '30px', color: 'white' }}>{helioPriceInMATIC ? helioPriceInMATIC : '-.----'} ETH</span>
               </Box>
