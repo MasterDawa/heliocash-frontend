@@ -51,17 +51,17 @@ const Footer = () => {
           </Grid>
           <Grid item xs={6} style={{textAlign: 'right', height: '20px'}}>
             <a
-              href="https://twitter.com/Helio_Cash"
+              href="https://twitter.com/RespectFinance"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
             >
               <IconTwitter style={{fill: '#dddfee'}} />
             </a>
-            <a href="https://github.com/HelioCash/heliocash-frontend" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://github.com/MasterDawa/respectfinance-frontend" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <IconGithub style={{fill: '#dddfee', height: '20px'}} />
             </a>
-            <a href="https://t.me/HELIOCommunityPortal/3" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://t.me/respfin" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <IconTelegram style={{fill: '#dddfee', height: '20px'}} />
             </a>
           </Grid>
