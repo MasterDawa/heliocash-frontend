@@ -220,7 +220,7 @@ const Home = () => {
               <p>
                 <IconTelegram alt="telegram" style={{ fill: '#dddfee', height: '15px' }} /> Join our{' '}
                 <a
-                  href="https://t.me/HELIOCommunityPortal/3"
+                  href="https://t.me/respfin"
                   rel="noopener noreferrer"
                   target="_blank"
                   style={{ color: '#dddfee' }}
@@ -303,7 +303,7 @@ const Home = () => {
           </Card>
         </Grid>
 
-        {/* RESPECT */}
+        {/* HELIO */}
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
@@ -314,7 +314,7 @@ const Home = () => {
               </Box>
               <Button
                 onClick={() => {
-                  helioFinance.watchAssetInMetamask('RESPECT');
+                  helioFinance.watchAssetInMetamask('HELIO');
                 }}
                 style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
               >
@@ -322,8 +322,8 @@ const Home = () => {
                 <b>+</b>&nbsp;&nbsp;
                 <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
               </Button>
-              <h2 style={{ marginBottom: '10px' }}>HELIO</h2>
-              4,000 RESPECT (1.0 Peg) =
+              <h2 style={{ marginBottom: '10px' }}>RESPECT</h2>
+              4,000 HELIO (1.0 Peg) =
               <Box>
                 <span style={{ fontSize: '30px', color: 'white' }}>{helioPriceInMATIC ? helioPriceInMATIC : '-.----'} ETH</span>
               </Box>
@@ -341,13 +341,13 @@ const Home = () => {
           </Card>
         </Grid>
 
-        {/* RSHARE */}
+        {/* HSHARE */}
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
               <Button
                 onClick={() => {
-                  helioFinance.watchAssetInMetamask('RSHARE');
+                  helioFinance.watchAssetInMetamask('HSHARE');
                 }}
                 style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
               >
@@ -380,13 +380,13 @@ const Home = () => {
           </Card>
         </Grid>
 
-        {/* RBOND */}
+        {/* HBOND */}
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
               <Button
                 onClick={() => {
-                  helioFinance.watchAssetInMetamask('RBOND');
+                  helioFinance.watchAssetInMetamask('HBOND');
                 }}
                 style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
               >
@@ -396,10 +396,10 @@ const Home = () => {
               </Button>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="RBOND" />
+                  <TokenSymbol symbol="HBOND" />
                 </CardIcon>
               </Box>
-              <h2 style={{ marginBottom: '10px' }}>HBOND</h2>
+              <h2 style={{ marginBottom: '10px' }}>RBOND</h2>
               4,000 RBOND
               <Box>
                 <span style={{ fontSize: '30px', color: 'white' }}>
@@ -433,7 +433,7 @@ const Home = () => {
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {helioLPStats?.tokenAmount ? helioLPStats?.tokenAmount : '-.--'} HELIO /{' '}
+                  {helioLPStats?.tokenAmount ? helioLPStats?.tokenAmount : '-.--'} RESPECT /{' '}
                   {helioLPStats?.ftmAmount ? helioLPStats?.ftmAmount : '-.--'} ETH
                 </span>
               </Box>
@@ -546,7 +546,7 @@ const Home = () => {
                     Deposit into boardroom <br />
                   </span>
                   <div style={{ marginTop: '12px', fontSize: '12px' }}>
-                    <i>Disclaimer: Uses all liquid HELIO & HSHARES in wallet</i>
+                    <i>Disclaimer: Uses all liquid RESPECT & RSHARES in wallet</i>
                   </div>
                   <Button size='small' style={{ marginTop: '16px', color: '#800080', marginBottom: '-5px' }} onClick={onToggleExpansion}>
                     Collapse
@@ -576,7 +576,7 @@ const Home = () => {
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} RSHARE /{' '}
+                  {bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} HSHARE /{' '}
                   {bshareLPStats?.ftmAmount ? bshareLPStats?.ftmAmount : '-.--'} MATIC
                 </span>
               </Box>
