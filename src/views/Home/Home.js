@@ -7,7 +7,7 @@ import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
-import useHelioStats from '../../hooks/useRespectStats';
+import useRespectStats from '../../hooks/useRespectStats';
 import useLpStats from '../../hooks/useLpStats';
 import useLpStatsETH from '../../hooks/useLpStatsETH';
 import useModal from '../../hooks/useModal';
@@ -26,7 +26,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import useRespectFinance from '../../hooks/useRespectFinance';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 
-import HelioImage from '../../assets/img/respect_animated.gif';
+import RespectImage from '../../assets/img/respect_animated.gif';
 import RugDocImage from '../../assets/img/rugdoc-badge.png';
 import ZrxGuardImage from '../../assets/img/0x-guard.png';
 
@@ -60,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const respectFtmLpStats = useLpStatsETH('HELIO-ETH-LP');
-  const rShareFtmLpStats = useLpStats('HSHARE-MATIC-LP');
+  const respectFtmLpStats = useLpStatsETH('RESPECT-ETH-LP');
+  const rShareFtmLpStats = useLpStats('RSHARE-MATIC-LP');
   const respectStats = useRespectStats();
   const rShareStats = userShareStats();
   const tBondStats = useBondStats();
@@ -123,34 +123,34 @@ const Home = () => {
 
   const buyRespectAddress =
     'https://quickswap.exchange/#/swap?inputCurrency=0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619&outputCurrency=' +
-    helio.address;
+    respect.address;
   const buyRShareAddress =
     'https://quickswap.exchange/#/swap?outputCurrency=' +
     rShare.address;
 
-  const helioLPStats = useMemo(() => (helioFtmLpStats ? helioFtmLpStats : null), [helioFtmLpStats]);
-  const bshareLPStats = useMemo(() => (hShareFtmLpStats ? hShareFtmLpStats : null), [hShareFtmLpStats]);
-  const helioPriceInDollars = useMemo(
-    () => (helioStats ? Number(helioStats.priceInDollars).toFixed(2) : null),
-    [helioStats],
+  const respectLPStats = useMemo(() => (respectFtmLpStats ? respectFtmLpStats : null), [respectFtmLpStats]);
+  const bshareLPStats = useMemo(() => (rShareFtmLpStats ? rShareFtmLpStats : null), [rShareFtmLpStats]);
+  const respectPriceInDollars = useMemo(
+    () => (respectStats ? Number(helioStats.priceInDollars).toFixed(2) : null),
+    [respectStats],
   );
-  const helioPriceInMATIC = useMemo(() => (helioStats ? Number(helioStats.tokenInETH).toFixed(4) : null), [helioStats]);
-  const helioCirculatingSupply = useMemo(() => (helioStats ? String(helioStats.circulatingSupply) : null), [helioStats]);
-  const helioTotalSupply = useMemo(() => (helioStats ? String(helioStats.totalSupply) : null), [helioStats]);
+  const respectPriceInMATIC = useMemo(() => (respectStats ? Number(respectStats.tokenInETH).toFixed(4) : null), [respectStats]);
+  const respectCirculatingSupply = useMemo(() => (respectStats ? String(respectStats.circulatingSupply) : null), [respectStats]);
+  const respectTotalSupply = useMemo(() => (respectStats ? String(respectStats.totalSupply) : null), [respectStats]);
 
-  const hSharePriceInDollars = useMemo(
-    () => (hShareStats ? Number(hShareStats.priceInDollars).toFixed(2) : null),
+  const rSharePriceInDollars = useMemo(
+    () => (rShareStats ? Number(rShareStats.priceInDollars).toFixed(2) : null),
+    [rShareStats],
+  );
+  const rSharePriceInMATIC = useMemo(
+    () => (rShareStats ? Number(rShareStats.tokenInETH).toFixed(4) : null),
+    [rShareStats],
+  );
+  const rShareCirculatingSupply = useMemo(
+    () => (rShareStats ? String(rShareStats.circulatingSupply) : null),
     [hShareStats],
   );
-  const hSharePriceInMATIC = useMemo(
-    () => (hShareStats ? Number(hShareStats.tokenInETH).toFixed(4) : null),
-    [hShareStats],
-  );
-  const hShareCirculatingSupply = useMemo(
-    () => (hShareStats ? String(hShareStats.circulatingSupply) : null),
-    [hShareStats],
-  );
-  const hShareTotalSupply = useMemo(() => (hShareStats ? String(hShareStats.totalSupply) : null), [hShareStats]);
+  const rShareTotalSupply = useMemo(() => (rShareStats ? String(rShareStats.totalSupply) : null), [rShareStats]);
 
   const tBondPriceInDollars = useMemo(
     () => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null),
@@ -163,30 +163,30 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const helioLpZap = useZap({ depositTokenName: 'HELIO-ETH-LP' });
-  const bshareLpZap = useZap({ depositTokenName: 'HSHARE-MATIC-LP' });
+  const respectLpZap = useZap({ depositTokenName: 'RESPECT-ETH-LP' });
+  const bshareLpZap = useZap({ depositTokenName: 'RSHARE-MATIC-LP' });
 
-  const [onPresentHelioZap, onDissmissHelioZap] = useModal(
+  const [onPresentRespectZap, onDissmissRespectZap] = useModal(
     <ZapModal
       decimals={18}
       onConfirm={(zappingToken, tokenName, amount, slippageBp) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-        helioLpZap.onZap(zappingToken, tokenName, amount, slippageBp);
-        onDissmissHelioZap();
+        respectLpZap.onZap(zappingToken, tokenName, amount, slippageBp);
+        onDissmissRespectZap();
       }}
-      tokenName={'HELIO-ETH-LP'}
+      tokenName={'RESPECT-ETH-LP'}
     />,
   );
 
-  const [onPresentHshareZap, onDissmissHshareZap] = useModal(
+  const [onPresentRshareZap, onDissmissRshareZap] = useModal(
     <ZapModal
       decimals={18}
       onConfirm={(zappingToken, tokenName, amount, slippageBp) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         bshareLpZap.onZap(zappingToken, tokenName, amount, slippageBp);
-        onDissmissHshareZap();
+        onDissmissRshareZap();
       }}
-      tokenName={'HSHARE-MATIC-LP'}
+      tokenName={'RSHARE-MATIC-LP'}
     />,
   );
 
