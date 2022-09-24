@@ -13,9 +13,9 @@ import useLpStatsETH from '../../hooks/useLpStatsETH';
 import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
-import usehShareStats from '../../hooks/userShareStats';
+import userShareStats from '../../hooks/userShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-import { Helio as helioProd, HShare as hShareProd } from '../../respect-finance/deployments/deployments.mainnet.json';
+import { Respect as respectProd, RShare as rShareProd } from '../../respect-finance/deployments/deployments.mainnet.json';
 import { roundAndFormatNumber } from '../../0x';
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
@@ -60,12 +60,12 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const helioFtmLpStats = useLpStatsETH('HELIO-ETH-LP');
-  const hShareFtmLpStats = useLpStats('HSHARE-MATIC-LP');
-  const helioStats = useRespectStats();
-  const hShareStats = userShareStats();
+  const respectFtmLpStats = useLpStatsETH('HELIO-ETH-LP');
+  const rShareFtmLpStats = useLpStats('HSHARE-MATIC-LP');
+  const respectStats = useRespectStats();
+  const rShareStats = userShareStats();
   const tBondStats = useBondStats();
-  const helioFinance = useRespectFinance();
+  const respectFinance = useRespectFinance();
   const [approvalStateStrategy, approveStrategy] = useApproveStrategy();
   const { onStrategy } = useStrategy()
   const [strategyValue, setStrategyValue] = useState(80);
@@ -118,15 +118,15 @@ const Home = () => {
     setBoardroomValue(Number(newValue));
   };
 
-  const helio = helioProd;
-  const hShare = hShareProd;
+  const respect = respectProd;
+  const rShare = rShareProd;
 
-  const buyHelioAddress =
+  const buyRespectAddress =
     'https://quickswap.exchange/#/swap?inputCurrency=0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619&outputCurrency=' +
     helio.address;
-  const buyHShareAddress =
+  const buyRShareAddress =
     'https://quickswap.exchange/#/swap?outputCurrency=' +
-    hShare.address;
+    rShare.address;
 
   const helioLPStats = useMemo(() => (helioFtmLpStats ? helioFtmLpStats : null), [helioFtmLpStats]);
   const bshareLPStats = useMemo(() => (hShareFtmLpStats ? hShareFtmLpStats : null), [hShareFtmLpStats]);
