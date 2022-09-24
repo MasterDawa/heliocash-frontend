@@ -131,7 +131,7 @@ const Home = () => {
   const respectLPStats = useMemo(() => (respectFtmLpStats ? respectFtmLpStats : null), [respectFtmLpStats]);
   const bshareLPStats = useMemo(() => (rShareFtmLpStats ? rShareFtmLpStats : null), [rShareFtmLpStats]);
   const respectPriceInDollars = useMemo(
-    () => (respectStats ? Number(helioStats.priceInDollars).toFixed(2) : null),
+    () => (respectStats ? Number(respectStats.priceInDollars).toFixed(2) : null),
     [respectStats],
   );
   const respectPriceInMATIC = useMemo(() => (respectStats ? Number(respectStats.tokenInETH).toFixed(4) : null), [respectStats]);
@@ -148,7 +148,7 @@ const Home = () => {
   );
   const rShareCirculatingSupply = useMemo(
     () => (rShareStats ? String(rShareStats.circulatingSupply) : null),
-    [hShareStats],
+    [rShareStats],
   );
   const rShareTotalSupply = useMemo(() => (rShareStats ? String(rShareStats.totalSupply) : null), [rShareStats]);
 
@@ -570,7 +570,7 @@ const Home = () => {
               </Box>
               <h2>RSHARE-MATIC QuickSwap LP</h2>
               <Box mt={2}>
-                <Button onClick={onPresentHshareZap} className="shinyButtonSecondary">
+                <Button onClick={onPresentRshareZap} className="shinyButtonSecondary">
                   Zap In
                 </Button>
               </Box>
